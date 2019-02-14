@@ -1,1 +1,1 @@
-# ScientificVisualisation
+computational visualization repo
