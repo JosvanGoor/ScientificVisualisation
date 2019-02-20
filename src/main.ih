@@ -1,35 +1,6 @@
 #include <iostream>
+#include <string>
 
-#include <rfftw.h>              //the numerical simulation FFTW library
-#include <math.h>               //for various math functions
-#include <GL/glut.h>            //the GLUT graphics library
-
-#include "globals.h"
+#include "window/window.h"
 
 using namespace std;
-
-// helper functions
-void init_simulation(int n);
-void FFT(int direction, void *vx);
-int clamp(float x);
-void solve(int n, fftw_real* vx, fftw_real* vy, fftw_real* vx0, fftw_real* vy0, fftw_real visc, fftw_real dt);
-void diffuse_matter(int n, fftw_real *vx, fftw_real *vy, fftw_real *rho, fftw_real *rho0, fftw_real dt);
-void set_forces();
-void rainbow(float value, float* R, float* G, float* B);
-void set_colormap(float vy);
-void direction_to_color(float x, float y, int method);
-void visualize();
-
-// interaction functions
-void display();
-void reshape(int w, int h);
-void keyboard(unsigned char key, int x, int y);
-void drag(int mx, int my);
-
-//sim step
-void simulation_step();
-
-inline double max(double lhs, double rhs)
-{
-    return lhs > rhs ? lhs : rhs;
-}

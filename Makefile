@@ -1,31 +1,35 @@
 # Generic project Makefile
 
-EXECUTABLE = scivis	
+EXECUTABLE = compvis	
 
-OBJECTS			=	clamp.o \
-					diffusematter.o \
-					directiontocolor.o \
-					display.o \
-					drag.o \
-					FFT.o \
-					globals.o \
-					initsimulation.o \
-					keyboard.o \
-					main.o \
-					rainbow.o \
-					reshape.o \
-					setcolormap.o \
-					setforces.o \
-					simulationstep.o \
-					solve.o \
-					visualize.o
+SIMULATION	=	simulation/diffusematter.o \
+				simulation/setforces.o \
+				simulation/simulation0.o \
+				simulation/simulation1.o \
+				simulation/simulationstep.o \
+				simulation/solve.o
+
+UTILITY		=	utility/clamp.o
+
+WINDOW		=	window/directiontocolor.o \
+				window/paintsmoke.o \
+				window/paintvectors.o \
+				window/repaint.o \
+				window/setcolormap.o \
+				window/window0.o \
+				window/window1.o
+
+OBJECTS		=	$(SIMULATION) \
+				$(UTILITY) \
+				$(WINDOW) \
+				main.o
 
 #build macros
 COMPILER = g++
 FLAGS = -std=c++17 -Wall -ggdb -pedantic
-INCLUDEDIRS = -I./fftw-2.1.5/include/
-LIBDIRS     = -L./fftw-2.1.5/lib/
-LIBRARIES = $(LIBDIRS) -lrfftw -lfftw -lglut -lGL -lGLU -lGLEW -lm
+INCLUDEDIRS = -I./fftw/include/
+LIBDIRS     = -L./fftw/lib/
+LIBRARIES = $(LIBDIRS) -lrfftw -lfftw -lGL -lGLU -lGLEW -lm -lglfw
 
 #folders
 SOURCEDIR = src
@@ -33,7 +37,7 @@ BUILDDIR = build
 
 #executable build
 $(EXECUTABLE): folders $(addprefix $(BUILDDIR)/,$(OBJECTS))
-	$(COMPILER) $(FLAGS) $(addprefix $(BUILDDIR)/,$(OBJECTS)) -o $@ $(LIBRARIES) -m32
+	$(COMPILER) $(FLAGS) $(addprefix $(BUILDDIR)/,$(OBJECTS)) -o $@ $(LIBRARIES)
 
 #optional include of dependencies
 -include $(addprefix $(BUILDDIR)/,$(OBJECTS:.o=.d))
@@ -41,9 +45,9 @@ $(EXECUTABLE): folders $(addprefix $(BUILDDIR)/,$(OBJECTS))
 #phony for rules that should never have a corresponding file
 .PHONY: folders clean gdb run rebuild
 
-#@mkdir -p $(filter-out %./,$(addprefix $(BUILDDIR)/,$(dir $(OBJECTS))))
 folders:
 	@mkdir -p build
+	@mkdir -p $(filter-out %./,$(addprefix $(BUILDDIR)/,$(dir $(OBJECTS))))
 
 clean:
 	rm -rf build/
@@ -60,9 +64,9 @@ rebuild:
 	make -j 12
 
 $(BUILDDIR)/%.o: $(SOURCEDIR)/%.cpp
-	$(COMPILER) $(FLAGS) $(INCLUDEDIRS) -o $@ -c $< -m32
+	$(COMPILER) $(FLAGS) $(INCLUDEDIRS) -o $@ -c $<
 	@$(COMPILER) $(FLAGS) -MM -MT $(BUILDDIR)/$*.o src/$*.cpp > $(BUILDDIR)/$*.d
 
 $(BUILDDIR)/%.o: $(SOURCEDIR)/%.cc
-	$(COMPILER) $(FLAGS) $(INCLUDEDIRS) -o $@ -c $< -m32
+	$(COMPILER) $(FLAGS) $(INCLUDEDIRS) -o $@ -c $<
 	@$(COMPILER) $(FLAGS) -MM -MT $(BUILDDIR)/$*.o src/$*.cc > $(BUILDDIR)/$*.d
