@@ -34,9 +34,11 @@ class Simulation
 
         //getters
         int gridsize() const;
-        std::vector<fftw_real> const &rho() const;
         std::vector<fftw_real> const &vfield_x() const;
         std::vector<fftw_real> const &vfield_y() const;
+        std::vector<fftw_real> &rho();
+        std::vector<fftw_real> &force_x();
+        std::vector<fftw_real> &force_y();
 
     private:
         Simulation(Simulation const &copy) = delete;
@@ -53,7 +55,7 @@ inline int Simulation::gridsize() const
     return d_gridsize;
 }
 
-inline std::vector<fftw_real> const &Simulation::rho() const
+inline std::vector<fftw_real> &Simulation::rho()
 {
     return d_rho;
 }
@@ -66,6 +68,16 @@ inline std::vector<fftw_real> const &Simulation::vfield_x() const
 inline std::vector<fftw_real> const &Simulation::vfield_y() const
 {
     return d_vfield_y;
+}
+
+inline std::vector<fftw_real> &Simulation::force_x()
+{
+    return d_force_x;
+}
+
+inline std::vector<fftw_real> &Simulation::force_y()
+{
+    return d_force_y;
 }
 
 #endif

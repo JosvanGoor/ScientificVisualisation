@@ -20,6 +20,6 @@ void Window::repaint()
             throw "Wtf this is impossible..."s;
     }
 
-    glFlush();
+    // glFlush();
     swap_buffers();
 }

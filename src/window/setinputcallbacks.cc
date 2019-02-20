@@ -23,7 +23,7 @@ void Window::set_input_callbacks()
                 ->mouse_moved(xpos, ypos);
         });
 
-    glfwSetWindowSizeCallback(d_window,
+    glfwSetFramebufferSizeCallback(d_window,
         [](GLFWwindow *window, int width, int height)
         {
             reinterpret_cast<Window *>(glfwGetWindowUserPointer(window))

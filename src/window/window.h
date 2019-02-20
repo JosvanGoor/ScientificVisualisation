@@ -24,8 +24,8 @@ class Window
     size_t d_height;
     GLFWwindow *d_window;
 
-    int d_mouse_lastx;
-    int d_mouse_lasty;
+    double d_mouse_lastx;
+    double d_mouse_lasty;
     bool d_mouse_dragging;
 
     float d_vec_scale;
