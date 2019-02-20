@@ -22,6 +22,10 @@ class Window
 {
     size_t d_width;
     size_t d_height;
+    GLFWwindow *d_window;
+
+    int d_mouse_lastx;
+    int d_mouse_lasty;
     bool d_mouse_dragging;
 
     float d_vec_scale;
@@ -29,7 +33,7 @@ class Window
     DrawMode d_drawmode;
     ColorMapping d_colormapping;
     
-    GLFWwindow *d_window;
+    Simulation d_simulation;
 
     public:
         Window(size_t width = 500, size_t height = 500);
@@ -38,8 +42,10 @@ class Window
         bool should_close();
         void swap_buffers();
         void make_current();
+        Simulation &simulation();
 
-        void repaint(Simulation const &sim);
+        void repaint();
+
 
         // callbacks
         void key_event(int key, int scancode, int action, int mods);
@@ -56,8 +62,8 @@ class Window
         void set_colormap(float col);
         void direction_to_color(float x, float y);
 
-        void paint_smoke(Simulation const &sim);
-        void paint_vectors(Simulation const &sim);
+        void paint_smoke();
+        void paint_vectors();
 
 };
 
@@ -74,6 +80,11 @@ inline void Window::swap_buffers()
 inline void Window::make_current()
 {
     glfwMakeContextCurrent(d_window);
+}
+
+inline Simulation &Window::simulation()
+{
+    return d_simulation;
 }
 
 #endif

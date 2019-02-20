@@ -1,43 +1,43 @@
 #include "window.ih"
 
-void Window::paint_smoke(Simulation const &sim)
+void Window::paint_smoke()
 {
-    double wn = d_width / static_cast<double>(sim.gridsize() + 1);
-    double hn = d_height / static_cast<double>(sim.gridsize() + 1);
+    double wn = d_width / static_cast<double>(d_simulation.gridsize() + 1);
+    double hn = d_height / static_cast<double>(d_simulation.gridsize() + 1);
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     
-    for (int jdx = 0; jdx < (sim.gridsize() - 1); ++jdx)
+    for (int jdx = 0; jdx < (d_simulation.gridsize() - 1); ++jdx)
     {
         glBegin(GL_TRIANGLE_STRIP);
 
         int idx = 0;
         float px = wn + idx * wn; // think about this...
         float py = hn + jdx * hn;
-        int index = jdx * sim.gridsize() + idx;
+        int index = jdx * d_simulation.gridsize() + idx;
 
-        glColor3f(sim.rho()[index], sim.rho()[index], sim.rho()[index]);
+        glColor3f(d_simulation.rho()[index], d_simulation.rho()[index], d_simulation.rho()[index]);
         glVertex2f(px, py);
 
-        for (; idx < sim.gridsize(); ++idx)
+        for (; idx < d_simulation.gridsize(); ++idx)
         {
             px = wn + idx * wn;
             py = hn + (jdx + 1) * hn;
-            index = ((jdx + 1) * sim.gridsize()) + idx;
-            set_colormap(sim.rho()[index]);
+            index = ((jdx + 1) * d_simulation.gridsize()) + idx;
+            set_colormap(d_simulation.rho()[index]);
             glVertex2f(px, py);
 
             px = wn + (idx + 1) * wn;
             py = hn + jdx * hn;
-            index = (jdx * sim.gridsize()) + (idx + 1);
-            set_colormap(sim.rho()[index]);
+            index = (jdx * d_simulation.gridsize()) + (idx + 1);
+            set_colormap(d_simulation.rho()[index]);
             glVertex2f(px, py);
         }
 
-        px = wn + (sim.gridsize() - 1) * wn;
+        px = wn + (d_simulation.gridsize() - 1) * wn;
         py = hn + (jdx + 1) * hn;
-        index = ((jdx + 1) * sim.gridsize()) + (sim.gridsize() - 1);
-        set_colormap(sim.rho()[index]);
+        index = ((jdx + 1) * d_simulation.gridsize()) + (d_simulation.gridsize() - 1);
+        set_colormap(d_simulation.rho()[index]);
         glVertex2f(px, py);
 
         glEnd();

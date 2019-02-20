@@ -1,9 +1,10 @@
 #include "window.ih"
 
 Window::Window(size_t width, size_t height)
-:
-    d_width(width),
+:   d_width(width),
     d_height(height),
+    d_mouse_lastx(0),
+    d_mouse_lasty(0),
     d_mouse_dragging(false),
     d_vec_scale(1000),
     d_color_direction(false),

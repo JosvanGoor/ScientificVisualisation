@@ -1,6 +1,6 @@
 #include "window.ih"
 
-void Window::repaint(Simulation const &sim)
+void Window::repaint()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
@@ -9,11 +9,11 @@ void Window::repaint(Simulation const &sim)
     switch(d_drawmode)
     {
         case DrawMode::SMOKE:
-            paint_smoke(sim);
+            paint_smoke();
         break;
 
         case DrawMode::VECTORS:
-            paint_vectors(sim);
+            paint_vectors();
         break;
 
         default:

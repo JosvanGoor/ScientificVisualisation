@@ -12,12 +12,10 @@ try
     Window window;
     window.make_current();
 
-    Simulation simulation;
-
     while (!window.should_close())
     {   
-        simulation.simulation_step();
-        window.repaint(simulation);
+        window.simulation().simulation_step();
+        window.repaint();
 
         glfwPollEvents();
     }
