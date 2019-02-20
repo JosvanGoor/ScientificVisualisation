@@ -1,6 +1,6 @@
 # Generic project Makefile
 
-EXECUTABLE = compvis	
+EXECUTABLE = scivis	
 
 SIMULATION	=	simulation/diffusematter.o \
 				simulation/setforces.o \
