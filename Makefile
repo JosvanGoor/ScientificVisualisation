@@ -12,12 +12,17 @@ SIMULATION	=	simulation/diffusematter.o \
 UTILITY		=	utility/clamp.o
 
 WINDOW		=	window/directiontocolor.o \
+				window/keyevent.o \
+				window/mousebuttonevent.o \
+				window/mousemoved.o \
 				window/paintsmoke.o \
 				window/paintvectors.o \
 				window/repaint.o \
 				window/setcolormap.o \
+				window/setinputcallbacks.o \
 				window/window0.o \
-				window/window1.o
+				window/window1.o \
+				window/windowresized.o
 
 OBJECTS		=	$(SIMULATION) \
 				$(UTILITY) \
@@ -45,19 +50,15 @@ $(EXECUTABLE): folders $(addprefix $(BUILDDIR)/,$(OBJECTS))
 #phony for rules that should never have a corresponding file
 .PHONY: folders clean gdb run rebuild
 
+# guarantees that all required folders exist
 folders:
 	@mkdir -p build
 	@mkdir -p $(filter-out %./,$(addprefix $(BUILDDIR)/,$(dir $(OBJECTS))))
 
 clean:
+	rm -f $(EXECUTABLE)
 	rm -rf build/
 	make folders
-
-gdb: $(EXECUTABLE)
-	gdb ./$(EXECUTABLE)
-
-run: $(EXECUTABLE)
-	./$(EXECUTABLE)
 
 rebuild:
 	make clean

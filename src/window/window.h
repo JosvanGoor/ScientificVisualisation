@@ -2,6 +2,7 @@
 #define __INCLUDED_WINDOW_H_
 
 #include <GLFW/glfw3.h>
+#include <GL/glu.h>
 #include "../simulation/simulation.h"
 
 enum class DrawMode
@@ -21,6 +22,7 @@ class Window
 {
     size_t d_width;
     size_t d_height;
+    bool d_mouse_dragging;
 
     float d_vec_scale;
     bool d_color_direction;
@@ -39,9 +41,17 @@ class Window
 
         void repaint(Simulation const &sim);
 
+        // callbacks
+        void key_event(int key, int scancode, int action, int mods);
+        void mouse_button_event(int button, int action, int mods);
+        void mouse_moved(double xpos, double ypos);
+        void window_resized(int width, int height);
+
     private:
         Window(Window const &copy) = delete;
         Window &operator=(Window const &copy) = delete;
+
+        void set_input_callbacks();
 
         void set_colormap(float col);
         void direction_to_color(float x, float y);

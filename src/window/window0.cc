@@ -2,5 +2,5 @@
 
 Window::~Window()
 {
-    // nozink
+    glfwDestroyWindow(d_window);
 }
