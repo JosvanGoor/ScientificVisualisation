@@ -1,6 +1,7 @@
 #ifndef __SIMULATION_H_
 #define __SIMULATION_H_
 
+#include <string>
 #include <vector>
 
 #include <rfftw.h>

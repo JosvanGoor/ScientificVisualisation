@@ -10,13 +10,12 @@ void Simulation::solve()
     // solve.cc: 9
     for (int idx = 0; idx < gridsize_sq; ++idx)
     {
-        d_vfield0_x[idx] *= d_timestep;
-        d_vfield0_y[idx] *= d_timestep;
-    }
+        d_vfield_x[idx] += d_timestep * d_vfield0_x[idx];
+        d_vfield0_x[idx] = d_vfield_x[idx];
 
-    // solve.cc 10
-    d_vfield_x = d_vfield0_x;
-    d_vfield0_y = d_vfield0_y;
+        d_vfield_y[idx] += d_timestep * d_vfield0_y[idx];
+        d_vfield0_y[idx] = d_vfield0_y[idx];
+    }
 
     // solve.cc 12
     for (int idx = 0; idx < d_gridsize; ++idx)
@@ -29,8 +28,8 @@ void Simulation::solve()
             size_t pos = idx + d_gridsize * jdx;
 
             double yval = (0.5 / d_gridsize) + jdx * (1.0 / d_gridsize);
-            double x0 = d_gridsize * (xval - d_timestep * d_vfield_x[pos]) - 0.5f;
-            double y0 = d_gridsize * (yval - d_timestep * d_vfield_x[pos]) - 0.5f;
+            double x0 = d_gridsize * (xval - d_timestep * d_vfield0_x[pos]) - 0.5f;
+            double y0 = d_gridsize * (yval - d_timestep * d_vfield0_y[pos]) - 0.5f;
             int i0 = clamp(x0);
             double s = x0 - i0;
             i0 = (d_gridsize + (i0 % d_gridsize)) % d_gridsize; //kan met 1 modulo minder?
@@ -83,7 +82,7 @@ void Simulation::solve()
     );
     
     // solve.cc 34
-    for (int idx = 0; idx < d_gridsize; idx += 2)
+    for (int idx = 0; idx <= d_gridsize; idx += 2)
     {
         double xval = 0.5 * idx;
         for (int jdx = 0; jdx < d_gridsize; ++jdx)
@@ -135,9 +134,9 @@ void Simulation::solve()
     {
         for (int jdx = 0; jdx < d_gridsize; ++jdx)
         {
-            d_vfield_x[idx + d_gridsize + jdx]
+            d_vfield_x[idx + d_gridsize * jdx]
                 = f * d_vfield0_x[idx + (d_gridsize + 2) * jdx];
-            d_vfield_y[idx + d_gridsize + jdx]
+            d_vfield_y[idx + d_gridsize * jdx]
                 = f * d_vfield0_y[idx + (d_gridsize + 2) * jdx];
         }
     }

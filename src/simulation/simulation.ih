@@ -1,6 +1,7 @@
 #include "simulation.h"
 
 #include <cmath>
+#include <numeric>
 
 #include "../utility/utility.h"
 

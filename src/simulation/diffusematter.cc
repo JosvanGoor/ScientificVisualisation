@@ -8,10 +8,10 @@ void Simulation::diffuse_matter()
         for (int jdx = 0; jdx < d_gridsize; ++jdx)
         {
             size_t pos = idx + d_gridsize * jdx;
-            double yval = (0.f / d_gridsize) + (1.0 / d_gridsize) * jdx;
+            double yval = (0.5 / d_gridsize) + (1.0 / d_gridsize) * jdx;
 
-            double x0 = d_gridsize * (xval - d_timestep * d_vfield_x[pos]) - 0.5f;
-            double y0 = d_gridsize * (yval - d_timestep * d_vfield_y[pos]) - 0.5f;
+            double x0 = d_gridsize * (xval - d_timestep * d_vfield_x[pos]) - 0.5;
+            double y0 = d_gridsize * (yval - d_timestep * d_vfield_y[pos]) - 0.5;
 
             int i0 = clamp(x0);
             double s = x0 - i0;
