@@ -20,27 +20,21 @@ try
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    GLFWwindow *window = glfwCreateWindow(500, 500, "jajajaja", nullptr, nullptr);
-    if (!window)
-        throw "Failed to create glfw window"s;
-    glfwMakeContextCurrent(window);
+    Window window;
+    window.make_current();
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
         throw "Failed to initialize GLAD"s;
 
-    glViewport(0, 0, 500, 500);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    window.set_rendermodel(new LineRenderModel());
+    glClearColor(0.0, 0.0, 0.0, 0.0);
 
-    LineRenderModel model;
-
-    size_t frame = 0;
-    while (!glfwWindowShouldClose(window))
+    while (!window.should_close())
     {
-        glClearColor(0.2, 0.3, 0.3, 1.0);
         
-        model.render();
-
-        glfwSwapBuffers(window);
+        window.simulation().simulation_step();
+        window.repaint();
+        
         glfwPollEvents();
     }
 

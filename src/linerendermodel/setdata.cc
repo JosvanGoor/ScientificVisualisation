@@ -2,7 +2,6 @@
 
 void LineRenderModel::set_data(vector<float> const &lines, vector<float> const &colors)
 {
-
     glBindBuffer(GL_ARRAY_BUFFER, d_vertex_buffer);
     glBufferData(GL_ARRAY_BUFFER, lines.size() * sizeof(float), lines.data(), GL_STREAM_DRAW);
 

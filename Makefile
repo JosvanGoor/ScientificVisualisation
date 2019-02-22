@@ -6,12 +6,12 @@ GLAD				=	glad/glad.o
 
 LINERENDERMODEL		=	linerendermodel/defaultcolors.o \
 						linerendermodel/defaultlines.o \
-						linerendermodel/framebuffersize.o \
 						linerendermodel/linerendermodel1.o \
 						linerendermodel/render.o \
 						linerendermodel/setdata.o
 
 RENDERMODEL			=	rendermodel/compileshader.o \
+						rendermodel/framebuffersize.o \
 						rendermodel/linkprogram.o \
 						rendermodel/rendermodel0.o
 
@@ -25,11 +25,26 @@ SIMULATION			=	simulation/diffusematter.o \
 UTILITY				=	utility/clamp.o \
 						utility/readfile.o
 
+WINDOW				=	window/colormap.o \
+						window/directiontocolor.o \
+						window/framebufferresized.o \
+						window/keyevent.o \
+						window/mousebuttonevent.o \
+						window/mousemoved.o \
+						window/paintsmoke.o \
+						window/paintvectors.o \
+						window/repaint.o \
+						window/setinputcallbacks.o \
+						window/setrendermodel.o \
+						window/window0.o \
+						window/window1.o
+
 OBJECTS				=	$(GLAD) \
 						$(LINERENDERMODEL) \
 						$(RENDERMODEL) \
 						$(SIMULATION) \
 						$(UTILITY) \
+						$(WINDOW) \
 						main.o
 #build macros
 COMPILER = g++

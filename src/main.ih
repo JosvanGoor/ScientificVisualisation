@@ -4,7 +4,6 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "linerendermodel/linerendermodel.h"
-#include "utility/utility.h"
+#include "window/window.h"
 
 using namespace std;
