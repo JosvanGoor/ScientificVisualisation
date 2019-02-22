@@ -4,6 +4,9 @@ string read_file(string const &file)
 {
     ifstream in {file, std::ios::binary};
 
+    if(!in.is_open())
+        throw "Failed to read file."s;
+
     size_t length;
     in.seekg(0, ios::end);
     length = in.tellg();

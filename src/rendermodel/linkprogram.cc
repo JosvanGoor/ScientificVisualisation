@@ -1,6 +1,6 @@
-#include "main.ih"
+#include "rendermodel.ih"
 
-GLuint link_program(GLuint vshader, GLuint fshader)
+GLuint RenderModel::link_program(GLuint vshader, GLuint fshader)
 {
     GLuint program = glCreateProgram();
 

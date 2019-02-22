@@ -4,9 +4,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "linerendermodel/linerendermodel.h"
 #include "utility/utility.h"
 
 using namespace std;
-
-GLuint compile_shader(string const &source, GLuint type);
-GLuint link_program(GLuint vshader, GLuint fshader);

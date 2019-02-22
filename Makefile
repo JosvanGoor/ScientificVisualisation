@@ -2,26 +2,33 @@
 
 EXECUTABLE = scivis	
 
-GLAD		=	glad/glad.o
+GLAD				=	glad/glad.o
 
-SIMULATION	=	simulation/diffusematter.o \
-				simulation/setforces.o \
-				simulation/simulation0.o \
-				simulation/simulation1.o \
-				simulation/simulationstep.o \
-				simulation/solve.o
+LINERENDERMODEL		=	linerendermodel/defaultcolors.o \
+						linerendermodel/defaultlines.o \
+						linerendermodel/linerendermodel1.o \
+						linerendermodel/render.o
 
-UTILITY		=	utility/clamp.o \
-				utility/readfile.o
+RENDERMODEL			=	rendermodel/compileshader.o \
+						rendermodel/linkprogram.o \
+						rendermodel/rendermodel0.o
 
-OBJECTS		=	$(GLAD) \
-				$(RENDERER) \
-				$(SIMULATION) \
-				$(UTILITY) \
-				main.o \
-				compileshader.o \
-				linkprogram.o
+SIMULATION			=	simulation/diffusematter.o \
+						simulation/setforces.o \
+						simulation/simulation0.o \
+						simulation/simulation1.o \
+						simulation/simulationstep.o \
+						simulation/solve.o
 
+UTILITY				=	utility/clamp.o \
+						utility/readfile.o
+
+OBJECTS				=	$(GLAD) \
+						$(LINERENDERMODEL) \
+						$(RENDERMODEL) \
+						$(SIMULATION) \
+						$(UTILITY) \
+						main.o
 #build macros
 COMPILER = g++
 FLAGS = -std=c++17 -Wall -ggdb -pedantic

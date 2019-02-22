@@ -1,6 +1,6 @@
-#include "main.ih"
+#include "rendermodel.ih"
 
-GLuint compile_shader(string const &source, GLuint type)
+GLuint RenderModel::compile_shader(string const &source, GLuint type)
 {
     GLuint shader = glCreateShader(type);
 
