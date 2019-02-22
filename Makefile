@@ -2,6 +2,8 @@
 
 EXECUTABLE = scivis	
 
+GLAD		=	glad/glad.o
+
 SIMULATION	=	simulation/diffusematter.o \
 				simulation/setforces.o \
 				simulation/simulation0.o \
@@ -12,32 +14,20 @@ SIMULATION	=	simulation/diffusematter.o \
 UTILITY		=	utility/clamp.o \
 				utility/readfile.o
 
-WINDOW		=	window/directiontocolor.o \
-				window/framebufferresized.o \
-				window/keyevent.o \
-				window/mousebuttonevent.o \
-				window/mousemoved.o \
-				window/paintsmoke.o \
-				window/paintvectors.o \
-				window/repaint.o \
-				window/setcolormap.o \
-				window/setinputcallbacks.o \
-				window/window0.o \
-				window/window1.o
-
 OBJECTS		=	$(GLAD) \
 				$(RENDERER) \
 				$(SIMULATION) \
 				$(UTILITY) \
-				$(WINDOW) \
-				main.o
+				main.o \
+				compileshader.o \
+				linkprogram.o
 
 #build macros
 COMPILER = g++
 FLAGS = -std=c++17 -Wall -ggdb -pedantic
-INCLUDEDIRS = -I./fftw/include/
-LIBDIRS     = -L./fftw/lib/
-LIBRARIES = $(LIBDIRS) -lrfftw -lfftw -lGL -lGLU -lGLEW -lm -lglut
+INCLUDEDIRS = -I./extern/include/
+LIBDIRS     = -L./extern/lib/
+LIBRARIES = $(LIBDIRS) -lrfftw -lfftw -lGL -lGLU -lGLEW -lm -lglfw
 
 #folders
 SOURCEDIR = src
