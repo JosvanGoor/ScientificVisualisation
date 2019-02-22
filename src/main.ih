@@ -1,7 +1,36 @@
 #include <iostream>
 #include <string>
 
-#include "renderer/renderer.h"
-#include "window/window.h"
+#include "simulation/simulation.h"
+#include "GL/glut.h"
 
 using namespace std;
+
+extern size_t window_width;
+extern size_t window_height;
+extern double mouse_prev_x;
+extern double mouse_prev_y;
+
+enum class DrawMode
+{
+    SMOKE,
+    VECTORS,
+    TEST
+};
+
+enum class ColorMapping
+{
+    BLACKWHITE,
+    RAINBOW,
+    BANDS
+};
+
+void display();
+void reshape(int newwidth, int newheight);
+void keyboard(unsigned char key, int x, int y);
+void drag(int x, int y);
+
+void visualize();
+
+void direction_to_color(float x, float y, int method);
+void set_colormap(float col);

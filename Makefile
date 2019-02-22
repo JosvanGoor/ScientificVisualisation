@@ -2,15 +2,6 @@
 
 EXECUTABLE = scivis	
 
-GLAD		=	glad/glad.o
-
-RENDERER	=	renderer/compileprogram.o \
-				renderer/compileshader.o \
-				renderer/defaultvertexbuffer.o \
-				renderer/draw.o \
-				renderer/initialize.o \
-				renderer/renderer1.o
-
 SIMULATION	=	simulation/diffusematter.o \
 				simulation/setforces.o \
 				simulation/simulation0.o \
@@ -46,7 +37,7 @@ COMPILER = g++
 FLAGS = -std=c++17 -Wall -ggdb -pedantic
 INCLUDEDIRS = -I./fftw/include/
 LIBDIRS     = -L./fftw/lib/
-LIBRARIES = $(LIBDIRS) -lrfftw -lfftw -lGL -lGLU -lGLEW -lm -lglfw
+LIBRARIES = $(LIBDIRS) -lrfftw -lfftw -lGL -lGLU -lGLEW -lm -lglut
 
 #folders
 SOURCEDIR = src

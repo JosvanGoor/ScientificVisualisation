@@ -1,8 +1,0 @@
-#include "window.h"
-
-#include <cmath>
-#include <string>
-
-#include "../utility/utility.h"
-
-using namespace std;
