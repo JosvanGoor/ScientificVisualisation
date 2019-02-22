@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include "../rendermodel/rendermodel.h"
 
@@ -13,15 +15,17 @@ class LineRenderModel : public RenderModel
     GLuint d_attribute_object;
     GLuint d_vertex_buffer;
     GLuint d_color_buffer;
-    glm::mat4 d_projection;
 
-    std::vector<float> d_lines;
-    std::vector<float> d_colors;
+    GLuint d_projection_location;
+    glm::mat4 d_projection;
 
     public:
         LineRenderModel();
 
         void render();
+
+        void framebuffer_size(size_t width, size_t height);
+        void set_data(std::vector<float> const &lines, std::vector<float> const &colors);
 
     private:
         std::vector<float> default_lines();

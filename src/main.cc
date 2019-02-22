@@ -10,7 +10,6 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
     glViewport(0, 0, width, height);
 }  
 
-
 int main()
 try
 {
@@ -34,6 +33,7 @@ try
 
     LineRenderModel model;
 
+    size_t frame = 0;
     while (!glfwWindowShouldClose(window))
     {
         glClearColor(0.2, 0.3, 0.3, 1.0);

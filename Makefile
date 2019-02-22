@@ -6,8 +6,10 @@ GLAD				=	glad/glad.o
 
 LINERENDERMODEL		=	linerendermodel/defaultcolors.o \
 						linerendermodel/defaultlines.o \
+						linerendermodel/framebuffersize.o \
 						linerendermodel/linerendermodel1.o \
-						linerendermodel/render.o
+						linerendermodel/render.o \
+						linerendermodel/setdata.o
 
 RENDERMODEL			=	rendermodel/compileshader.o \
 						rendermodel/linkprogram.o \
