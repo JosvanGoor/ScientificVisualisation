@@ -1,14 +1,15 @@
 #ifndef __INCLUDED_WINDOW_H_
 #define __INCLUDED_WINDOW_H_
 
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <GL/glu.h>
 #include "../simulation/simulation.h"
 
 enum class DrawMode
 {
     SMOKE,
-    VECTORS
+    VECTORS,
+    TEST
 };
 
 enum class ColorMapping
@@ -46,12 +47,11 @@ class Window
 
         void repaint();
 
-
         // callbacks
         void key_event(int key, int scancode, int action, int mods);
         void mouse_button_event(int button, int action, int mods);
         void mouse_moved(double xpos, double ypos);
-        void window_resized(int width, int height);
+        void framebuffer_resized(int width, int height);
 
     private:
         Window(Window const &copy) = delete;
@@ -64,6 +64,7 @@ class Window
 
         void paint_smoke();
         void paint_vectors();
+        void paint_test();
 
 };
 

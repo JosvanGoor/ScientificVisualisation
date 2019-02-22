@@ -27,6 +27,6 @@ void Window::set_input_callbacks()
         [](GLFWwindow *window, int width, int height)
         {
             reinterpret_cast<Window *>(glfwGetWindowUserPointer(window))
-                ->window_resized(width, height);
+                ->framebuffer_resized(width, height);
         });
 }

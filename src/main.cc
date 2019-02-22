@@ -25,6 +25,8 @@ try
         return 2;
     }
 
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
     Window window;
     
     window.mouse_button_event(GLFW_MOUSE_BUTTON_1, GLFW_PRESS, 0);
@@ -33,13 +35,19 @@ try
     window.mouse_button_event(GLFW_MOUSE_BUTTON_1, GLFW_RELEASE, 0);
 
     window.make_current();
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+        throw "Failed to load opengl functions.";
+
+    Renderer renderer;
+    renderer.initialize();
 
     while (!window.should_close())
     {   
         glfwPollEvents();
-        window.simulation().simulation_step();
-        window.repaint();
-
+        // window.simulation().simulation_step();
+        // window.repaint();
+        renderer.draw();
+        window.swap_buffers();
         check_opengl_errors();
     }
 

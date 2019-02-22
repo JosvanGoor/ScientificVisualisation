@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 
+#include "renderer/renderer.h"
 #include "window/window.h"
 
 using namespace std;

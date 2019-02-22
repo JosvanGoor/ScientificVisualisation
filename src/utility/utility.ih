@@ -1,5 +1,7 @@
 #include "utility.h"
 
+#include <fstream>
+#include <iterator>
 #include <rfftw.h>
 
 using namespace std;

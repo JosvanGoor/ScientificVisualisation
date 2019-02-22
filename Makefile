@@ -2,6 +2,15 @@
 
 EXECUTABLE = scivis	
 
+GLAD		=	glad/glad.o
+
+RENDERER	=	renderer/compileprogram.o \
+				renderer/compileshader.o \
+				renderer/defaultvertexbuffer.o \
+				renderer/draw.o \
+				renderer/initialize.o \
+				renderer/renderer1.o
+
 SIMULATION	=	simulation/diffusematter.o \
 				simulation/setforces.o \
 				simulation/simulation0.o \
@@ -9,9 +18,11 @@ SIMULATION	=	simulation/diffusematter.o \
 				simulation/simulationstep.o \
 				simulation/solve.o
 
-UTILITY		=	utility/clamp.o
+UTILITY		=	utility/clamp.o \
+				utility/readfile.o
 
 WINDOW		=	window/directiontocolor.o \
+				window/framebufferresized.o \
 				window/keyevent.o \
 				window/mousebuttonevent.o \
 				window/mousemoved.o \
@@ -21,10 +32,11 @@ WINDOW		=	window/directiontocolor.o \
 				window/setcolormap.o \
 				window/setinputcallbacks.o \
 				window/window0.o \
-				window/window1.o \
-				window/windowresized.o
+				window/window1.o
 
-OBJECTS		=	$(SIMULATION) \
+OBJECTS		=	$(GLAD) \
+				$(RENDERER) \
+				$(SIMULATION) \
 				$(UTILITY) \
 				$(WINDOW) \
 				main.o
