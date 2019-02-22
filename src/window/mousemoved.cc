@@ -7,8 +7,6 @@ void Window::mouse_moved(double xpos, double ypos)
     if (!d_mouse_dragging)
         return;
 
-    cout << "mouse dragged\n";
-
     int xi = clamp((d_simulation.gridsize() + 1) * (xpos / d_width));
     int yi = clamp((d_simulation.gridsize() + 1) * ((d_height - ypos) / d_height));
 

@@ -7,7 +7,7 @@ Window::Window(size_t width, size_t height)
     d_mouse_lasty(0),
     d_mouse_dragging(false),
     d_vec_scale(1000),
-    d_color_direction(true),
+    d_color_direction(false),
     d_drawmode(DrawMode::VECTORS),
     d_colormapping(ColorMapping::BLACKWHITE),
     d_rendermodel(nullptr)

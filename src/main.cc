@@ -5,11 +5,6 @@ void error_callback(int error, const char* description)
     fprintf(stderr, "Error: %s\n", description);
 }
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-    glViewport(0, 0, width, height);
-}  
-
 int main()
 try
 {
@@ -26,12 +21,11 @@ try
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
         throw "Failed to initialize GLAD"s;
 
-    window.set_rendermodel(new LineRenderModel());
+    // window.set_rendermodel(new LineRenderModel());
     glClearColor(0.0, 0.0, 0.0, 0.0);
 
     while (!window.should_close())
     {
-        
         window.simulation().simulation_step();
         window.repaint();
         
@@ -44,5 +38,8 @@ catch(string const &error)
 {
     cerr << "caught error:\n";
     cerr << "    " << error << "\n";
+
+    glfwTerminate();
+
     return 1;
 }

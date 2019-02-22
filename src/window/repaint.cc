@@ -5,7 +5,10 @@
 void Window::repaint()
 {
     if (!d_rendermodel)
+    {
         cerr << "No current rendermodel! skipping draw.\n";
+        return;
+    }
 
     switch(d_drawmode)
     {

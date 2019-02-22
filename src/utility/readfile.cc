@@ -17,7 +17,7 @@ string read_file(string const &file)
     buffer[length] = '\0';
 
     string rval{buffer};
-    delete buffer;
+    delete[] buffer;
 
     return rval;
 }
