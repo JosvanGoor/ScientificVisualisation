@@ -1,7 +1,5 @@
 #include "simulation.ih"
 
-#include <iostream>
-
 void Simulation::set_forces()
 {
     for (int idx = 0; idx < d_gridsize * d_gridsize; ++idx)

@@ -1,7 +1,5 @@
 #include "simulation.ih"
 
-#include <iostream>
-
 // voor de duidelijkheid list ik de approximate regelnummers uit de
 // solve.cc file
 
@@ -19,9 +17,6 @@ void Simulation::solve()
 
         d_vfield_y[idx] += d_timestep * d_vfield0_y[idx];
         d_vfield0_y[idx] = d_vfield_y[idx];
-        
-        if (d_vfield0_x[idx] > 0)
-            cout << "d_vfield0_x: " << d_vfield0_x[idx] << "\n";
     }
 
     // solve.cc 12

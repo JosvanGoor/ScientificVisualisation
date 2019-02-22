@@ -21,7 +21,7 @@ try
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
         throw "Failed to initialize GLAD"s;
 
-    // window.set_rendermodel(new LineRenderModel());
+    window.set_rendermodel(new LineRenderModel());
     glClearColor(0.0, 0.0, 0.0, 0.0);
 
     while (!window.should_close())
