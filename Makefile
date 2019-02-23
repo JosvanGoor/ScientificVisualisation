@@ -6,6 +6,7 @@ GLAD				=	glad/glad.o
 
 LINERENDERMODEL		=	linerendermodel/defaultcolors.o \
 						linerendermodel/defaultlines.o \
+						linerendermodel/linerendermodel0.o \
 						linerendermodel/linerendermodel1.o \
 						linerendermodel/render.o \
 						linerendermodel/setdata.o
