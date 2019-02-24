@@ -4,6 +4,7 @@
 #include <array>
 
 #include "../linerendermodel/linerendermodel.h"
+#include "../smokerendermodel/smokerendermodel.h"
 #include "../simulation/simulation.h"
 #include <GLFW/glfw3.h>
 

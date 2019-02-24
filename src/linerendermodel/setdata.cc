@@ -8,5 +8,7 @@ void LineRenderModel::set_data(vector<float> const &lines, vector<float> const &
     glBindBuffer(GL_ARRAY_BUFFER, d_color_buffer);
     glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(float), colors.data(), GL_STREAM_DRAW);
 
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
     d_linecount = lines.size() / 4;
 }

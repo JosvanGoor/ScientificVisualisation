@@ -23,6 +23,13 @@ SIMULATION			=	simulation/diffusematter.o \
 						simulation/simulationstep.o \
 						simulation/solve.o
 
+SMOKERENDERMODEL	=	smokerendermodel/defaultcolors.o \
+						smokerendermodel/defaulttristrip.o \
+						smokerendermodel/render.o \
+						smokerendermodel/setdata.o \
+						smokerendermodel/smokerendermodel0.o \
+						smokerendermodel/smokerendermodel1.o
+
 UTILITY				=	utility/clamp.o \
 						utility/readfile.o
 
@@ -44,6 +51,7 @@ OBJECTS				=	$(GLAD) \
 						$(LINERENDERMODEL) \
 						$(RENDERMODEL) \
 						$(SIMULATION) \
+						$(SMOKERENDERMODEL) \
 						$(UTILITY) \
 						$(WINDOW) \
 						main.o

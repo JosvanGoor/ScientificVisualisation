@@ -1,6 +1,6 @@
 #include "smokerendermodel.ih"
 
-SmokeRenderModel::SmokeRenderModel()
+SmokeRenderModel::SmokeRenderModel(size_t rows)
 {
     GLuint vshader = compile_shader(read_file("shaders/line_vertex.glsl"), GL_VERTEX_SHADER);
     GLuint fshader = compile_shader(read_file("shaders/line_fragment.glsl"), GL_FRAGMENT_SHADER);
@@ -8,10 +8,12 @@ SmokeRenderModel::SmokeRenderModel()
     glDeleteShader(vshader);
     glDeleteShader(fshader);
 
+    d_rows = rows;
+    d_drawcount = 8;
     vector<float> tristrip = default_tristrip();
     vector<float> colors = default_colors();
 
-    d_projection = glm::ortho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+    d_projection = glm::ortho(0.0f, 500.0f, 0.0f, 500.0f, -1.0f, 1.0f);
     d_projection_location = glGetUniformLocation(d_program, "u_transform");
 
     glGenVertexArrays(1, &d_attribute_object);

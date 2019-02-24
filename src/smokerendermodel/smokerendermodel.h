@@ -6,6 +6,7 @@
 class SmokeRenderModel : public RenderModel
 {
 
+    size_t d_rows;
     size_t d_drawcount;
     GLuint d_program;
     GLuint d_attribute_object;
@@ -14,11 +15,11 @@ class SmokeRenderModel : public RenderModel
     GLuint d_projection_location;
 
     public:
-        SmokeRenderModel();
+        SmokeRenderModel(size_t d_rows = 50);
+        ~SmokeRenderModel();
 
         void render();
-
-        void set_data(std::vector<float> const &tristrip, std::vector<float> const &colors);
+        void set_data(std::vector<float> const &lines, std::vector<float> const &colors);
 
     private:
         std::vector<float> default_tristrip();
