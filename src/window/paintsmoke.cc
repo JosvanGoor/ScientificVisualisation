@@ -17,13 +17,11 @@ void Window::paint_smoke()
         float py = hn + jdx * hn;
         int index = jdx * d_simulation.gridsize() + idx;
 
-        Color col
-        {
-            static_cast<float>(d_simulation.rho()[index]),
-            static_cast<float>(d_simulation.rho()[index]),
-            static_cast<float>(d_simulation.rho()[index])
-        };
-        colors.insert(colors.end(), col.begin(), col.end());
+        Color col;
+
+        colors.push_back(d_simulation.rho()[index]);
+        colors.push_back(d_simulation.rho()[index]);
+        colors.push_back(d_simulation.rho()[index]);
         triangles.push_back(px);
         triangles.push_back(py);
 
