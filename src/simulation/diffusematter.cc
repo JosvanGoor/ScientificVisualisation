@@ -2,7 +2,7 @@
 
 void Simulation::diffuse_matter()
 {
-    //#pragma omp parallel for
+    #pragma omp for
     for (int idx = 0; idx < d_gridsize; ++idx)
     {
         double xval = (0.5 / d_gridsize) + (1.0 / d_gridsize) * idx;

@@ -1,4 +1,5 @@
 #include "main.ih"
+#include <omp.h>
 
 void error_callback(int error, const char* description)
 {
@@ -24,14 +25,21 @@ try
     window.set_rendermodel(new SmokeRenderModel(100));
     glClearColor(0.0, 0.0, 0.0, 0.0);
 
-    while (!window.should_close())
+    #pragma omp parallel
     {
-        window.simulation().simulation_step();
-        window.repaint();
-        
-        glfwPollEvents();
+        while (!window.should_close())
+        {
+            window.simulation().simulation_step();
+            
+            #pragma omp barrier
+            if(omp_get_thread_num() == 0)
+            {
+                window.repaint();
+                
+                glfwPollEvents();
+            }
+        }
     }
-
     glfwTerminate();
 }
 catch(string const &error)

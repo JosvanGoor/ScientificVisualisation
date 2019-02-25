@@ -2,6 +2,7 @@
 
 void Simulation::set_forces()
 {
+    #pragma omp for
     for (int idx = 0; idx < d_gridsize * d_gridsize; ++idx)
     {
         d_rho0[idx] = 0.995 * d_rho[idx];

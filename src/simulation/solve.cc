@@ -11,7 +11,7 @@ void Simulation::solve()
     // cout << accumulate(d_vfield0_x.begin(), d_vfield0_x.end(), 0.0) << "\n";
 
     // solve.cc: 9
-    #pragma omp parallel
+    // #pragma omp parallel
     {
         #pragma omp for
         for (int idx = 0; idx < gridsize_sq; ++idx)
