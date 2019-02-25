@@ -10,6 +10,11 @@ void Window::framebuffer_resized(int width, int height)
     d_height = height;
 
     glViewport(0, 0, width, height);
+    
+    if (d_drawmode == DrawMode::SMOKE)
+        initialize_smoke_render();
+    
     if (d_rendermodel)
         d_rendermodel->framebuffer_size(width, height);
+
 }
