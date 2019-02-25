@@ -21,7 +21,7 @@ try
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
         throw "Failed to initialize GLAD"s;
 
-    window.set_rendermodel(new SmokeRenderModel());
+    window.set_rendermodel(new SmokeRenderModel(100));
     glClearColor(0.0, 0.0, 0.0, 0.0);
 
     while (!window.should_close())
