@@ -4,16 +4,17 @@ EXECUTABLE = scivis
 
 GLAD				=	glad/glad.o
 
-LINERENDERMODEL		=	linerendermodel/defaultcolors.o \
-						linerendermodel/defaultlines.o \
-						linerendermodel/linerendermodel0.o \
+LINERENDERMODEL		=	linerendermodel/linerendermodel0.o \
 						linerendermodel/linerendermodel1.o \
-						linerendermodel/render.o \
-						linerendermodel/setdata.o
+						linerendermodel/render.o
 
 RENDERMODEL			=	rendermodel/compileshader.o \
 						rendermodel/framebuffersize.o \
 						rendermodel/linkprogram.o \
+						rendermodel/loadshaders.o \
+						rendermodel/preparebuffers.o \
+						rendermodel/setcolordata.o \
+						rendermodel/setvertexdata.o \
 						rendermodel/rendermodel0.o
 
 SIMULATION			=	simulation/diffusematter.o \
@@ -51,7 +52,6 @@ OBJECTS				=	$(GLAD) \
 						$(LINERENDERMODEL) \
 						$(RENDERMODEL) \
 						$(SIMULATION) \
-						$(SMOKERENDERMODEL) \
 						$(UTILITY) \
 						$(WINDOW) \
 						main.o

@@ -36,6 +36,8 @@ void Window::paint_vectors()
         }
     }
 
-    d_rendermodel->set_data(lines, colors);
+    d_rendermodel->set_color_data(colors);
+    d_rendermodel->set_vertex_data(lines);
+    d_rendermodel->set_drawcount(lines.size() / 2);
     d_rendermodel->render();
 }

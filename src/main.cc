@@ -21,7 +21,7 @@ try
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
         throw "Failed to initialize GLAD"s;
 
-    window.set_rendermodel(new SmokeRenderModel(200));
+    window.set_rendermodel(new LineRenderModel());
     glClearColor(0.0, 0.0, 0.0, 0.0);
 
     size_t iterations = 0;
@@ -43,20 +43,19 @@ try
             }
             window.simulation().simulation_step();
             
-            if (omp_get_thread_num() == 0)
-                simulation_time += chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count();
-
             #pragma omp barrier
             if (omp_get_thread_num() == 0)
             {
+                simulation_time += chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count();
                 chrono::time_point t1 = chrono::high_resolution_clock::now();
                 window.repaint();
                 graphics_time += chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count();
                 
                 if (iterations == 1000)
                 {
-                    cout << "avg sim time over last 1000 iterations: " << simulation_time / 1000 << "\n";
-                    cout << "avg gfx time over last 1000 iterations: " << graphics_time / 1000 << "\n";
+                    cout.precision(1);
+                    cout << "avg sim time over last 1000 iterations: " << simulation_time << "ms.\n";
+                    cout << "avg gfx time over last 1000 iterations: " << graphics_time << "ms.\n";
                     simulation_time = 0;
                     graphics_time = 0;
                     iterations = 0;
