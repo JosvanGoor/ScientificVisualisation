@@ -13,5 +13,4 @@ void SmokeRenderModel::set_data(vector<float> const &tristrip, vector<float> con
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     d_drawcount = (tristrip.size() / 2) / (d_rows - 1);
-    cout << d_drawcount << "\n";
 }

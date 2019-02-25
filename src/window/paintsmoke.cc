@@ -17,11 +17,8 @@ void Window::paint_smoke()
         float py = hn + jdx * hn;
         int index = jdx * d_simulation.gridsize() + idx;
 
-        Color col;
-
-        colors.push_back(d_simulation.rho()[index]);
-        colors.push_back(d_simulation.rho()[index]);
-        colors.push_back(d_simulation.rho()[index]);
+        Color col = colormap(d_simulation.rho()[index]);
+        colors.insert(colors.end(), col.begin(), col.end());
         triangles.push_back(px);
         triangles.push_back(py);
 
@@ -51,7 +48,6 @@ void Window::paint_smoke()
         colors.insert(colors.end(), col.begin(), col.end());
         triangles.push_back(px);
         triangles.push_back(py);
-        
     }
 
     d_rendermodel->set_data(triangles, colors);
