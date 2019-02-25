@@ -1,8 +1,11 @@
+#include <chrono>
 #include <string>
 #include <iostream>
 
+#include <omp.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+
 
 #include "window/window.h"
 
