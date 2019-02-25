@@ -24,6 +24,11 @@ try
     window.set_rendermodel(new SmokeRenderModel(200));
     glClearColor(0.0, 0.0, 0.0, 0.0);
 
+    size_t iterations = 0;
+    chrono::time_point t1 = chrono::high_resolution_clock::now();
+    double simulation_time = 0.0;
+    double graphics_time = 0.0;
+
     #pragma omp parallel
     {
         if (omp_get_thread_num() == 0)
@@ -31,17 +36,37 @@ try
 
         while (!window.should_close())
         {
+            if (omp_get_thread_num() == 0)
+            {
+                ++iterations;
+                t1 = chrono::high_resolution_clock::now();
+            }
             window.simulation().simulation_step();
             
+            if (omp_get_thread_num() == 0)
+                simulation_time += chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count();
+
             #pragma omp barrier
             if (omp_get_thread_num() == 0)
             {
                 chrono::time_point t1 = chrono::high_resolution_clock::now();
                 window.repaint();
-                chrono::duration<double> elapsed = chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1);
-                cout << "gfx took " << elapsed.count() << "seconds\n\n";
+                graphics_time += chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count();
+                
+                if (iterations == 1000)
+                {
+                    cout << "avg sim time over last 1000 iterations: " << simulation_time / 1000 << "\n";
+                    cout << "avg gfx time over last 1000 iterations: " << graphics_time / 1000 << "\n";
+                    simulation_time = 0;
+                    graphics_time = 0;
+                    iterations = 0;
+                }
+
                 glfwPollEvents();
             }
+            
+            //else the program wont end.
+            #pragma omp barrier
         }
     }
     glfwTerminate();
