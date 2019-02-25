@@ -22,6 +22,7 @@ class RenderModel
         GLuint d_attribute_object;
 
     public:
+        RenderModel();
         virtual ~RenderModel();
 
         virtual void render() = 0;

@@ -2,6 +2,7 @@
 #define __INCLUDED_WINDOW_H_
 
 #include <array>
+#include <memory>
 
 #include "../linerendermodel/linerendermodel.h"
 #include "../smokerendermodel/smokerendermodel.h"
@@ -39,8 +40,8 @@ class Window
     DrawMode d_drawmode;
     ColorMapping d_colormapping;
     
-    RenderModel *d_rendermodel;
     Simulation d_simulation;
+    std::unique_ptr<RenderModel> d_rendermodel;
 
     public:
         Window(size_t width = 500, size_t height = 500);
@@ -52,7 +53,7 @@ class Window
         Simulation &simulation();
 
         void repaint();
-        void set_rendermodel(RenderModel *model);
+        void set_drawmode(DrawMode mode);
 
         // callbacks
         void key_event(int key, int scancode, int action, int mods);
@@ -68,6 +69,8 @@ class Window
 
         Color colormap(float col);
         Color direction_to_color(float x, float y);
+
+        void initialize_smoke_render();
 
         void paint_smoke();
         void paint_vectors();

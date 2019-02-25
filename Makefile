@@ -15,6 +15,7 @@ RENDERMODEL			=	rendermodel/compileshader.o \
 						rendermodel/preparebuffers.o \
 						rendermodel/setcolordata.o \
 						rendermodel/setvertexdata.o \
+						rendermodel/rendermodel1.o \
 						rendermodel/rendermodel0.o
 
 SIMULATION			=	simulation/diffusematter.o \
@@ -24,10 +25,7 @@ SIMULATION			=	simulation/diffusematter.o \
 						simulation/simulationstep.o \
 						simulation/solve.o
 
-SMOKERENDERMODEL	=	smokerendermodel/defaultcolors.o \
-						smokerendermodel/defaulttristrip.o \
-						smokerendermodel/render.o \
-						smokerendermodel/setdata.o \
+SMOKERENDERMODEL	=	smokerendermodel/render.o \
 						smokerendermodel/smokerendermodel0.o \
 						smokerendermodel/smokerendermodel1.o
 
@@ -37,14 +35,15 @@ UTILITY				=	utility/clamp.o \
 WINDOW				=	window/colormap.o \
 						window/directiontocolor.o \
 						window/framebufferresized.o \
+						window/initializesmokerender.o \
 						window/keyevent.o \
 						window/mousebuttonevent.o \
 						window/mousemoved.o \
 						window/paintsmoke.o \
 						window/paintvectors.o \
 						window/repaint.o \
+						window/setdrawmode.o \
 						window/setinputcallbacks.o \
-						window/setrendermodel.o \
 						window/window0.o \
 						window/window1.o
 
@@ -52,6 +51,7 @@ OBJECTS				=	$(GLAD) \
 						$(LINERENDERMODEL) \
 						$(RENDERMODEL) \
 						$(SIMULATION) \
+						$(SMOKERENDERMODEL) \
 						$(UTILITY) \
 						$(WINDOW) \
 						main.o
