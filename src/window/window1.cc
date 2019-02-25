@@ -10,7 +10,7 @@ Window::Window(size_t width, size_t height)
     d_color_direction(false),
     d_drawmode(DrawMode::SMOKE),
     d_colormapping(ColorMapping::RAINBOW),
-    d_simulation(200),
+    d_simulation(500),
     d_rendermodel()
 {
     d_window = glfwCreateWindow

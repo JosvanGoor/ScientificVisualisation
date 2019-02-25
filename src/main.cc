@@ -53,7 +53,7 @@ try
                 
                 if (iterations == 1000)
                 {
-                    cout.precision(1);
+                    cout.precision(3);
                     cout << "avg sim time over last 1000 iterations: " << simulation_time << "ms.\n";
                     cout << "avg gfx time over last 1000 iterations: " << graphics_time << "ms.\n";
                     simulation_time = 0;

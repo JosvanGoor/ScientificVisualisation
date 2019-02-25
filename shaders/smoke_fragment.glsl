@@ -6,7 +6,8 @@ out vec4 FragColor;
 vec4 colormap(float col)
 {
     const float dx = 0.8;
-    clamp(col, 0.0, 1.0);
+
+    col = max(min(col, 1), 0);
     col = (6 - 2 * dx) * col + dx;
 
     return vec4
