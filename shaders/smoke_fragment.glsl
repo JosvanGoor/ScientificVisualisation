@@ -1,9 +1,24 @@
 #version 330 core
 
-in vec3 col;
+in float col;
 out vec4 FragColor;
+
+vec4 colormap(float col)
+{
+    const float dx = 0.8;
+    clamp(col, 0.0, 1.0);
+    col = (6 - 2 * dx) * col + dx;
+
+    return vec4
+    (
+        max(0.0f, (3 - abs(col - 4) - abs(col - 5)) / 2),
+        max(0.0f, (4 - abs(col - 2) - abs(col - 4)) / 2),
+        max(0.0f, (3 - abs(col - 1) - abs(col - 2)) / 2),
+        1.0f
+    );
+}
 
 void main()
 {
-    FragColor = vec4(col, 1.0f);
+    FragColor = colormap(col);
 } 
