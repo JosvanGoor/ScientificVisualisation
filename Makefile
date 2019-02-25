@@ -57,7 +57,7 @@ OBJECTS				=	$(GLAD) \
 						main.o
 #build macros
 COMPILER = g++
-FLAGS = -std=c++17 -Wall -ggdb -pedantic
+FLAGS = -std=c++17 -Wall -ggdb -pedantic -fopenmp
 INCLUDEDIRS = -I./extern/include/
 LIBDIRS     = -L./extern/lib/
 LIBRARIES = $(LIBDIRS) -lrfftw -lfftw -lGL -lGLU -lGLEW -lm -lglfw

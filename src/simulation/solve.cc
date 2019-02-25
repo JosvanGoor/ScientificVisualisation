@@ -20,6 +20,7 @@ void Simulation::solve()
     }
 
     // solve.cc 12
+    #pragma omp parallel for
     for (int idx = 0; idx < d_gridsize; ++idx)
     {
         // deze zat in de for, eruitgehaald.
