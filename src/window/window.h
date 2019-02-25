@@ -13,7 +13,7 @@ enum class DrawMode
 {
     SMOKE,
     VECTORS,
-    TEST
+    NONE
 };
 
 enum class ColorMapping

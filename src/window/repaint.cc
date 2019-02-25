@@ -20,6 +20,9 @@ void Window::repaint()
             paint_vectors();
         break;
 
+        case DrawMode::NONE:
+            return;
+
         default:
             throw "Wtf this is impossible..."s;
     }

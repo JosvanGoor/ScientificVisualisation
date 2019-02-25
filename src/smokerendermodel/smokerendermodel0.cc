@@ -2,5 +2,4 @@
 
 SmokeRenderModel::~SmokeRenderModel()
 {
-    //TODO
 }

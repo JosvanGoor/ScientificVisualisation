@@ -12,6 +12,10 @@ void Window::set_drawmode(DrawMode mode)
             d_rendermodel = std::make_unique<LineRenderModel>();
         break;
 
+        case DrawMode::NONE:
+            d_rendermodel.release();
+        break;
+
         default:
             throw "wtf this is impossible."s;
     }

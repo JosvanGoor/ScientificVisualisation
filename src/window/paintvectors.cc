@@ -10,17 +10,14 @@ void Window::paint_vectors()
     std::vector<float> lines;
     std::vector<float> colors;
 
+    lines.reserve(4 * (d_simulation.gridsize() * d_simulation.gridsize()));
+    colors.reserve(4 * (d_simulation.gridsize() * d_simulation.gridsize()));
+
     for (int idx = 0; idx < d_simulation.gridsize(); ++idx)
     {
         for (int jdx = 0; jdx < d_simulation.gridsize(); ++jdx)
         {
             int index = jdx * d_simulation.gridsize() + idx;
-
-            Color col = direction_to_color
-            (
-                d_simulation.vfield_x()[index],
-                d_simulation.vfield_y()[index]
-            );
 
             // line start
             lines.push_back(wn + idx * wn);
@@ -31,8 +28,10 @@ void Window::paint_vectors()
             lines.push_back((hn + jdx * hn) + d_vec_scale * d_simulation.vfield_y()[index]);
 
             //color for both points
-            colors.insert(colors.end(), col.begin(), col.end());
-            colors.insert(colors.end(), col.begin(), col.end());
+            colors.push_back(d_simulation.vfield_x()[index]);
+            colors.push_back(d_simulation.vfield_y()[index]);
+            colors.push_back(d_simulation.vfield_x()[index]);
+            colors.push_back(d_simulation.vfield_y()[index]);
         }
     }
 

@@ -7,10 +7,10 @@ Window::Window(size_t width, size_t height)
     d_mouse_lasty(0),
     d_mouse_dragging(false),
     d_vec_scale(1000),
-    d_color_direction(false),
-    d_drawmode(DrawMode::SMOKE),
+    d_color_direction(true),
+    d_drawmode(DrawMode::NONE),
     d_colormapping(ColorMapping::RAINBOW),
-    d_simulation(500),
+    d_simulation(300),
     d_rendermodel()
 {
     d_window = glfwCreateWindow
