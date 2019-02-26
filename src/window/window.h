@@ -3,6 +3,7 @@
 
 #include <array>
 #include <memory>
+#include <iostream>
 
 #include "../linerendermodel/linerendermodel.h"
 #include "../smokerendermodel/smokerendermodel.h"
@@ -58,6 +59,7 @@ class Window
         void set_colormapping(ColorMapping mapping);
         
         void print_shortcuts() const;
+        void print_settings() const;
 
         // callbacks
         void key_event(int key, int scancode, int action, int mods);
@@ -100,6 +102,11 @@ inline Simulation &Window::simulation()
 inline void Window::set_colormapping(ColorMapping mapping)
 {
     d_colormapping = mapping;
+}
+
+inline void Window::print_settings() const
+{
+    std::cout << "Settings: " << drawmode_string(d_drawmode) << " / " << colormapping_string(d_colormapping) << "               \r" << std::flush;
 }
 
 #endif

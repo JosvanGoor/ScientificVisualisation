@@ -21,7 +21,6 @@ void Window::key_event(int key, int scancode, int action, int mods)
                     (static_cast<int>(d_colormapping) + 1) % 3
                 )
             );
-            cout << "Set: " << colormapping_string(d_colormapping) << "          \r" << flush;
         break;
 
         case GLFW_KEY_R:
@@ -32,7 +31,7 @@ void Window::key_event(int key, int scancode, int action, int mods)
                     (static_cast<int>(d_drawmode) + 1) % 2
                 )
             );
-            cout << "Set: " << drawmode_string(d_drawmode) << "          \r" << flush;
         break;
     }
+    print_settings();
 }

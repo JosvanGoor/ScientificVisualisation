@@ -9,7 +9,7 @@ Window::Window(size_t width, size_t height)
     d_vec_scale(1000),
     d_drawmode(DrawMode::NONE),
     d_colormapping(ColorMapping::BANDS),
-    d_simulation(300),
+    d_simulation(200),
     d_rendermodel()
 {
     d_window = glfwCreateWindow
