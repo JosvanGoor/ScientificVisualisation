@@ -7,7 +7,6 @@
 
 fftw_real length(fftw_real a, fftw_real b)
 {   
-    cout << std::sqrt(a * a + b * b) << '\n';
     return std::sqrt(a * a + b * b);
 }
 

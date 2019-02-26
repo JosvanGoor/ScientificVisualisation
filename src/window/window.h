@@ -121,7 +121,10 @@ inline void Window::set_colormode(ColorMode mode)
 
 inline void Window::print_settings() const
 {
-    std::cout << "Settings: " << drawmode_string(d_drawmode) << " / " << colormapping_string(d_colormapping) << "               \r" << std::flush;
+    std::cout << "Settings: "
+              << "{" << drawmode_string(d_drawmode) << "}:"
+              << " " << colormapping_string(d_colormapping) << " -> "
+              << colormode_string(d_colormode) << "               \r" << std::flush;
 }
 
 #endif

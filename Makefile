@@ -33,6 +33,7 @@ UTILITY				=	utility/clamp.o \
 						utility/readfile.o
 
 WINDOW				=	window/colormappingstring.o \
+						window/colormodestring.o \
 						window/drawmodestring.o \
 						window/framebufferresized.o \
 						window/initializesmokerender.o \
