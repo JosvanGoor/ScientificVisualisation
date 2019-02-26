@@ -26,6 +26,14 @@ enum class ColorMapping
 };
 std::string colormapping_string(ColorMapping mapping);
 
+enum class ColorMode
+{
+    DENSITY,
+    VELOCITY,
+    FORCE
+};
+std::string colormode_string(ColorMode mode);
+
 typedef std::array<float, 3> Color;
 
 class Window
@@ -41,6 +49,7 @@ class Window
     float d_vec_scale;
     DrawMode d_drawmode;
     ColorMapping d_colormapping;
+    ColorMode d_colormode;
     
     Simulation d_simulation;
     std::unique_ptr<RenderModel> d_rendermodel;
@@ -57,6 +66,7 @@ class Window
         void repaint();
         void set_drawmode(DrawMode mode);
         void set_colormapping(ColorMapping mapping);
+        void set_colormode(ColorMode mode);
         
         void print_shortcuts() const;
         void print_settings() const;
@@ -102,6 +112,11 @@ inline Simulation &Window::simulation()
 inline void Window::set_colormapping(ColorMapping mapping)
 {
     d_colormapping = mapping;
+}
+
+inline void Window::set_colormode(ColorMode mode)
+{
+    d_colormode = mode;
 }
 
 inline void Window::print_settings() const

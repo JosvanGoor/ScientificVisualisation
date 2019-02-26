@@ -32,6 +32,16 @@ void Window::key_event(int key, int scancode, int action, int mods)
                 )
             );
         break;
+
+        case GLFW_KEY_M:
+            set_colormode
+            (
+                static_cast<ColorMode>
+                (
+                    (static_cast<int>(d_colormode) + 1) % 3
+                )
+            );
+        break;
     }
     print_settings();
 }
