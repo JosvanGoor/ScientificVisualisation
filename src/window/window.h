@@ -15,6 +15,7 @@ enum class DrawMode
     VECTORS,
     NONE
 };
+std::string drawmode_string(DrawMode mode);
 
 enum class ColorMapping
 {
@@ -22,6 +23,7 @@ enum class ColorMapping
     RAINBOW,
     BANDS
 };
+std::string colormapping_string(ColorMapping mapping);
 
 typedef std::array<float, 3> Color;
 
@@ -36,7 +38,6 @@ class Window
     bool d_mouse_dragging;
 
     float d_vec_scale;
-    bool d_color_direction;
     DrawMode d_drawmode;
     ColorMapping d_colormapping;
     
@@ -54,6 +55,9 @@ class Window
 
         void repaint();
         void set_drawmode(DrawMode mode);
+        void set_colormapping(ColorMapping mapping);
+        
+        void print_shortcuts() const;
 
         // callbacks
         void key_event(int key, int scancode, int action, int mods);
@@ -66,9 +70,6 @@ class Window
         Window &operator=(Window const &copy) = delete;
 
         void set_input_callbacks();
-
-        Color colormap(float col);
-        Color direction_to_color(float x, float y);
 
         void initialize_smoke_render();
 
@@ -94,6 +95,11 @@ inline void Window::make_current()
 inline Simulation &Window::simulation()
 {
     return d_simulation;
+}
+
+inline void Window::set_colormapping(ColorMapping mapping)
+{
+    d_colormapping = mapping;
 }
 
 #endif

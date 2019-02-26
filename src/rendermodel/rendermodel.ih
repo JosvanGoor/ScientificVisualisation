@@ -1,5 +1,7 @@
 #include "rendermodel.h"
 
+#include <sstream>
+
 #include "../utility/utility.h"
 
 using namespace std;

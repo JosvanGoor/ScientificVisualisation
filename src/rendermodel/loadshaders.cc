@@ -10,4 +10,5 @@ void RenderModel::load_shaders(string const &vsfile, string const &fsfile)
     glDeleteShader(fshader);
 
     d_projection_location = glGetUniformLocation(d_program, "u_transform");
+    d_colormapping_location = glGetUniformLocation(d_program, "u_colormapping");
 }

@@ -10,6 +10,8 @@ void Window::repaint()
         return;
     }
 
+    d_rendermodel->set_colormapping(static_cast<int>(d_colormapping));
+
     switch(d_drawmode)
     {
         case DrawMode::SMOKE:

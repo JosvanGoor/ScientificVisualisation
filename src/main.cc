@@ -32,7 +32,10 @@ try
     #pragma omp parallel
     {
         if (omp_get_thread_num() == 0)
+        {
             cout << "Running on " << omp_get_num_threads() << "threads\n";
+            window.print_shortcuts();
+        }
 
         while (!window.should_close())
         {
@@ -56,6 +59,7 @@ try
                     cout.precision(3);
                     cout << "avg sim time over last 1000 iterations: " << simulation_time << "ms.\n";
                     cout << "avg gfx time over last 1000 iterations: " << graphics_time << "ms.\n";
+                    window.print_shortcuts();
                     simulation_time = 0;
                     graphics_time = 0;
                     iterations = 0;

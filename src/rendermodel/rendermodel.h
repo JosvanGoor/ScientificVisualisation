@@ -13,8 +13,10 @@ class RenderModel
 {
     protected:
         size_t d_drawcount;
+        int d_colormapping;
         glm::mat4 d_projection;
         GLuint d_projection_location;
+        GLuint d_colormapping_location;
 
         GLuint d_program;
         GLuint d_vertex_buffer;
@@ -27,6 +29,7 @@ class RenderModel
 
         virtual void render() = 0;
         
+        void set_colormapping(int mapping);
         void set_drawcount(size_t drawcount);
         void set_color_data(std::vector<float> const &colors);
         void set_vertex_data(std::vector<float> const &vertex);
@@ -39,6 +42,11 @@ class RenderModel
         static GLuint compile_shader(std::string const &source, GLuint type);
         static GLuint link_program(GLuint vshader, GLuint fshader);
 };
+
+inline void RenderModel::set_colormapping(int mapping)
+{
+    d_colormapping = mapping;
+}
 
 inline void RenderModel::set_drawcount(size_t drawcount)
 {

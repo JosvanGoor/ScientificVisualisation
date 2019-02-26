@@ -15,7 +15,12 @@ GLuint RenderModel::compile_shader(string const &source, GLuint type)
     {
         char log[512];
         glGetShaderInfoLog(shader, 512, nullptr, log);
-        throw string(log);
+
+        stringstream ss;
+        ss << "failed to compile ";
+        ss << ((type == GL_VERTEX_SHADER) ? "vertex shader " : "fragment shader ");
+        ss << log;
+        throw ss.str();
     }
 
     return shader;

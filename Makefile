@@ -32,8 +32,8 @@ SMOKERENDERMODEL	=	smokerendermodel/render.o \
 UTILITY				=	utility/clamp.o \
 						utility/readfile.o
 
-WINDOW				=	window/colormap.o \
-						window/directiontocolor.o \
+WINDOW				=	window/colormappingstring.o \
+						window/drawmodestring.o \
 						window/framebufferresized.o \
 						window/initializesmokerender.o \
 						window/keyevent.o \
@@ -41,6 +41,7 @@ WINDOW				=	window/colormap.o \
 						window/mousemoved.o \
 						window/paintsmoke.o \
 						window/paintvectors.o \
+						window/printshortcuts.o \
 						window/repaint.o \
 						window/setdrawmode.o \
 						window/setinputcallbacks.o \
