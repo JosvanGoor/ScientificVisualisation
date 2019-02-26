@@ -29,8 +29,8 @@ std::string colormapping_string(ColorMapping mapping);
 enum class ColorMode
 {
     DENSITY,
-    VELOCITY,
-    FORCE
+    FORCE,
+    VELOCITY
 };
 std::string colormode_string(ColorMode mode);
 

@@ -6,29 +6,31 @@
 #include <cmath>
 
 fftw_real length(fftw_real a, fftw_real b)
-{
+{   
+    cout << std::sqrt(a * a + b * b) << '\n';
     return std::sqrt(a * a + b * b);
 }
 
 void Window::paint_smoke()
 {
-    cout << "start\n";
     vector<float> colors;
     colors.reserve(2 * d_simulation.gridsize() * d_simulation.gridsize());
     
     vector<fftw_real> store;
-    store.reserve(d_simulation.rho().size());
 
     switch (d_colormode)
     {
         case ColorMode::DENSITY:
+            store.reserve(d_simulation.rho().size());
             std::copy(d_simulation.rho().begin(), d_simulation.rho().end(), store.begin());
             break;
         case ColorMode::VELOCITY:
+            store.reserve(d_simulation.vfield_x().size());
             std::transform(d_simulation.vfield_x().begin(),d_simulation.vfield_x().end(),
                             d_simulation.vfield_y().begin(), store.begin(), length);
             break;
         case ColorMode::FORCE:
+            store.reserve(d_simulation.force_x().size());
             std::transform(d_simulation.force_x().begin(),d_simulation.force_x().end(),
                             d_simulation.force_y().begin(), store.begin(), length);
             break;
@@ -57,8 +59,7 @@ void Window::paint_smoke()
 
     // cout << "spent " << chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count() << " s preparing\n";
     // t1 = chrono::high_resolution_clock::now();
-    d_rendermodel->set_color_data(std::move(colors));
+    d_rendermodel->set_color_data(colors);
     d_rendermodel->render();
-    cout << "test\n";
     // cout << "spent " << chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count() << " s rendering\n";
 }
