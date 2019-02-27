@@ -7,9 +7,13 @@
 in float col;
 out vec4 FragColor;
 uniform int u_colormapping;
+uniform vec2 u_limits;
 
 vec4 colormap(float col)
 {
+    col = max(min(col,u_limits.y),u_limits.x);
+    col = (col - u_limits.x) / (u_limits.y - u_limits.x);
+
     if (u_colormapping == BLACKWHITE)
         return vec4(col, col, col, 1.0f);
 

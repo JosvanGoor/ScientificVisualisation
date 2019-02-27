@@ -9,6 +9,7 @@ void SmokeRenderModel::render()
     glBindVertexArray(d_attribute_object);
     glUniformMatrix4fv(d_projection_location, 1, GL_FALSE, glm::value_ptr(d_projection));
     glUniform1i(d_colormapping_location, d_colormapping);
+    glUniform2f(d_limit_location, d_min, d_max);
 
     for (size_t idx = 0; idx < (d_drawcount - 1); ++idx)
     {

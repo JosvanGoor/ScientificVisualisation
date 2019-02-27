@@ -34,10 +34,18 @@ enum class ColorMode
 };
 std::string colormode_string(ColorMode mode);
 
+
+enum class ScalingMode
+{
+    STATIC,
+    DYNAMIC
+};
+std::string scalingmode_string(ScalingMode mode);
 typedef std::array<float, 3> Color;
 
 class Window
 {
+    float d_min, d_max;
     size_t d_width;
     size_t d_height;
     GLFWwindow *d_window;
@@ -50,6 +58,7 @@ class Window
     DrawMode d_drawmode;
     ColorMapping d_colormapping;
     ColorMode d_colormode;
+    ScalingMode d_scalingmode;
     
     Simulation d_simulation;
     std::unique_ptr<RenderModel> d_rendermodel;
@@ -67,6 +76,7 @@ class Window
         void set_drawmode(DrawMode mode);
         void set_colormapping(ColorMapping mapping);
         void set_colormode(ColorMode mode);
+        void set_scalingmode(ScalingMode mode);
         
         void print_shortcuts() const;
         void print_settings() const;
@@ -119,10 +129,19 @@ inline void Window::set_colormode(ColorMode mode)
     d_colormode = mode;
 }
 
+inline void Window::set_scalingmode(ScalingMode mode)
+{
+    d_scalingmode = mode;
+}
+
 inline void Window::print_settings() const
 {
     std::cout << "Settings: "
               << "{" << drawmode_string(d_drawmode) << "}:"
+              << "{" << scalingmode_string(d_scalingmode);
+    if (d_scalingmode == ScalingMode::STATIC) 
+        std::cout << ": between: [" << d_min << ", " << d_max << ']';
+    std::cout << "}:"
               << " " << colormapping_string(d_colormapping) << " -> "
               << colormode_string(d_colormode) << "               \r" << std::flush;
 }

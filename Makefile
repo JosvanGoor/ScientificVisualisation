@@ -41,6 +41,7 @@ UTILITY				=	utility/clamp.o \
 
 WINDOW				=	window/colormappingstring.o \
 						window/colormodestring.o \
+						window/scalingmodestring.o \
 						window/drawmodestring.o \
 						window/framebufferresized.o \
 						window/initializesmokerender.o \
