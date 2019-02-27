@@ -27,12 +27,15 @@ class TextRenderer
     GLuint d_attributes;
     GLuint d_color_location;
     GLuint d_sampler_location;
+    GLuint d_projection_location;
 
-    std::map<GLubyte, Character> d_characters;
+    glm::mat4 d_projection;
+    std::map<char, Character> d_characters;
 
     public:
         TextRenderer(std::string const &font, size_t size);
 
+        void set_size(size_t width, size_t height);
         void render_string(std::string const &text, float xpos, float ypos, glm::vec3 color);
 
     private:

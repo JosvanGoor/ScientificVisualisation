@@ -24,6 +24,9 @@ try
     window.set_drawmode(DrawMode::SMOKE);
     glClearColor(0.0, 0.0, 0.0, 0.0);
 
+    TextRenderer text{"fonts/comic.ttf", 42};
+    text.set_size(500, 500);
+
     size_t iterations = 0;
     chrono::time_point t1 = chrono::high_resolution_clock::now();
     double simulation_time = 0.0;
@@ -52,6 +55,9 @@ try
                 simulation_time += chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count();
                 chrono::time_point t1 = chrono::high_resolution_clock::now();
                 window.repaint();
+                
+                text.render_string("text123", 100, 100, glm::vec3(1.0, 1.0, 1.0));
+
                 graphics_time += chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count();
                 
                 if (iterations == 1000)
@@ -64,7 +70,7 @@ try
                     graphics_time = 0;
                     iterations = 0;
                 }
-
+                window.swap_buffers();
                 glfwPollEvents();
             }
             

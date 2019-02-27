@@ -29,7 +29,11 @@ SMOKERENDERMODEL	=	smokerendermodel/render.o \
 						smokerendermodel/smokerendermodel0.o \
 						smokerendermodel/smokerendermodel1.o
 
-TEXTRENDERER		=	textrenderer/loadglyphs.o \
+TEXTRENDERER		=	textrenderer/loadbuffers.o \
+						textrenderer/loadglyphs.o \
+						textrenderer/loadprogram.o \
+						textrenderer/renderstring.o \
+						textrenderer/setsize.o \
 						textrenderer/textrenderer1.o
 
 UTILITY				=	utility/clamp.o \

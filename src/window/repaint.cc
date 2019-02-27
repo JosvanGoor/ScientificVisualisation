@@ -28,6 +28,4 @@ void Window::repaint()
         default:
             throw "Wtf this is impossible..."s;
     }
-
-    swap_buffers();
 }

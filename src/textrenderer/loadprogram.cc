@@ -10,5 +10,7 @@ void TextRenderer::load_program()
     glDeleteShader(vshader);
     glDeleteShader(fshader);
 
-    
+    d_projection_location = glGetUniformLocation(d_program, "projection");
+    d_color_location = glGetUniformLocation(d_program, "text_color");
+    d_sampler_location = glGetUniformLocation(d_program, "text");
 }
