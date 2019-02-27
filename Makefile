@@ -29,6 +29,9 @@ SMOKERENDERMODEL	=	smokerendermodel/render.o \
 						smokerendermodel/smokerendermodel0.o \
 						smokerendermodel/smokerendermodel1.o
 
+TEXTRENDERER		=	textrenderer/loadglyphs.o \
+						textrenderer/textrenderer1.o
+
 UTILITY				=	utility/clamp.o \
 						utility/readfile.o
 
@@ -54,6 +57,7 @@ OBJECTS				=	$(GLAD) \
 						$(RENDERMODEL) \
 						$(SIMULATION) \
 						$(SMOKERENDERMODEL) \
+						$(TEXTRENDERER) \
 						$(UTILITY) \
 						$(WINDOW) \
 						main.o
@@ -62,7 +66,7 @@ COMPILER = g++
 FLAGS = -std=c++17 -Wall -ggdb -pedantic -fopenmp
 INCLUDEDIRS = -I./extern/include/
 LIBDIRS     = -L./extern/lib/
-LIBRARIES = $(LIBDIRS) -lrfftw -lfftw -lGL -lGLU -lGLEW -lm -lglfw 
+LIBRARIES = $(LIBDIRS) -lrfftw -lfftw -lGL -lGLU -lGLEW -lm -lglfw -lfreetype
 
 #folders
 SOURCEDIR = src

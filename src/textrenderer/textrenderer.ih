@@ -1,0 +1,3 @@
+#include "textrenderer.h"
+
+using namespace std;
