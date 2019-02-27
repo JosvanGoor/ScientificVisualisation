@@ -4,7 +4,6 @@
 
 void SmokeRenderModel::render_bar()
 {
-
     float left = d_width * 0.90;
     float right = d_width * 0.96;
     float top = d_height * 0.9;
@@ -52,4 +51,8 @@ void SmokeRenderModel::render_bar()
     glUniform1i(d_colormapping_location, d_colormapping);
     glUniform2f(d_limit_location, d_min, d_max);
     glDrawArrays(GL_TRIANGLES, 0, 6 * 2);
+    glBindVertexArray(0);
+
+    d_textrender.render_string(to_string(d_max).substr(0, 4), left, top + 10, glm::vec3(1.0, 1.0, 1.0));
+    d_textrender.render_string(to_string(d_min).substr(0, 4), left, bot - 26, glm::vec3(1.0, 1.0, 1.0));
 }

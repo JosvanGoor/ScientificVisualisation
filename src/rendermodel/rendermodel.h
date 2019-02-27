@@ -38,7 +38,7 @@ class RenderModel
         void set_drawcount(size_t drawcount);
         void set_color_data(std::vector<float> const &colors, float v_min = 0, float v_max = 1);
         void set_vertex_data(std::vector<float> const &vertex);
-        void framebuffer_size(size_t width, size_t height);
+        virtual void framebuffer_size(size_t width, size_t height);
 
         void load_shaders(std::string const &vsfile, std::string const &fsfile);
         void prepare_buffers(size_t coord_width, size_t color_width);

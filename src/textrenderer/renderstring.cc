@@ -3,6 +3,7 @@
 void TextRenderer::render_string(std::string const &text, float xpos, float ypos, glm::vec3 color)
 {
     glUseProgram(d_program);
+    glBindVertexArray(d_attributes);
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);  
@@ -10,7 +11,6 @@ void TextRenderer::render_string(std::string const &text, float xpos, float ypos
     glUniform3f(d_color_location, color.x, color.y, color.z);
     glUniformMatrix4fv(d_projection_location, 1, GL_FALSE, glm::value_ptr(d_projection));
     glActiveTexture(GL_TEXTURE0);
-    glBindVertexArray(d_attributes);
 
     for (char ch : text)
     {
