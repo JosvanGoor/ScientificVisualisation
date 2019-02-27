@@ -5,10 +5,9 @@
 #include <string>
 
 #include <ft2build.h>
-#include <glad/glad.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <glm/gtc/matrix_transform.hpp>
+#include <freetype/freetype.h>
+
+#include "../rendermodel/rendermodel.h"
 
 struct Character
 {
@@ -32,8 +31,12 @@ class TextRenderer
     public:
         TextRenderer(std::string const &font, size_t size);
 
+        void render_string(std::string const &text, float xpos, float ypos, glm::vec3 color);
+
     private:
         void load_glyphs(std::string const &font, size_t size);
+        void load_program();
+        void load_buffers();
 };
 
 #endif

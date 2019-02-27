@@ -1,3 +1,5 @@
 #include "textrenderer.h"
 
+#include "../utility/utility.h"
+
 using namespace std;
