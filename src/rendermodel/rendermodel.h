@@ -41,7 +41,6 @@ class RenderModel
         void load_shaders(std::string const &vsfile, std::string const &fsfile);
         void prepare_buffers(size_t coord_width, size_t color_width);
 
-    protected:
         static GLuint compile_shader(std::string const &source, GLuint type);
         static GLuint link_program(GLuint vshader, GLuint fshader);
 };
