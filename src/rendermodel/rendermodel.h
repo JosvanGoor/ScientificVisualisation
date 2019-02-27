@@ -12,6 +12,8 @@
 class RenderModel
 {
     protected:
+        size_t d_width;
+        size_t d_height;
         size_t d_drawcount;
         int d_colormapping;
         float d_min, d_max;

@@ -25,7 +25,9 @@ SIMULATION			=	simulation/diffusematter.o \
 						simulation/simulationstep.o \
 						simulation/solve.o
 
-SMOKERENDERMODEL	=	smokerendermodel/render.o \
+SMOKERENDERMODEL	=	smokerendermodel/buildbar.o \
+						smokerendermodel/render.o \
+						smokerendermodel/renderbar.o \
 						smokerendermodel/smokerendermodel0.o \
 						smokerendermodel/smokerendermodel1.o
 
