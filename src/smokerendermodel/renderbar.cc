@@ -4,8 +4,8 @@
 
 void SmokeRenderModel::render_bar()
 {
-    float left = d_width * 0.90;
-    float right = d_width * 0.96;
+    float left = d_width  - 50;
+    float right = d_width - 25;
     float top = d_height * 0.9;
     float bot = d_height * 0.1;
 
@@ -18,7 +18,7 @@ void SmokeRenderModel::render_bar()
         left - 5, bot - 5, right + 5, bot - 5, right + 5, top + 5
     };
 
-    float white[6] = {d_max, d_max, d_max, d_max, d_max, d_max};
+    float white[6] = {1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f};
 
     glBindBuffer(GL_ARRAY_BUFFER, d_bar_vertices);
     glBufferData(GL_ARRAY_BUFFER, sizeof(bigger), bigger, GL_STREAM_DRAW);
@@ -53,6 +53,6 @@ void SmokeRenderModel::render_bar()
     glDrawArrays(GL_TRIANGLES, 0, 6 * 2);
     glBindVertexArray(0);
 
-    d_textrender.render_string(to_string(d_max).substr(0, 4), left, top + 10, glm::vec3(1.0, 1.0, 1.0));
-    d_textrender.render_string(to_string(d_min).substr(0, 4), left, bot - 26, glm::vec3(1.0, 1.0, 1.0));
+    d_textrender.render_string(to_string(d_max).substr(0, 4), left - 2, top + 10, glm::vec3(1.0, 1.0, 1.0));
+    d_textrender.render_string(to_string(d_min).substr(0, 4), left - 2, bot - 26, glm::vec3(1.0, 1.0, 1.0));
 }
