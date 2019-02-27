@@ -23,6 +23,8 @@ class TextRenderer
     size_t d_height;
 
     GLuint d_program;
+    GLuint d_buffer;
+    GLuint d_attributes;
     GLuint d_color_location;
     GLuint d_sampler_location;
 

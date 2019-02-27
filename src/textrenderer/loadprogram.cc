@@ -9,4 +9,6 @@ void TextRenderer::load_program()
     d_program = RenderModel::link_program(vshader, fshader);
     glDeleteShader(vshader);
     glDeleteShader(fshader);
+
+    
 }
