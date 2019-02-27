@@ -42,6 +42,32 @@ void Window::key_event(int key, int scancode, int action, int mods)
                 )
             );
         break;
+
+        case GLFW_KEY_S:
+            set_scalingmode
+            (
+                static_cast<ScalingMode>
+                (
+                    (static_cast<int>(d_scalingmode) + 1) % 2
+                )
+            );
+        break;
+
+        case GLFW_KEY_MINUS:
+            d_min -= 0.01;
+        break;
+
+        case GLFW_KEY_EQUAL:
+            d_min = d_min + 0.01 > d_max ? d_max : d_min + 0.01;
+        break;
+
+        case GLFW_KEY_LEFT_BRACKET:
+            d_max = d_max - 0.01 < d_min ? d_min : d_max - 0.01;
+        break;
+
+        case GLFW_KEY_RIGHT_BRACKET:
+            d_max += 0.01;
+        break;
     }
     print_settings();
 }

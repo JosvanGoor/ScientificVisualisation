@@ -1,7 +1,9 @@
 #include "window.ih"
 
 Window::Window(size_t width, size_t height)
-:   d_width(width),
+:   d_min(0),
+    d_max(1),
+    d_width(width),
     d_height(height),
     d_mouse_lastx(0),
     d_mouse_lasty(0),
@@ -10,7 +12,8 @@ Window::Window(size_t width, size_t height)
     d_drawmode(DrawMode::NONE),
     d_colormapping(ColorMapping::BANDS),
     d_colormode(ColorMode::DENSITY),
-    d_simulation(200),
+    d_scalingmode(ScalingMode::STATIC),
+    d_simulation(300),
     d_rendermodel()
 {
     d_window = glfwCreateWindow
