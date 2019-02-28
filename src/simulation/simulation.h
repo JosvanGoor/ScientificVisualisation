@@ -24,8 +24,10 @@ class Simulation
     std::vector<fftw_real> d_rho0; // vorige step
 
     // geen idee wat dit doet.
-    rfftwnd_plan d_plan_rtoc;
-    rfftwnd_plan d_plan_ctor;
+    rfftwnd_plan d_plan_rtoc_1;
+    rfftwnd_plan d_plan_rtoc_2;
+    rfftwnd_plan d_plan_ctor_1;
+    rfftwnd_plan d_plan_ctor_2;
 
     public:
         Simulation(double timestep = 0.4, double viscosity = 0.001);

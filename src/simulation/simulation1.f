@@ -19,8 +19,12 @@ Simulation<Size>::Simulation(double timestep, double viscosity)
     d_rho.resize(dim, 0.0);
     d_rho0.resize(dim, 0.0);
 
-    d_plan_ctor = rfftw2d_create_plan(Size, Size,
+    d_plan_ctor_1 = rfftw2d_create_plan(Size, Size,
         FFTW_COMPLEX_TO_REAL, FFTW_IN_PLACE);
-    d_plan_rtoc = rfftw2d_create_plan(Size, Size,
+    d_plan_ctor_2 = rfftw2d_create_plan(Size, Size,
+        FFTW_COMPLEX_TO_REAL, FFTW_IN_PLACE);
+    d_plan_rtoc_1 = rfftw2d_create_plan(Size, Size,
+        FFTW_REAL_TO_COMPLEX, FFTW_IN_PLACE);
+    d_plan_rtoc_2 = rfftw2d_create_plan(Size, Size,
         FFTW_REAL_TO_COMPLEX, FFTW_IN_PLACE);
 }

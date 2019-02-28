@@ -78,22 +78,22 @@ void Simulation<Size>::solve()
 
         // solve.cc 31
         // this is some hacky shit I dont even
-        if (omp_get_thread_num() == 0)
+        #pragma omp sections
         {
-            rfftwnd_one_real_to_complex
+            {rfftwnd_one_real_to_complex
             (
-                d_plan_rtoc,
+                d_plan_rtoc_1,
                 d_vfield0_x.data(),
                 reinterpret_cast<fftw_complex *>(d_vfield0_x.data())
-            );
-
+            );}
+            #pragma omp section
             // solve.cc 32
-            rfftwnd_one_real_to_complex
+            {rfftwnd_one_real_to_complex
             (
-                d_plan_rtoc,
+                d_plan_rtoc_2,
                 d_vfield0_y.data(),
                 reinterpret_cast<fftw_complex *>(d_vfield0_y.data())
-            );
+            );}
         }
         #pragma omp barrier
         // solve.cc 34
@@ -138,21 +138,21 @@ void Simulation<Size>::solve()
         // solve.cc 53
         // Sanity restored
 
-        if (omp_get_thread_num() == 0)
+        #pragma omp sections
         {
-            rfftwnd_one_complex_to_real
+            {rfftwnd_one_complex_to_real
             (
-                d_plan_ctor,
+                d_plan_ctor_1,
                 reinterpret_cast<fftw_complex *>(d_vfield0_x.data()),
                 d_vfield0_x.data()
-            );
-
-            rfftwnd_one_complex_to_real
+            );}
+            #pragma omp section
+            {rfftwnd_one_complex_to_real
             (
-                d_plan_ctor,
+                d_plan_ctor_2,
                 reinterpret_cast<fftw_complex *>(d_vfield0_y.data()),
                 d_vfield0_y.data()
-            );
+            );}
         }
 
         #pragma omp barrier
