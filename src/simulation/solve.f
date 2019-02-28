@@ -18,19 +18,10 @@ void Simulation<Size>::solve()
         for (int idx = 0; idx < gridsize_sq; ++idx)
         {
             d_vfield_x[idx] += d_timestep * d_vfield0_x[idx];
+            d_vfield0_x[idx] = d_vfield_x[idx];
 
             d_vfield_y[idx] += d_timestep * d_vfield0_y[idx];
-        }
-
-        #pragma omp sections
-        {
-            {
-                std::copy(d_vfield_x.begin(), d_vfield_x.end(), d_vfield0_x.begin());
-            }
-            #pragma omp section
-            {
-                std::copy(d_vfield_y.begin(), d_vfield_y.end(), d_vfield0_y.begin());
-            }
+            d_vfield0_y[idx] = d_vfield_y[idx];
         }
 
         // solve.cc 12
