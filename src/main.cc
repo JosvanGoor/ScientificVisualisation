@@ -15,7 +15,7 @@ try
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    Window window;
+    Window window{1350, 850};
     window.make_current();
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
