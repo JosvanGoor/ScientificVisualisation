@@ -41,11 +41,11 @@ void Simulation<Size>::solve()
                 double y0 = Size * (yval - d_timestep * d_vfield0_y[pos]) - 0.5f;
                 int i0 = clamp(x0);
                 double s = x0 - i0;
-                i0 %= Size; 
+                i0 = (i0 + Size) % Size; 
                 int i1 = (i0 + 1) % Size;
                 int j0 = clamp(y0);
                 double t = y0 - j0;
-                j0 %= Size; 
+                j0 = (j0 + Size) % Size; 
                 int j1 = (j0 + 1) % Size;
 
                 size_t pos00 = i0 + Size * j0;
@@ -106,12 +106,14 @@ void Simulation<Size>::solve()
             {
                 double yval = jdx <= (Size / 2) ? jdx : (jdx - Size);
                 double y2 = yval * yval;
-                double xy = xval * yval;
 
                 double r = x2 + y2;
                 
                 if (r == 0.0)
                     continue;
+
+
+                double xy = xval * yval;
 
                 double f = exp(-r * d_timestep * d_viscosity);
 
