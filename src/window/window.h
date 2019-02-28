@@ -4,6 +4,7 @@
 #include <array>
 #include <memory>
 #include <iostream>
+#include <sstream>
 
 #include "../linerendermodel/linerendermodel.h"
 #include "../smokerendermodel/smokerendermodel.h"
@@ -22,7 +23,9 @@ enum class ColorMapping
 {
     BLACKWHITE,
     RAINBOW,
-    BANDS
+    BANDS,
+    SPACE,
+    DUTCH
 };
 std::string colormapping_string(ColorMapping mapping);
 
@@ -67,6 +70,9 @@ class Window
         Window(size_t width = 500, size_t height = 500);
         ~Window();
 
+        size_t width() const;
+        size_t height() const;
+
         bool should_close();
         void swap_buffers();
         void make_current();
@@ -79,7 +85,7 @@ class Window
         void set_scalingmode(ScalingMode mode);
         
         void print_shortcuts() const;
-        void print_settings() const;
+        std::string print_settings() const;
 
         // callbacks
         void key_event(int key, int scancode, int action, int mods);
@@ -98,6 +104,16 @@ class Window
         void paint_smoke();
         void paint_vectors();
 };
+
+inline size_t Window::width() const
+{
+    return d_width;
+}
+
+inline size_t Window::height() const
+{
+    return d_height;
+}
 
 inline bool Window::should_close()
 {
@@ -134,16 +150,19 @@ inline void Window::set_scalingmode(ScalingMode mode)
     d_scalingmode = mode;
 }
 
-inline void Window::print_settings() const
+inline std::string Window::print_settings() const
 {
-    std::cout << "Settings: "
+    std::stringstream ss;
+    ss        << "Settings: "
               << "{" << drawmode_string(d_drawmode) << "}:"
               << "{" << scalingmode_string(d_scalingmode);
     if (d_scalingmode == ScalingMode::STATIC) 
-        std::cout << ": between: [" << d_min << ", " << d_max << ']';
-    std::cout << "}:"
+        ss    << ": between: [" << d_min << ", " << d_max << ']';
+    ss        << "}:"
               << " " << colormapping_string(d_colormapping) << " -> "
-              << colormode_string(d_colormode) << "               \r" << std::flush;
+              << colormode_string(d_colormode);
+
+    return ss.str();
 }
 
 #endif

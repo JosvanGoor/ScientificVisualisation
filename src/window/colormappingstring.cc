@@ -13,6 +13,12 @@ string colormapping_string(ColorMapping mapping)
         case ColorMapping::BANDS:
             return "ColorMapping::BANDS";
 
+        case ColorMapping::SPACE:
+            return "ColorMapping::SPACE";
+
+        case ColorMapping::DUTCH:
+            return "ColorMapping::DUTCH";
+
         default:
             return "UNKNOWN ColorMapping";
     }

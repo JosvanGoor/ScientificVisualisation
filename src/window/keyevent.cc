@@ -18,7 +18,7 @@ void Window::key_event(int key, int scancode, int action, int mods)
             ( 
                 static_cast<ColorMapping>
                 (
-                    (static_cast<int>(d_colormapping) + 1) % 3
+                    (static_cast<int>(d_colormapping) + 1) % 5
                 )
             );
         break;

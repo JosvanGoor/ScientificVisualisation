@@ -24,7 +24,8 @@ try
     window.set_drawmode(DrawMode::SMOKE);
     glClearColor(0.0, 0.0, 0.0, 0.0);
 
-    TextRenderer text{"fonts/comic.ttf", 46};
+    TextRenderer text{"fonts/comic.ttf", 16};
+    text.set_size(500, 500);
 
     size_t iterations = 0;
     chrono::time_point t1 = chrono::high_resolution_clock::now();
@@ -54,7 +55,10 @@ try
                 simulation_time += chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count();
                 chrono::time_point t1 = chrono::high_resolution_clock::now();
                 window.repaint();
-                text.render_string("test123", 300, 300, glm::vec3(1.0f, 1.0f, 1.0f));
+                
+                text.set_size(window.width(), window.height());
+                text.render_string(window.print_settings(), 10, window.height() - 26, glm::vec3(1.0f, 1.0f, 1.0f));
+
                 graphics_time += chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count();
                 
                 if (iterations == 1000)
