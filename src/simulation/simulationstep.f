@@ -1,6 +1,7 @@
 #include "simulation.ih"
 #include <iostream>
 #include <omp.h>
+#include <chrono>
 
 template <int Size>
 void Simulation<Size>::simulation_step()
