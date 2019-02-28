@@ -6,9 +6,9 @@
 
 #include <rfftw.h>
 
+template <int Size = 300>
 class Simulation
 {
-    int d_gridsize;
     double d_timestep;
     double d_viscosity;
     bool d_running;
@@ -28,13 +28,13 @@ class Simulation
     rfftwnd_plan d_plan_ctor;
 
     public:
-        Simulation(int gridsize = 50, double timestep = 0.4, double viscosity = 0.001);
+        Simulation(double timestep = 0.4, double viscosity = 0.001);
         ~Simulation();
 
         void simulation_step();
 
         //getters
-        int gridsize() const;
+        constexpr int gridsize() const;
         std::vector<fftw_real> const &vfield_x() const;
         std::vector<fftw_real> const &vfield_y() const;
         std::vector<fftw_real> &rho();
@@ -51,34 +51,47 @@ class Simulation
 
 };
 
-inline int Simulation::gridsize() const
+template <int Size>
+constexpr int Simulation<Size>::gridsize() const
 {
-    return d_gridsize;
+    return Size;
 }
 
-inline std::vector<fftw_real> &Simulation::rho()
+template <int Size>
+inline std::vector<fftw_real> &Simulation<Size>::rho()
 {
     return d_rho;
 }
 
-inline std::vector<fftw_real> const &Simulation::vfield_x() const
+template <int Size>
+inline std::vector<fftw_real> const &Simulation<Size>::vfield_x() const
 {
     return d_vfield_x;
 }
 
-inline std::vector<fftw_real> const &Simulation::vfield_y() const
+template <int Size>
+inline std::vector<fftw_real> const &Simulation<Size>::vfield_y() const
 {
     return d_vfield_y;
 }
 
-inline std::vector<fftw_real> &Simulation::force_x()
+template <int Size>
+inline std::vector<fftw_real> &Simulation<Size>::force_x()
 {
     return d_force_x;
 }
 
-inline std::vector<fftw_real> &Simulation::force_y()
+template <int Size>
+inline std::vector<fftw_real> &Simulation<Size>::force_y()
 {
     return d_force_y;
 }
+
+#include "diffusematter.f"
+#include "setforces.f"
+#include "simulation0.f"
+#include "simulation1.f"
+#include "simulationstep.f"
+#include "solve.f"
 
 #endif

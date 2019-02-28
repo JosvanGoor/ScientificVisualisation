@@ -2,7 +2,8 @@
 #include <iostream>
 #include <omp.h>
 
-void Simulation::simulation_step()
+template <int Size>
+void Simulation<Size>::simulation_step()
 {
     if(!d_running)
         return;

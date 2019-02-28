@@ -4,9 +4,10 @@
 // voor de duidelijkheid list ik de approximate regelnummers uit de
 // solve.cc file
 
-void Simulation::solve()
+template <int Size>
+void Simulation<Size>::solve()
 {
-    int gridsize_sq = d_gridsize * d_gridsize;
+    int gridsize_sq = Size * Size;
 
     // cout << accumulate(d_vfield0_x.begin(), d_vfield0_x.end(), 0.0) << "\n";
 
@@ -25,31 +26,31 @@ void Simulation::solve()
 
         // solve.cc 12
         #pragma omp for
-        for (int idx = 0; idx < d_gridsize; ++idx)
+        for (int idx = 0; idx < Size; ++idx)
         {
             // deze zat in de for, eruitgehaald.
-            double xval = (0.5 / d_gridsize) + idx * (1.0 / d_gridsize);
+            double xval = (0.5 / Size) + idx * (1.0 / Size);
 
-            for (int jdx = 0; jdx < d_gridsize; ++jdx)
+            for (int jdx = 0; jdx < Size; ++jdx)
             {
-                size_t pos = idx + d_gridsize * jdx;
+                size_t pos = idx + Size * jdx;
 
-                double yval = (0.5 / d_gridsize) + jdx * (1.0 / d_gridsize);
-                double x0 = d_gridsize * (xval - d_timestep * d_vfield0_x[pos]) - 0.5f;
-                double y0 = d_gridsize * (yval - d_timestep * d_vfield0_y[pos]) - 0.5f;
+                double yval = (0.5 / Size) + jdx * (1.0 / Size);
+                double x0 = Size * (xval - d_timestep * d_vfield0_x[pos]) - 0.5f;
+                double y0 = Size * (yval - d_timestep * d_vfield0_y[pos]) - 0.5f;
                 int i0 = clamp(x0);
                 double s = x0 - i0;
-                i0 = (d_gridsize + (i0 % d_gridsize)) % d_gridsize; //kan met 1 modulo minder?
-                int i1 = (i0 + 1) % d_gridsize;
+                i0 = (Size + (i0 % Size)) % Size; //kan met 1 modulo minder?
+                int i1 = (i0 + 1) % Size;
                 int j0 = clamp(y0);
                 double t = y0 - j0;
-                j0 = (d_gridsize + (j0 % d_gridsize)) % d_gridsize; //kan met 1 modulo minder?
-                int j1 = (j0 + 1) % d_gridsize;
+                j0 = (Size + (j0 % Size)) % Size; //kan met 1 modulo minder?
+                int j1 = (j0 + 1) % Size;
 
-                size_t pos00 = i0 + d_gridsize * j0;
-                size_t pos01 = i0 + d_gridsize * j1;
-                size_t pos10 = i1 + d_gridsize * j0;
-                size_t pos11 = i1 + d_gridsize * j1;
+                size_t pos00 = i0 + Size * j0;
+                size_t pos01 = i0 + Size * j1;
+                size_t pos10 = i1 + Size * j0;
+                size_t pos11 = i1 + Size * j1;
                 // solve.cc 23
                 d_vfield_x[pos] = (1 - s) * ((1 - t) * d_vfield0_x[pos00] + t * d_vfield0_x[pos01])
                     + s * ((1 - t) * d_vfield0_x[pos10] + t * d_vfield0_x[pos11]);
@@ -61,14 +62,14 @@ void Simulation::solve()
 
         // solve.cc 27
         #pragma omp for
-        for (int idx = 0; idx < d_gridsize; ++idx)
+        for (int idx = 0; idx < Size; ++idx)
         {
-            for (int jdx = 0; jdx < d_gridsize; ++jdx)
+            for (int jdx = 0; jdx < Size; ++jdx)
             {
-                d_vfield0_x[idx + (d_gridsize + 2) * jdx]
-                    = d_vfield_x[idx + d_gridsize * jdx];
-                d_vfield0_y[idx + (d_gridsize + 2) * jdx]
-                    = d_vfield_y[idx + d_gridsize * jdx];
+                d_vfield0_x[idx + (Size + 2) * jdx]
+                    = d_vfield_x[idx + Size * jdx];
+                d_vfield0_y[idx + (Size + 2) * jdx]
+                    = d_vfield_y[idx + Size * jdx];
             }
         }
 
@@ -94,12 +95,12 @@ void Simulation::solve()
         #pragma omp barrier
         // solve.cc 34
         #pragma omp for
-        for (int idx = 0; idx <= d_gridsize; idx += 2)
+        for (int idx = 0; idx <= Size; idx += 2)
         {
             double xval = 0.5 * idx;
-            for (int jdx = 0; jdx < d_gridsize; ++jdx)
+            for (int jdx = 0; jdx < Size; ++jdx)
             {
-                double yval = jdx <= (d_gridsize / 2) ? jdx : (jdx - d_gridsize);
+                double yval = jdx <= (Size / 2) ? jdx : (jdx - Size);
                 double r = xval * xval + yval * yval;
                 
                 if (r == 0.0)
@@ -110,8 +111,8 @@ void Simulation::solve()
                 double U[2]; //there obviously is no better way of doing this.
                 double V[2];
 
-                size_t pos0 = idx + (d_gridsize + 2) * jdx;
-                size_t pos1 = idx + 1 + (d_gridsize + 2) * jdx;
+                size_t pos0 = idx + (Size + 2) * jdx;
+                size_t pos1 = idx + 1 + (Size + 2) * jdx;
                 U[0] = d_vfield0_x[pos0];
                 U[1] = d_vfield0_x[pos1];
                 V[0] = d_vfield0_y[pos0];
@@ -149,14 +150,14 @@ void Simulation::solve()
         //solve.cc 56
         double f = 1.0 / (gridsize_sq);
         #pragma omp for
-        for (int idx = 0; idx < d_gridsize; ++idx)
+        for (int idx = 0; idx < Size; ++idx)
         {
-            for (int jdx = 0; jdx < d_gridsize; ++jdx)
+            for (int jdx = 0; jdx < Size; ++jdx)
             {
-                d_vfield_x[idx + d_gridsize * jdx]
-                    = f * d_vfield0_x[idx + (d_gridsize + 2) * jdx];
-                d_vfield_y[idx + d_gridsize * jdx]
-                    = f * d_vfield0_y[idx + (d_gridsize + 2) * jdx];
+                d_vfield_x[idx + Size * jdx]
+                    = f * d_vfield0_x[idx + (Size + 2) * jdx];
+                d_vfield_y[idx + Size * jdx]
+                    = f * d_vfield0_y[idx + (Size + 2) * jdx];
             }
         }
     }

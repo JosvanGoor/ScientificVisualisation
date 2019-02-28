@@ -46,6 +46,8 @@ enum class ScalingMode
 std::string scalingmode_string(ScalingMode mode);
 typedef std::array<float, 3> Color;
 
+typedef Simulation<300> t_Simulation;
+
 class Window
 {
     float d_min, d_max;
@@ -63,7 +65,7 @@ class Window
     ColorMode d_colormode;
     ScalingMode d_scalingmode;
     
-    Simulation d_simulation;
+    t_Simulation d_simulation;
     std::unique_ptr<RenderModel> d_rendermodel;
 
     public:
@@ -76,7 +78,7 @@ class Window
         bool should_close();
         void swap_buffers();
         void make_current();
-        Simulation &simulation();
+        t_Simulation &simulation();
 
         void repaint();
         void set_drawmode(DrawMode mode);
@@ -130,7 +132,7 @@ inline void Window::make_current()
     glfwMakeContextCurrent(d_window);
 }
 
-inline Simulation &Window::simulation()
+inline t_Simulation &Window::simulation()
 {
     return d_simulation;
 }

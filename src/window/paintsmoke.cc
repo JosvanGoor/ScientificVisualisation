@@ -13,11 +13,12 @@ fftw_real length(fftw_real a, fftw_real b)
 void Window::paint_smoke()
 {
     vector<float> colors;
-    colors.reserve(2 * d_simulation.gridsize() * d_simulation.gridsize());
+    colors.resize(2 * d_simulation.gridsize() * d_simulation.gridsize(), 0);
     float v_min = std::numeric_limits<float>::max();
     float v_max = std::numeric_limits<float>::min();
     vector<fftw_real> store;
 
+    // chrono::time_point t1 = chrono::high_resolution_clock::now();
     switch (d_colormode)
     {
         case ColorMode::DENSITY:
@@ -38,11 +39,11 @@ void Window::paint_smoke()
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-    // chrono::time_point t1 = chrono::high_resolution_clock::now();
+    size_t pushloc = 0;
     for (int jdx = 0; jdx < (d_simulation.gridsize() - 1); ++jdx)
     {
         int index = jdx * d_simulation.gridsize();
-        colors.push_back(store[index]);
+        colors[pushloc++] = (store[index]);
         
         v_max = store[index] > v_max ? store[index] : v_max;
         v_min = store[index] < v_min ? store[index] : v_min;
@@ -50,20 +51,20 @@ void Window::paint_smoke()
         for (int idx = 0; idx < (d_simulation.gridsize() - 1); ++idx)
         {
             index = ((jdx + 1) * d_simulation.gridsize()) + idx;
-            colors.push_back(store[index]);
+            colors[pushloc++] = (store[index]);
         
             v_max = store[index] > v_max ? store[index] : v_max;
             v_min = store[index] < v_min ? store[index] : v_min;
                 
             index = (jdx * d_simulation.gridsize()) + (idx + 1);
-            colors.push_back(store[index]);
+            colors[pushloc++] = (store[index]);
             
             v_max = store[index] > v_max ? store[index] : v_max;
             v_min = store[index] < v_min ? store[index] : v_min;
         }
 
         index = ((jdx + 1) * d_simulation.gridsize()) + (d_simulation.gridsize() - 1);
-        colors.push_back(store[index]);
+        colors[pushloc++] = (store[index]);
         
         v_max = store[index] > v_max ? store[index] : v_max;
         v_min = store[index] < v_min ? store[index] : v_min;

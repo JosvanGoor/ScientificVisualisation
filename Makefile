@@ -62,7 +62,6 @@ WINDOW				=	window/colormappingstring.o \
 OBJECTS				=	$(GLAD) \
 						$(LINERENDERMODEL) \
 						$(RENDERMODEL) \
-						$(SIMULATION) \
 						$(SMOKERENDERMODEL) \
 						$(TEXTRENDERER) \
 						$(UTILITY) \

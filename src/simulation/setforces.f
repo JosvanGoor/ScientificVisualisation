@@ -1,9 +1,10 @@
 #include "simulation.ih"
 
-void Simulation::set_forces()
+template <int Size>
+void Simulation<Size>::set_forces()
 {
     #pragma omp for
-    for (int idx = 0; idx < d_gridsize * d_gridsize; ++idx)
+    for (int idx = 0; idx < Size * Size; ++idx)
     {
         d_rho0[idx] = 0.995 * d_rho[idx];
         d_force_x[idx] *= 0.85;
