@@ -1,15 +1,30 @@
 #include "simulation.ih"
+#include <algorithm>
+#include <iostream>
+
 
 template <int Size>
 void Simulation<Size>::set_forces()
 {
-    #pragma omp for
-    for (int idx = 0; idx < Size * Size; ++idx)
+    #pragma omp sections
     {
-        d_rho0[idx] = 0.995 * d_rho[idx];
-        d_force_x[idx] *= 0.85;
-        d_force_y[idx] *= 0.85;
-        d_vfield0_x[idx] = d_force_x[idx];
-        d_vfield0_y[idx] = d_force_y[idx];
+        {std::transform(d_rho.begin(),d_rho.end(),
+                        d_rho0.begin(), [](float lhs){
+                            return lhs * 0.995;
+                        });}
+        #pragma omp section
+        {std::transform(d_force_x.begin(),d_force_x.end(),
+                        d_force_x.begin(), [](float lhs){
+                            return lhs * 0.85;
+                        });}
+        #pragma omp section
+        {std::transform(d_force_y.begin(),d_force_y.end(),
+                        d_force_y.begin(), [](float lhs){
+                            return lhs * 0.85;
+                        });}
+        #pragma omp section
+        {std::copy(d_force_x.begin(), d_force_x.end(), d_vfield0_x.begin());}
+        #pragma omp section
+        {std::copy(d_force_y.begin(), d_force_y.end(), d_vfield0_y.begin());}
     }
 }

@@ -1,5 +1,5 @@
 #include "smokerendermodel.h"
-
 #include "../utility/utility.h"
+#include <omp.h>
 
 using namespace std;
