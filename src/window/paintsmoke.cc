@@ -50,20 +50,20 @@ void Window::paint_smoke()
 
         for (int idx = 0; idx < (d_simulation.gridsize() - 1); ++idx)
         {
-            index = ((jdx + 1) * d_simulation.gridsize()) + idx;
-            colors[pushloc++] = (store[index]);
+            int index1 = index + d_simulation.gridsize() + idx;
+            colors[pushloc++] = (store[index1]);
         
-            v_max = store[index] > v_max ? store[index] : v_max;
-            v_min = store[index] < v_min ? store[index] : v_min;
+            v_max = store[index1] > v_max ? store[index1] : v_max;
+            v_min = store[index1] < v_min ? store[index1] : v_min;
                 
-            index = (jdx * d_simulation.gridsize()) + (idx + 1);
-            colors[pushloc++] = (store[index]);
+            index1 = index + (idx + 1);
+            colors[pushloc++] = (store[index1]);
             
-            v_max = store[index] > v_max ? store[index] : v_max;
-            v_min = store[index] < v_min ? store[index] : v_min;
+            v_max = store[index1] > v_max ? store[index1] : v_max;
+            v_min = store[index1] < v_min ? store[index1] : v_min;
         }
 
-        index = ((jdx + 1) * d_simulation.gridsize()) + (d_simulation.gridsize() - 1);
+        index = index + (2 * d_simulation.gridsize() - 1);
         colors[pushloc++] = (store[index]);
         
         v_max = store[index] > v_max ? store[index] : v_max;
