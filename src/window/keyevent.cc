@@ -9,6 +9,10 @@ void Window::key_event(int key, int scancode, int action, int mods)
 
     switch(key)
     {
+        case GLFW_KEY_Q:
+            glfwSetWindowShouldClose(d_window, true);
+        break;
+
         case GLFW_KEY_H:
             print_shortcuts();
         break;
@@ -69,5 +73,4 @@ void Window::key_event(int key, int scancode, int action, int mods)
             d_max += 0.01;
         break;
     }
-    print_settings();
 }
