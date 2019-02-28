@@ -46,7 +46,7 @@ enum class ScalingMode
 std::string scalingmode_string(ScalingMode mode);
 typedef std::array<float, 3> Color;
 
-typedef Simulation<400> t_Simulation;
+typedef Simulation<1000> t_Simulation;
 
 class Window
 {

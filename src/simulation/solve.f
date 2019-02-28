@@ -95,7 +95,7 @@ void Simulation<Size>::solve()
                 reinterpret_cast<fftw_complex *>(d_vfield0_y.data())
             );}
         }
-        #pragma omp barrier
+
         // solve.cc 34
         #pragma omp for
         for (int idx = 0; idx <= Size; idx += 2)
@@ -154,8 +154,6 @@ void Simulation<Size>::solve()
                 d_vfield0_y.data()
             );}
         }
-
-        #pragma omp barrier
 
         //solve.cc 56
         double f = 1.0 / (gridsize_sq);
