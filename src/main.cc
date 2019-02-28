@@ -57,6 +57,11 @@ try
                 window.repaint();
                 
                 text.set_size(window.width(), window.height());
+                text.render_string(window.print_settings(), 10+2, window.height() - 26, glm::vec3(.0f, .0f, .0f));
+                text.render_string(window.print_settings(), 10-2, window.height() - 26, glm::vec3(.0f, .0f, .0f));
+                text.render_string(window.print_settings(), 10, window.height() - 24, glm::vec3(.0f, .0f, .0f));
+                text.render_string(window.print_settings(), 10, window.height() - 28, glm::vec3(.0f, .0f, .0f));
+
                 text.render_string(window.print_settings(), 10, window.height() - 26, glm::vec3(1.0f, 1.0f, 1.0f));
 
                 graphics_time += chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count();

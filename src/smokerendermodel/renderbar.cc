@@ -53,6 +53,16 @@ void SmokeRenderModel::render_bar()
     glDrawArrays(GL_TRIANGLES, 0, 6 * 2);
     glBindVertexArray(0);
 
+
+    d_textrender.render_string(to_string(d_min).substr(0, 4), left, bot - 26, glm::vec3(.0, .0, .0));
+    d_textrender.render_string(to_string(d_min).substr(0, 4), left - 4, bot - 26, glm::vec3(.0, .0, .0));
+    d_textrender.render_string(to_string(d_min).substr(0, 4), left - 2, bot - 24, glm::vec3(.0, .0, .0));
+    d_textrender.render_string(to_string(d_min).substr(0, 4), left - 2, bot - 28, glm::vec3(.0, .0, .0));
+    d_textrender.render_string(to_string(d_max).substr(0, 4), left, top + 10, glm::vec3(.0, .0, .0));
+    d_textrender.render_string(to_string(d_max).substr(0, 4), left - 4, top + 10, glm::vec3(.0, .0, .0));
+    d_textrender.render_string(to_string(d_max).substr(0, 4), left - 2, top + 12, glm::vec3(.0, .0, .0));
+    d_textrender.render_string(to_string(d_max).substr(0, 4), left - 2, top + 8, glm::vec3(.0, .0, .0));
+
     d_textrender.render_string(to_string(d_max).substr(0, 4), left - 2, top + 10, glm::vec3(1.0, 1.0, 1.0));
     d_textrender.render_string(to_string(d_min).substr(0, 4), left - 2, bot - 26, glm::vec3(1.0, 1.0, 1.0));
 }
