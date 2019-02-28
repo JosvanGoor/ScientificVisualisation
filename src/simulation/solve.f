@@ -40,11 +40,11 @@ void Simulation<Size>::solve()
                 double y0 = Size * (yval - d_timestep * d_vfield0_y[pos]) - 0.5f;
                 int i0 = clamp(x0);
                 double s = x0 - i0;
-                i0 = (Size + (i0 % Size)) % Size; //kan met 1 modulo minder?
+                i0 = (Size + i0) % Size; //kan met 1 modulo minder?
                 int i1 = (i0 + 1) % Size;
                 int j0 = clamp(y0);
                 double t = y0 - j0;
-                j0 = (Size + (j0 % Size)) % Size; //kan met 1 modulo minder?
+                j0 = (Size + j0) % Size; //kan met 1 modulo minder?
                 int j1 = (j0 + 1) % Size;
 
                 size_t pos00 = i0 + Size * j0;
@@ -98,10 +98,14 @@ void Simulation<Size>::solve()
         for (int idx = 0; idx <= Size; idx += 2)
         {
             double xval = 0.5 * idx;
+            double x2 = xval * xval;
             for (int jdx = 0; jdx < Size; ++jdx)
             {
                 double yval = jdx <= (Size / 2) ? jdx : (jdx - Size);
-                double r = xval * xval + yval * yval;
+                double y2 = yval * yval;
+                double xy = xval * yval;
+
+                double r = x2 + y2;
                 
                 if (r == 0.0)
                     continue;
@@ -118,10 +122,11 @@ void Simulation<Size>::solve()
                 V[0] = d_vfield0_y[pos0];
                 V[1] = d_vfield0_y[pos1];
 
-                d_vfield0_x[pos0] = f * ((1 - xval * xval / r) * U[0] - xval * yval / r * V[0]);
-                d_vfield0_x[pos1] = f * ((1 - xval * xval / r) * U[1] - xval * yval / r * V[1]);
-                d_vfield0_y[pos0] = f * (-yval * xval / r * U[0] + (1 - yval * yval / r) * V[0]);
-                d_vfield0_y[pos1] = f * (-yval * xval / r * U[1] + (1 - yval * yval / r) * V[1]);
+
+                d_vfield0_x[pos0] = f * ((1 - x2 / r) * U[0] - xy / r * V[0]);
+                d_vfield0_x[pos1] = f * ((1 - x2 / r) * U[1] - xy / r * V[1]);
+                d_vfield0_y[pos0] = f * (-xy / r * U[0] + (1 - y2 / r) * V[0]);
+                d_vfield0_y[pos1] = f * (-xy / r * U[1] + (1 - y2 / r) * V[1]);
             }
         }
 
