@@ -26,16 +26,17 @@ void Simulation<Size>::solve()
 
         // solve.cc 12
         #pragma omp for
-        for (int idx = 0; idx < Size; ++idx)
+        for (int jdx = 0; jdx < Size; ++jdx)
         {
             // deze zat in de for, eruitgehaald.
-            double xval = (0.5 / Size) + idx * (1.0 / Size);
+            double yval = (0.5 / Size) + jdx * (1.0 / Size);
 
-            for (int jdx = 0; jdx < Size; ++jdx)
+            int j1 = Size * jdx;
+            for (int idx = 0; idx < Size; ++idx)
             {
-                size_t pos = idx + Size * jdx;
+                size_t pos = idx + j1;
 
-                double yval = (0.5 / Size) + jdx * (1.0 / Size);
+                double xval = (0.5 / Size) + idx * (1.0 / Size);
                 double x0 = Size * (xval - d_timestep * d_vfield0_x[pos]) - 0.5f;
                 double y0 = Size * (yval - d_timestep * d_vfield0_y[pos]) - 0.5f;
                 int i0 = clamp(x0);
@@ -62,14 +63,16 @@ void Simulation<Size>::solve()
 
         // solve.cc 27
         #pragma omp for
-        for (int idx = 0; idx < Size; ++idx)
+        for (int jdx = 0; jdx < Size; ++jdx)
         {
-            for (int jdx = 0; jdx < Size; ++jdx)
+            size_t j2 = Size * jdx;
+            size_t j1 = (Size + 2) * jdx;
+            for (int idx = 0; idx < Size; ++idx)
             {
-                d_vfield0_x[idx + (Size + 2) * jdx]
-                    = d_vfield_x[idx + Size * jdx];
-                d_vfield0_y[idx + (Size + 2) * jdx]
-                    = d_vfield_y[idx + Size * jdx];
+                d_vfield0_x[idx + j1]
+                    = d_vfield_x[idx + j2];
+                d_vfield0_y[idx + j1]
+                    = d_vfield_y[idx + j2];
             }
         }
 
@@ -155,14 +158,14 @@ void Simulation<Size>::solve()
         //solve.cc 56
         double f = 1.0 / (gridsize_sq);
         #pragma omp for
-        for (int idx = 0; idx < Size; ++idx)
+        for (int jdx = 0; jdx < Size; ++jdx)
         {
-            for (int jdx = 0; jdx < Size; ++jdx)
+            size_t y1 = Size * jdx;
+            size_t y2 = (Size + 2) * jdx;
+            for (int idx = 0; idx < Size; ++idx)
             {
-                d_vfield_x[idx + Size * jdx]
-                    = f * d_vfield0_x[idx + (Size + 2) * jdx];
-                d_vfield_y[idx + Size * jdx]
-                    = f * d_vfield0_y[idx + (Size + 2) * jdx];
+                d_vfield_x[idx + y1] = f * d_vfield0_x[idx + y2];
+                d_vfield_y[idx + y1] = f * d_vfield0_y[idx + y2];
             }
         }
     }
