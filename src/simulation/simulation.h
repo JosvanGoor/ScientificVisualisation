@@ -4,30 +4,30 @@
 #include <string>
 #include <vector>
 
-#include <rfftw.h>
+#include <fftw3.h>
 
-template <int Size = 300>
+template <int Size = 600>
 class Simulation
 {
     double d_timestep;
     double d_viscosity;
     bool d_running;
 
-    std::vector<fftw_real> d_vfield_x;
-    std::vector<fftw_real> d_vfield_y;
-    std::vector<fftw_real> d_vfield0_x; //vorige step
-    std::vector<fftw_real> d_vfield0_y;
+    std::vector<double> d_vfield_x;
+    std::vector<double> d_vfield_y;
+    std::vector<double> d_vfield0_x; //vorige step
+    std::vector<double> d_vfield0_y;
     
-    std::vector<fftw_real> d_force_x;
-    std::vector<fftw_real> d_force_y;
-    std::vector<fftw_real> d_rho;
-    std::vector<fftw_real> d_rho0; // vorige step
+    std::vector<double> d_force_x;
+    std::vector<double> d_force_y;
+    std::vector<double> d_rho;
+    std::vector<double> d_rho0; // vorige step
 
     // geen idee wat dit doet.
-    rfftwnd_plan d_plan_rtoc_1;
-    rfftwnd_plan d_plan_rtoc_2;
-    rfftwnd_plan d_plan_ctor_1;
-    rfftwnd_plan d_plan_ctor_2;
+    fftw_plan d_plan_ctor_x;
+    fftw_plan d_plan_ctor_y;
+    fftw_plan d_plan_rtoc_x;
+    fftw_plan d_plan_rtoc_y;
 
     public:
         Simulation(double timestep = 0.4, double viscosity = 0.001);
@@ -37,11 +37,11 @@ class Simulation
 
         //getters
         constexpr int gridsize() const;
-        std::vector<fftw_real> const &vfield_x() const;
-        std::vector<fftw_real> const &vfield_y() const;
-        std::vector<fftw_real> &rho();
-        std::vector<fftw_real> &force_x();
-        std::vector<fftw_real> &force_y();
+        std::vector<double> &vfield_x();
+        std::vector<double> &vfield_y();
+        std::vector<double> &rho();
+        std::vector<double> &force_x();
+        std::vector<double> &force_y();
 
     private:
         Simulation(Simulation const &copy) = delete;
@@ -60,31 +60,31 @@ constexpr int Simulation<Size>::gridsize() const
 }
 
 template <int Size>
-inline std::vector<fftw_real> &Simulation<Size>::rho()
+inline std::vector<double> &Simulation<Size>::rho()
 {
     return d_rho;
 }
 
 template <int Size>
-inline std::vector<fftw_real> const &Simulation<Size>::vfield_x() const
+inline std::vector<double> &Simulation<Size>::vfield_x()
 {
     return d_vfield_x;
 }
 
 template <int Size>
-inline std::vector<fftw_real> const &Simulation<Size>::vfield_y() const
+inline std::vector<double> &Simulation<Size>::vfield_y()
 {
     return d_vfield_y;
 }
 
 template <int Size>
-inline std::vector<fftw_real> &Simulation<Size>::force_x()
+inline std::vector<double> &Simulation<Size>::force_x()
 {
     return d_force_x;
 }
 
 template <int Size>
-inline std::vector<fftw_real> &Simulation<Size>::force_y()
+inline std::vector<double> &Simulation<Size>::force_y()
 {
     return d_force_y;
 }

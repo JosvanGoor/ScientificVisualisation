@@ -80,21 +80,25 @@ void Simulation<Size>::solve()
         // this is some hacky shit I dont even
         #pragma omp sections
         {
-            {rfftwnd_one_real_to_complex
-            (
-                d_plan_rtoc_1,
-                d_vfield0_x.data(),
-                reinterpret_cast<fftw_complex *>(d_vfield0_x.data())
-            );}
+            {fftw_execute(d_plan_rtoc_x);}
             #pragma omp section
-            // solve.cc 32
-            {rfftwnd_one_real_to_complex
-            (
-                d_plan_rtoc_2,
-                d_vfield0_y.data(),
-                reinterpret_cast<fftw_complex *>(d_vfield0_y.data())
-            );}
+            {fftw_execute(d_plan_rtoc_y);}
         }
+        #pragma omp barrier
+        // {rfftwnd_one_real_to_complex
+        // (
+        //     d_plan_rtoc_1,
+        //     d_vfield0_x.data(),
+        //     reinterpret_cast<fftw_complex *>(d_vfield0_x.data())
+        // );}
+        // // solve.cc 32
+        // {rfftwnd_one_real_to_complex
+        // (
+        //     d_plan_rtoc_2,
+        //     d_vfield0_y.data(),
+        //     reinterpret_cast<fftw_complex *>(d_vfield0_y.data())
+        // );}
+        
         // solve.cc 34
         #pragma omp for
         for (int idx = 0; idx <= Size; idx += 2)
@@ -137,22 +141,32 @@ void Simulation<Size>::solve()
         // solve.cc 53
         // Sanity restored
 
+
+       
         #pragma omp sections
         {
-            {rfftwnd_one_complex_to_real
-            (
-                d_plan_ctor_1,
-                reinterpret_cast<fftw_complex *>(d_vfield0_x.data()),
-                d_vfield0_x.data()
-            );}
+            {fftw_execute(d_plan_ctor_x);}
             #pragma omp section
-            {rfftwnd_one_complex_to_real
-            (
-                d_plan_ctor_2,
-                reinterpret_cast<fftw_complex *>(d_vfield0_y.data()),
-                d_vfield0_y.data()
-            );}
+            {fftw_execute(d_plan_ctor_y);}
         }
+        #pragma omp barrier
+
+        // #pragma omp sections
+        // {
+        //     {rfftwnd_one_complex_to_real
+        //     (
+        //         d_plan_ctor_1,
+        //         reinterpret_cast<fftw_complex *>(d_vfield0_x.data()),
+        //         d_vfield0_x.data()
+        //     );}
+        //     #pragma omp section
+        //     {rfftwnd_one_complex_to_real
+        //     (
+        //         d_plan_ctor_2,
+        //         reinterpret_cast<fftw_complex *>(d_vfield0_y.data()),
+        //         d_vfield0_y.data()
+        //     );}
+        // }
 
         //solve.cc 56
         double f = 1.0 / (gridsize_sq);

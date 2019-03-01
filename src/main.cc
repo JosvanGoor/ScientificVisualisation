@@ -1,4 +1,6 @@
 #include "main.ih"
+#include <fftw3.h>
+
 
 void error_callback(int error, const char* description)
 {
@@ -8,6 +10,10 @@ void error_callback(int error, const char* description)
 int main()
 try
 {
+
+    // fftw_init_threads();
+    // fftw_plan_with_nthreads(2);
+
     glfwSetErrorCallback(error_callback);
 
     glfwInit();
@@ -66,11 +72,11 @@ try
 
                 graphics_time += chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count();
                 
-                if (iterations == 1000)
+                if (iterations == 100)
                 {
                     cout.precision(3);
-                    cout << "avg sim time over last 1000 iterations: " << simulation_time << "ms.\n";
-                    cout << "avg gfx time over last 1000 iterations: " << graphics_time << "ms.\n";
+                    cout << "avg sim time over last 100 iterations: " << simulation_time*10 << "ms.\n";
+                    cout << "avg gfx time over last 100 iterations: " << graphics_time*10 << "ms.\n";
                     window.print_shortcuts();
                     simulation_time = 0;
                     graphics_time = 0;

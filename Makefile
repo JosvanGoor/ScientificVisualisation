@@ -73,7 +73,7 @@ COMPILER = g++
 FLAGS = -std=c++17 -Wall -O3 -fopenmp
 INCLUDEDIRS = -I./extern/include/
 LIBDIRS     = -L./extern/lib/
-LIBRARIES = $(LIBDIRS) -lrfftw -lfftw -lGL -lglfw -lfreetype
+LIBRARIES = $(LIBDIRS) -lfftw3 -lGL -lglfw -lfreetype
 
 #folders
 SOURCEDIR = src

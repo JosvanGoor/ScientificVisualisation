@@ -5,7 +5,7 @@
 #include <iostream>
 #include <cmath>
 
-fftw_real length(fftw_real a, fftw_real b)
+double length(double a, double b)
 {   
     return std::sqrt(a * a + b * b);
 }
@@ -16,7 +16,7 @@ void Window::paint_smoke()
     colors.resize(2 * d_simulation.gridsize() * d_simulation.gridsize(), 0);
     float v_min = std::numeric_limits<float>::max();
     float v_max = std::numeric_limits<float>::min();
-    vector<fftw_real> store;
+    vector<double> store;
 
     // chrono::time_point t1 = chrono::high_resolution_clock::now();
     switch (d_colormode)
