@@ -1,0 +1,8 @@
+#include "renderfont.h"
+
+#include <algorithm>
+#include <iostream>
+
+#include "string/string.h"
+
+using namespace std;

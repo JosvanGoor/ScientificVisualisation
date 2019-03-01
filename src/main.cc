@@ -24,8 +24,8 @@ try
     window.set_drawmode(DrawMode::SMOKE);
     glClearColor(0.0, 0.0, 0.0, 0.0);
 
-    TextRenderer text{"fonts/comic.ttf", 16};
-    text.set_size(500, 500);
+    RenderFont font{"fonts/comic.ttf", 16};
+    RenderFont::String status = font.create_string("initial");
 
     size_t iterations = 0;
     chrono::time_point t1 = chrono::high_resolution_clock::now();
@@ -55,15 +55,11 @@ try
                 simulation_time += chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count();
                 chrono::time_point t1 = chrono::high_resolution_clock::now();
                 window.repaint();
+
+                font.set_size(window.width(), window.height());
+                font.update_string(status, window.print_settings());
+                font.render_string_outlined(status, glm::vec2{10.0f, 5.0f});
                 
-                text.set_size(window.width(), window.height());
-                text.render_string(window.print_settings(), 10+2, window.height() - 26, glm::vec3(.0f, .0f, .0f));
-                text.render_string(window.print_settings(), 10-2, window.height() - 26, glm::vec3(.0f, .0f, .0f));
-                text.render_string(window.print_settings(), 10, window.height() - 24, glm::vec3(.0f, .0f, .0f));
-                text.render_string(window.print_settings(), 10, window.height() - 28, glm::vec3(.0f, .0f, .0f));
-
-                text.render_string(window.print_settings(), 10, window.height() - 26, glm::vec3(1.0f, 1.0f, 1.0f));
-
                 graphics_time += chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count();
                 
                 if (iterations == 1000)

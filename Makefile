@@ -2,11 +2,33 @@
 
 EXECUTABLE = scivis	
 
-GLAD				=	glad/glad.o
+GLAD				=	glad/glad.o \
+						lodepng/lodepng.o
 
 LINERENDERMODEL		=	linerendermodel/linerendermodel0.o \
 						linerendermodel/linerendermodel1.o \
 						linerendermodel/render.o
+
+RENDERFONT			=	renderfont/buildmap.o \
+						renderfont/createstring.o \
+						renderfont/firstpass.o \
+						renderfont/generatetexture.o \
+						renderfont/renderfont0.o \
+						renderfont/renderfont1.o \
+						renderfont/renderfont2.o \
+						renderfont/renderstring.o \
+						renderfont/renderstringoutlined.o \
+						renderfont/storeglyph.o \
+						renderfont/swap.o \
+						renderfont/texposition.o \
+						renderfont/updatestring.o \
+						renderfont/string/bufferstring.o \
+						renderfont/string/generatebuffers.o \
+						renderfont/string/operatorassign1.o \
+						renderfont/string/string0.o \
+						renderfont/string/string1.o \
+						renderfont/string/string2.o \
+						renderfont/string/swap.o
 
 RENDERMODEL			=	rendermodel/compileshader.o \
 						rendermodel/framebuffersize.o \
@@ -31,14 +53,11 @@ SMOKERENDERMODEL	=	smokerendermodel/buildbar.o \
 						smokerendermodel/smokerendermodel0.o \
 						smokerendermodel/smokerendermodel1.o
 
-TEXTRENDERER		=	textrenderer/loadbuffers.o \
-						textrenderer/loadglyphs.o \
-						textrenderer/loadprogram.o \
-						textrenderer/renderstring.o \
-						textrenderer/setsize.o \
-						textrenderer/textrenderer1.o
-
-UTILITY				=	utility/clamp.o \
+UTILITY				=	utility/buildprogram.o \
+						utility/clamp.o \
+						utility/compileshader.o \
+						utility/linkprogram.o \
+						utility/loadtexture.o \
 						utility/readfile.o
 
 WINDOW				=	window/colormappingstring.o \
@@ -61,9 +80,9 @@ WINDOW				=	window/colormappingstring.o \
 
 OBJECTS				=	$(GLAD) \
 						$(LINERENDERMODEL) \
+						$(RENDERFONT) \
 						$(RENDERMODEL) \
 						$(SMOKERENDERMODEL) \
-						$(TEXTRENDERER) \
 						$(UTILITY) \
 						$(WINDOW) \
 						main.o

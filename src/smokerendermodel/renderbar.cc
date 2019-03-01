@@ -61,17 +61,9 @@ void SmokeRenderModel::render_bar()
     min << setprecision(2) << scientific << d_min;
     max << setprecision(2) << scientific << d_max;
 
-    left -= 20;
-
-    d_textrender.render_string(min.str(), left, bot - 26, glm::vec3(.0, .0, .0));
-    d_textrender.render_string(min.str(), left - 4, bot - 26, glm::vec3(.0, .0, .0));
-    d_textrender.render_string(min.str(), left - 2, bot - 24, glm::vec3(.0, .0, .0));
-    d_textrender.render_string(min.str(), left - 2, bot - 28, glm::vec3(.0, .0, .0));
-    d_textrender.render_string(max.str(), left, top + 10, glm::vec3(.0, .0, .0));
-    d_textrender.render_string(max.str(), left - 4, top + 10, glm::vec3(.0, .0, .0));
-    d_textrender.render_string(max.str(), left - 2, top + 12, glm::vec3(.0, .0, .0));
-    d_textrender.render_string(max.str(), left - 2, top + 8, glm::vec3(.0, .0, .0));
-
-    d_textrender.render_string(max.str(), left - 2, top + 10, glm::vec3(1.0, 1.0, 1.0));
-    d_textrender.render_string(min.str(), left - 2, bot - 26, glm::vec3(1.0, 1.0, 1.0));
+    left -= 25;
+    d_renderfont.update_string(d_maxtext, max.str());
+    d_renderfont.update_string(d_mintext, min.str());
+    d_renderfont.render_string_outlined(d_maxtext, glm::vec2{left, bot - 26});
+    d_renderfont.render_string_outlined(d_mintext, glm::vec2{left, top + 10});
 }
