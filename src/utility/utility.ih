@@ -3,5 +3,8 @@
 #include <fstream>
 #include <iterator>
 #include <rfftw.h>
+#include <sstream>
+
+#include "../lodepng/lodepng.h"
 
 using namespace std;

@@ -2,15 +2,17 @@
 #define __INCLUDED_SMOKERENDERMODEL_H
 
 #include "../rendermodel/rendermodel.h"
-#include "../textrenderer/textrenderer.h"
+#include "../renderfont/renderfont.h"
 
 class SmokeRenderModel : public RenderModel
 {
     GLuint d_bar_vao;
     GLuint d_bar_vertices;
     GLuint d_bar_colors;
-    TextRenderer d_textrender;
-
+    RenderFont d_renderfont;
+    RenderFont::String d_maxtext;
+    RenderFont::String d_mintext;
+    
     public:
         SmokeRenderModel();
         ~SmokeRenderModel();
@@ -26,7 +28,7 @@ class SmokeRenderModel : public RenderModel
 inline void SmokeRenderModel::framebuffer_size(size_t width, size_t height)
 {
     RenderModel::framebuffer_size(width, height);
-    d_textrender.set_size(width, height);
+    d_renderfont.set_size(width, height);
 }
 
 #endif
