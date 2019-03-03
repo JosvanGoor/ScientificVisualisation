@@ -2,16 +2,6 @@
 
 #include <iostream>
 
-template <typename Enum>
-Enum rotate_enum(Enum val)
-{
-    return static_cast<Enum>
-    (
-        (static_cast<int>(val) + 1) % 
-        static_cast<int>(Enum::MODULO_VALUE)
-    );
-}
-
 void Window::key_event(int key, int scancode, int action, int mods)
 {
     if (action != GLFW_PRESS)

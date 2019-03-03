@@ -41,4 +41,16 @@ enum class ScalingMode
 };
 std::string scalingmode_string(ScalingMode mode);
 
+/* Rotates all enum values between 0 and modulo_value */
+template <typename Enum>
+Enum rotate_enum(Enum val)
+{
+    return static_cast<Enum>
+    (
+        (static_cast<int>(val) + 1) % 
+        static_cast<int>(Enum::MODULO_VALUE)
+    );
+}
+
+
 #endif
