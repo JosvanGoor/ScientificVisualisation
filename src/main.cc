@@ -60,7 +60,9 @@ try
                 simulation_time += chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count();
                 chrono::time_point t1 = chrono::high_resolution_clock::now();
             }
+
             window.repaint();
+            
             if (omp_get_thread_num() == 0)
             {
                 font.set_size(window.width(), window.height());
