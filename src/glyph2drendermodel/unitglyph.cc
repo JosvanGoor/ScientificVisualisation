@@ -4,8 +4,8 @@ vector<float> Glyph2dRenderModel::unit_glyph()
 {
     return
     {
-        -1.0f,  1.0f,
-        -1.0f, -1.0f,
-         1.0f,  0.0f
+        -2.5f,  1.0f,
+        -2.5f, -1.0f,
+         2.5f,  0.0f
     };
 }

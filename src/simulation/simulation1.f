@@ -5,12 +5,13 @@ Simulation<Size>::Simulation(double timestep, double viscosity)
 :
     d_timestep(timestep),
     d_viscosity(viscosity),
-    d_running(true)
+    d_running(true),
+    d_vfield_size(Size * 2 * (Size / 2 + 1))
 {
-    d_vfield_x = fftw_alloc_real(Size * 2 * (Size / 2 + 1));
-    d_vfield_y = fftw_alloc_real(Size * 2 * (Size / 2 + 1));
-    d_vfield0_x = fftw_alloc_real(Size * 2 * (Size / 2 + 1));
-    d_vfield0_y = fftw_alloc_real(Size * 2 * (Size / 2 + 1));
+    d_vfield_x = fftw_alloc_real(d_vfield_size);
+    d_vfield_y = fftw_alloc_real(d_vfield_size);
+    d_vfield0_x = fftw_alloc_real(d_vfield_size);
+    d_vfield0_y = fftw_alloc_real(d_vfield_size);
 
     fftw_import_wisdom_from_filename("wisdom");
 

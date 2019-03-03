@@ -12,6 +12,7 @@ class Simulation
     double d_timestep;
     double d_viscosity;
     bool d_running;
+    size_t d_vfield_size;
 
     double* d_vfield_x;
     double* d_vfield_y;
@@ -37,6 +38,7 @@ class Simulation
 
         //getters
         constexpr int gridsize() const;
+        size_t vfield_size() const;
         double *vfield_x();
         double *vfield_y();
         std::vector<double> &rho();
@@ -57,6 +59,12 @@ template <int Size>
 constexpr int Simulation<Size>::gridsize() const
 {
     return Size;
+}
+
+template <int Size>
+inline size_t Simulation<Size>::vfield_size() const
+{
+    return d_vfield_size;
 }
 
 template <int Size>

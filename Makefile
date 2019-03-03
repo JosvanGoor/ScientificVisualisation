@@ -14,7 +14,9 @@ GLYPH2DRENDERMODEL	=	glyph2drendermodel/glyph2drendermodel1.o \
 						glyph2drendermodel/initialize.o \
 						glyph2drendermodel/render.o \
 						glyph2drendermodel/setglyphdim.o \
-						glyph2drendermodel/unitglyph.o
+						glyph2drendermodel/unitglyph.o \
+						glyph2drendermodel/updatescalar.o \
+						glyph2drendermodel/updatevectors.o
 
 LINERENDERMODEL		=	linerendermodel/linerendermodel0.o \
 						linerendermodel/linerendermodel1.o \

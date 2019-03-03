@@ -65,11 +65,14 @@ try
             
             if (omp_get_thread_num() == 0)
             {
+                auto &sim = window.simulation();
+                glyphs.update_vectors(sim.vfield_x(), sim.vfield_y(), sim.gridsize());
+                glyphs.update_scalar(sim.rho(), sim.gridsize());
+                glyphs.render();
+
                 font.set_size(window.width(), window.height());
                 font.update_string(status, window.print_settings());
                 font.render_string_outlined(status, glm::vec2{10.0f, 5.0f});
-                
-                glyphs.render();
 
                 graphics_time += chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count();
                 
