@@ -24,6 +24,7 @@ try
         throw "Failed to initialize GLAD"s;
 
     window.set_drawmode(DrawMode::SMOKE);
+    
     glClearColor(0.0, 0.0, 0.0, 0.0);
 
     RenderFont font{"fonts/comic.ttf", 16};
@@ -36,6 +37,7 @@ try
 
     //TEST
     Glyph2dRenderModel glyphs;
+    Arrow3dRenderModel arrows;
 
     #pragma omp parallel
     {
@@ -57,15 +59,17 @@ try
             #pragma omp barrier
             if (omp_get_thread_num() == 0)
             {
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
                 simulation_time += chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count();
                 chrono::time_point t1 = chrono::high_resolution_clock::now();
 
                 window.repaint();
                 
                 auto &sim = window.simulation();
-                glyphs.update_vectors(sim.vfield_x(), sim.vfield_y(), sim.gridsize());
-                glyphs.update_scalar(sim.rho(), sim.gridsize());
-                glyphs.render();
+                arrows.update_vectors(sim.vfield_x(), sim.vfield_y(), sim.gridsize());
+                arrows.update_scalar(sim.rho(), sim.gridsize());
+                arrows.render();
 
                 font.set_size(window.width(), window.height());
                 font.update_string(status, window.print_settings());

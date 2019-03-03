@@ -35,9 +35,11 @@ void Window::paint_smoke()
             std::transform(d_simulation.force_x().begin(),d_simulation.force_x().end(),
                             d_simulation.force_y().begin(), store.begin(), length);
             break;
+        default:
+            throw "Illegal colormode"s;
     }
 
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // deze kan weg denk ik
 
     size_t pushloc = 0;
     for (int jdx = 0; jdx < (d_simulation.gridsize() - 1); ++jdx)
