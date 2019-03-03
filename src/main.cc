@@ -10,10 +10,6 @@ void error_callback(int error, const char* description)
 int main()
 try
 {
-
-    // fftw_init_threads();
-    // fftw_plan_with_nthreads(2);
-
     glfwSetErrorCallback(error_callback);
 
     glfwInit();

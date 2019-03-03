@@ -13,10 +13,10 @@ class Simulation
     double d_viscosity;
     bool d_running;
 
-    std::vector<double> d_vfield_x;
-    std::vector<double> d_vfield_y;
-    std::vector<double> d_vfield0_x; //vorige step
-    std::vector<double> d_vfield0_y;
+    double* d_vfield_x;
+    double* d_vfield_y;
+    double* d_vfield0_x; //vorige step
+    double* d_vfield0_y;
     
     std::vector<double> d_force_x;
     std::vector<double> d_force_y;
@@ -37,8 +37,8 @@ class Simulation
 
         //getters
         constexpr int gridsize() const;
-        std::vector<double> &vfield_x();
-        std::vector<double> &vfield_y();
+        double *vfield_x();
+        double *vfield_y();
         std::vector<double> &rho();
         std::vector<double> &force_x();
         std::vector<double> &force_y();
@@ -66,13 +66,13 @@ inline std::vector<double> &Simulation<Size>::rho()
 }
 
 template <int Size>
-inline std::vector<double> &Simulation<Size>::vfield_x()
+inline double *Simulation<Size>::vfield_x()
 {
     return d_vfield_x;
 }
 
 template <int Size>
-inline std::vector<double> &Simulation<Size>::vfield_y()
+inline double *Simulation<Size>::vfield_y()
 {
     return d_vfield_y;
 }

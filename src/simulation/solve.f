@@ -7,13 +7,17 @@
 template <int Size>
 void Simulation<Size>::solve()
 {
-    int gridsize_sq = Size * Size;
+    constexpr int gridsize_sq = Size * Size;
 
     // cout << accumulate(d_vfield0_x.begin(), d_vfield0_x.end(), 0.0) << "\n";
 
     // solve.cc: 9
-    // #pragma omp parallel
     {
+
+        // chrono::time_point t1 = chrono::high_resolution_clock::now();
+        // if (omp_get_thread_num() == 0)
+        //     t1 = chrono::high_resolution_clock::now();
+    
         #pragma omp for
         for (int idx = 0; idx < gridsize_sq; ++idx)
         {
@@ -24,42 +28,58 @@ void Simulation<Size>::solve()
             d_vfield0_y[idx] = d_vfield_y[idx];
         }
 
+        // if (omp_get_thread_num() == 0)
+        // {
+        //     cout << "Time_step: " << chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count() <<'\n';
+        //     t1 = chrono::high_resolution_clock::now();
+        // }
+
         // solve.cc 12
+        double yval, xval, x0, y0, s, t;
+        int j1, i0, i1, j0;
+        size_t pos, pos00, pos01, pos10, pos11;
         #pragma omp for
         for (int jdx = 0; jdx < Size; ++jdx)
         {
             // deze zat in de for, eruitgehaald.
-            double yval = (0.5 / Size) + jdx * (1.0 / Size);
+            yval = (0.5 / Size) + jdx * (1.0 / Size);
 
-            int j1 = Size * jdx;
-            for (int idx = 0; idx < Size; ++idx)
+            j1 = Size * jdx;
+            xval = (0.5 / Size);
+            for (int idx = 0; idx != Size; ++idx)
             {
-                size_t pos = idx + j1;
+                pos = idx + j1;
 
-                double xval = (0.5 / Size) + idx * (1.0 / Size);
-                double x0 = Size * (xval - d_timestep * d_vfield0_x[pos]) - 0.5f;
-                double y0 = Size * (yval - d_timestep * d_vfield0_y[pos]) - 0.5f;
-                int i0 = clamp(x0);
-                double s = x0 - i0;
+                x0 = Size * (xval - d_timestep * d_vfield0_x[pos]) - 0.5f;
+                y0 = Size * (yval - d_timestep * d_vfield0_y[pos]) - 0.5f;
+                i0 = clamp(x0);
+                s = x0 - i0;
                 i0 = (i0 + Size) % Size; 
-                int i1 = (i0 + 1) % Size;
-                int j0 = clamp(y0);
-                double t = y0 - j0;
+                i1 = (i0 + 1) % Size;
+                j0 = clamp(y0);
+                t = y0 - j0;
                 j0 = (j0 + Size) % Size; 
-                int j1 = (j0 + 1) % Size;
+                j1 = (j0 + 1) % Size;
 
-                size_t pos00 = i0 + Size * j0;
-                size_t pos01 = i0 + Size * j1;
-                size_t pos10 = i1 + Size * j0;
-                size_t pos11 = i1 + Size * j1;
+                pos00 = i0 + Size * j0;
+                pos01 = i0 + Size * j1;
+                pos10 = i1 + Size * j0;
+                pos11 = i1 + Size * j1;
                 // solve.cc 23
                 d_vfield_x[pos] = (1 - s) * ((1 - t) * d_vfield0_x[pos00] + t * d_vfield0_x[pos01])
                     + s * ((1 - t) * d_vfield0_x[pos10] + t * d_vfield0_x[pos11]);
                 // solve.cc 24
                 d_vfield_y[pos] = (1 - s) * ((1 - t) * d_vfield0_y[pos00] + t * d_vfield0_y[pos01])
                     + s * ((1 - t) * d_vfield0_y[pos10] + t * d_vfield0_y[pos11]);
+                    xval += (1.0 / Size);
             }
         }
+
+        // if (omp_get_thread_num() == 0)
+        // {
+        //     cout << "Vfield1: " << chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count() <<'\n';
+        //     t1 = chrono::high_resolution_clock::now();
+        // }
 
         // solve.cc 27
         #pragma omp for
@@ -67,14 +87,17 @@ void Simulation<Size>::solve()
         {
             size_t j2 = Size * jdx;
             size_t j1 = (Size + 2) * jdx;
-            for (int idx = 0; idx < Size; ++idx)
-            {
-                d_vfield0_x[idx + j1]
-                    = d_vfield_x[idx + j2];
-                d_vfield0_y[idx + j1]
-                    = d_vfield_y[idx + j2];
-            }
+
+            //Saves approx 1ms
+            std::copy(d_vfield_x + j2, d_vfield_x + j2 + Size, d_vfield0_x + j1);
+            std::copy(d_vfield_y + j2, d_vfield_y + j2 + Size, d_vfield0_y + j1);
         }
+
+        // if (omp_get_thread_num() == 0)
+        // {
+        //     cout << "Vfield2: " << chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count() <<'\n';
+        //     t1 = chrono::high_resolution_clock::now();
+        // }
 
         // solve.cc 31
         // this is some hacky shit I dont even
@@ -84,20 +107,12 @@ void Simulation<Size>::solve()
             #pragma omp section
             {fftw_execute(d_plan_rtoc_y);}
         }
-        #pragma omp barrier
-        // {rfftwnd_one_real_to_complex
-        // (
-        //     d_plan_rtoc_1,
-        //     d_vfield0_x.data(),
-        //     reinterpret_cast<fftw_complex *>(d_vfield0_x.data())
-        // );}
-        // // solve.cc 32
-        // {rfftwnd_one_real_to_complex
-        // (
-        //     d_plan_rtoc_2,
-        //     d_vfield0_y.data(),
-        //     reinterpret_cast<fftw_complex *>(d_vfield0_y.data())
-        // );}
+
+        // if (omp_get_thread_num() == 0)
+        // {
+        //     cout << "FFTW first: " << chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count() <<'\n';
+        //     t1 = chrono::high_resolution_clock::now();
+        // }
         
         // solve.cc 34
         #pragma omp for
@@ -105,7 +120,7 @@ void Simulation<Size>::solve()
         {
             double xval = 0.5 * idx;
             double x2 = xval * xval;
-            for (int jdx = 0; jdx < Size; ++jdx)
+            for (int jdx = 0, pos0 = idx, pos1 = idx + 1; jdx != Size; ++jdx, pos0 += (Size+2), pos1 += (Size+2))
             {
                 double yval = jdx <= (Size / 2) ? jdx : (jdx - Size);
                 double y2 = yval * yval;
@@ -123,8 +138,6 @@ void Simulation<Size>::solve()
                 double U[2]; //there obviously is no better way of doing this.
                 double V[2];
 
-                size_t pos0 = idx + (Size + 2) * jdx;
-                size_t pos1 = idx + 1 + (Size + 2) * jdx;
                 U[0] = d_vfield0_x[pos0];
                 U[1] = d_vfield0_x[pos1];
                 V[0] = d_vfield0_y[pos0];
@@ -138,6 +151,12 @@ void Simulation<Size>::solve()
             }
         }
 
+        // if (omp_get_thread_num() == 0)
+        // {
+        //     cout << "vfield 3: " << chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count() <<'\n';
+        //     t1 = chrono::high_resolution_clock::now();
+        // }
+
         // solve.cc 53
         // Sanity restored
 
@@ -149,37 +168,28 @@ void Simulation<Size>::solve()
             #pragma omp section
             {fftw_execute(d_plan_ctor_y);}
         }
+
+        // if (omp_get_thread_num() == 0)
+        // {
+        //     cout << "fftw second: " << chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count() <<'\n';
+        //     t1 = chrono::high_resolution_clock::now();
+        // }
         #pragma omp barrier
 
-        // #pragma omp sections
-        // {
-        //     {rfftwnd_one_complex_to_real
-        //     (
-        //         d_plan_ctor_1,
-        //         reinterpret_cast<fftw_complex *>(d_vfield0_x.data()),
-        //         d_vfield0_x.data()
-        //     );}
-        //     #pragma omp section
-        //     {rfftwnd_one_complex_to_real
-        //     (
-        //         d_plan_ctor_2,
-        //         reinterpret_cast<fftw_complex *>(d_vfield0_y.data()),
-        //         d_vfield0_y.data()
-        //     );}
-        // }
-
         //solve.cc 56
-        double f = 1.0 / (gridsize_sq);
         #pragma omp for
         for (int jdx = 0; jdx < Size; ++jdx)
         {
             size_t y1 = Size * jdx;
             size_t y2 = (Size + 2) * jdx;
-            for (int idx = 0; idx < Size; ++idx)
+            for (int idx = 0; idx != Size; ++idx)
             {
-                d_vfield_x[idx + y1] = f * d_vfield0_x[idx + y2];
-                d_vfield_y[idx + y1] = f * d_vfield0_y[idx + y2];
+                d_vfield_x[idx + y1] = d_vfield0_x[idx + y2] / (gridsize_sq);
+                d_vfield_y[idx + y1] = d_vfield0_y[idx + y2] / (gridsize_sq);
             }
         }
+
+        // if (omp_get_thread_num() == 0)
+        //     cout << "v_field normalize: " << chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count() <<"\n\n";
     }
 }

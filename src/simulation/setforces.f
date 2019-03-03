@@ -23,8 +23,8 @@ void Simulation<Size>::set_forces()
                             return lhs * 0.85;
                         });}
         #pragma omp section
-        {std::copy(d_force_x.begin(), d_force_x.end(), d_vfield0_x.begin());}
+        {std::copy(d_force_x.begin(), d_force_x.end(), d_vfield0_x);}
         #pragma omp section
-        {std::copy(d_force_y.begin(), d_force_y.end(), d_vfield0_y.begin());}
+        {std::copy(d_force_y.begin(), d_force_y.end(), d_vfield0_y);}
     }
 }

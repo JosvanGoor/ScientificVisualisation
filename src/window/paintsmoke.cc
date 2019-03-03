@@ -26,9 +26,9 @@ void Window::paint_smoke()
             std::copy(d_simulation.rho().begin(), d_simulation.rho().end(), store.begin());
             break;
         case ColorMode::VELOCITY:
-            store.reserve(d_simulation.vfield_x().size());
-            std::transform(d_simulation.vfield_x().begin(),d_simulation.vfield_x().end(),
-                            d_simulation.vfield_y().begin(), store.begin(), length);
+            store.reserve(d_simulation.gridsize() * 2 * (d_simulation.gridsize() / 2 + 1));
+            std::transform(d_simulation.vfield_x(),d_simulation.vfield_x() + d_simulation.gridsize() * 2 * (d_simulation.gridsize() / 2 + 1),
+                            d_simulation.vfield_y(), store.begin(), length);
             break;
         case ColorMode::FORCE:
             store.reserve(d_simulation.force_x().size());
