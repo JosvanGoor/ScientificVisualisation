@@ -61,13 +61,13 @@ try
                 chrono::time_point t1 = chrono::high_resolution_clock::now();
                 window.repaint();
 
-                font.set_size(window.width(), window.height());
-                font.update_string(status, window.print_settings());
-                font.render_string_outlined(status, glm::vec2{10.0f, 5.0f});
-                
                 auto &sim = window.simulation();
                 glyphs.update_vectors(sim.vfield_x(), sim.vfield_y(), sim.gridsize());
                 glyphs.render();
+
+                font.set_size(window.width(), window.height());
+                font.update_string(status, window.print_settings());
+                font.render_string_outlined(status, glm::vec2{10.0f, 5.0f});
 
                 graphics_time += chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count();
                 

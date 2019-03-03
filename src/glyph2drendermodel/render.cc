@@ -5,6 +5,9 @@ void Glyph2dRenderModel::render()
     /* Calculate positions */
     size_t numglyphs = d_glyph_dim * d_glyph_dim;
 
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     // do rendering
     glUseProgram(d_program);
     glBindVertexArray(d_attribute_object);
