@@ -35,5 +35,16 @@ void Glyph2dRenderModel::initialize()
     glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(float), nullptr);
     glEnableVertexAttribArray(2);
     glVertexAttribDivisor(2, 1);
+
+    /* Colors */
+    glGenBuffers(1, &d_color_buffer);
+    glBindBuffer(GL_ARRAY_BUFFER, d_color_buffer);
+    glBufferData(GL_ARRAY_BUFFER, 0, nullptr, GL_STREAM_DRAW);
+    glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(float), nullptr);
+    glEnableVertexAttribArray(3);
+    glVertexAttribDivisor(3, 1);
+
+    glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 

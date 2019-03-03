@@ -1,14 +1,11 @@
 #include "glyph2drendermodel.ih"
 
-#include <iostream>
-
-void Glyph2dRenderModel::update_vectors(double *vecx, double *vecy, size_t gridsize)
+void Glyph2dRenderModel::update_scalar(vector<double> const &scalar, size_t gridsize)
 {
     size_t numglyphs = d_glyph_dim * d_glyph_dim;
-    vector<float> angles;
-    angles.reserve(numglyphs);
+    vector<float> colors;
+    colors.reserve(numglyphs);
 
-    //interpolation is nearest neighbor atm.
     for (size_t row = 0; row < d_glyph_dim; ++row)
     {
         float approx_y = 1.0f / d_glyph_dim;
@@ -23,17 +20,11 @@ void Glyph2dRenderModel::update_vectors(double *vecx, double *vecy, size_t grids
             size_t xpos = static_cast<size_t>(approx_x * gridsize);
             size_t index = (ypos * gridsize) + xpos;
         
-            float angle = atan2(vecy[index], vecx[index]);
-            angles.push_back(angle);
+            colors.push_back(scalar[index]);
         }
     }
 
-    glBindBuffer(GL_ARRAY_BUFFER, d_rotation_buffer);
-    glBufferData(GL_ARRAY_BUFFER, bytesize(angles), angles.data(), GL_STREAM_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, d_color_buffer);
+    glBufferData(GL_ARRAY_BUFFER, bytesize(colors), colors.data(), GL_STREAM_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-}
-
-void Glyph2dRenderModel::update_vectors(vector<double> &vecx, vector<double> &vecy, size_t gridsize)
-{
-    update_vectors(vecx.data(), vecy.data(), gridsize);
 }

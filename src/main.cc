@@ -63,6 +63,7 @@ try
 
                 auto &sim = window.simulation();
                 glyphs.update_vectors(sim.vfield_x(), sim.vfield_y(), sim.gridsize());
+                glyphs.update_scalar(sim.rho(), sim.gridsize());
                 glyphs.render();
 
                 font.set_size(window.width(), window.height());
