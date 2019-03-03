@@ -1,8 +1,8 @@
 #include "arrow3drendermodel.ih"
 
 Arrow3dRenderModel::Arrow3dRenderModel()
-:   d_arrow_dim(50),
-    d_arrow_detail(300),
+:   d_arrow_dim(100),
+    d_arrow_detail(30),
     d_projection(1),
     d_program(0),
     d_attribute_object(0),
