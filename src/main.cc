@@ -34,6 +34,9 @@ try
     double simulation_time = 0.0;
     double graphics_time = 0.0;
 
+    //TEST
+    Glyph2dRenderModel glyphs;
+
     #pragma omp parallel
     {
         if (omp_get_thread_num() == 0)
@@ -62,6 +65,8 @@ try
                 font.update_string(status, window.print_settings());
                 font.render_string_outlined(status, glm::vec2{10.0f, 5.0f});
                 
+                glyphs.render();
+
                 graphics_time += chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count();
                 
                 if (iterations == 100)

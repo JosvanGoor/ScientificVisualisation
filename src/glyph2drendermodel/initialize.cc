@@ -1,12 +1,13 @@
 #include "glyph2drendermodel.ih"
 
-void Glyph2DRenderModel::initialize()
+void Glyph2dRenderModel::initialize()
 {
     d_program = build_program
     (
         "shaders/glyph2d_vertex.glsl",
         "shaders/glyph2d_fragment.glsl"
     );
+    d_projection_location = glGetUniformLocation(d_program, "projection");
 
     vector<float> glyph = unit_glyph();
 

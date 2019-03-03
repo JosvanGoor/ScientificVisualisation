@@ -11,11 +11,14 @@
 #include <string>
 #include <vector>
 
-class Glyph2DRenderModel
+class Glyph2dRenderModel
 {
-    size_t d_framewidth;
-    size_t d_frameheight;
+    float d_coord_start;
+    float d_coord_advance;
     size_t d_glyph_dim; // # of glyphs per dimension
+
+    glm::mat4 d_projection;
+    GLuint d_projection_location;
 
     GLuint d_program;
     GLuint d_attribute_object;
@@ -26,7 +29,11 @@ class Glyph2DRenderModel
     GLuint d_color_buffer;
 
     public:
-        Glyph2DRenderModel();
+        Glyph2dRenderModel();
+        
+        void render();
+
+        void set_glyph_dim(size_t dim);
 
     private:
         std::vector<float> unit_glyph();

@@ -10,7 +10,10 @@ ENUMS				=	enums/colormappingstring.o \
 GLAD				=	glad/glad.o \
 						lodepng/lodepng.o
 
-GLYPH2DRENDERMODEL	=	glyph2drendermodel/initialize.o \
+GLYPH2DRENDERMODEL	=	glyph2drendermodel/glyph2drendermodel1.o \
+						glyph2drendermodel/initialize.o \
+						glyph2drendermodel/render.o \
+						glyph2drendermodel/setglyphdim.o \
 						glyph2drendermodel/unitglyph.o
 
 LINERENDERMODEL		=	linerendermodel/linerendermodel0.o \

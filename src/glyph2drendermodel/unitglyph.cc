@@ -1,6 +1,6 @@
 #include "glyph2drendermodel.ih"
 
-vector<float> Glyph2DRenderModel::unit_glyph()
+vector<float> Glyph2dRenderModel::unit_glyph()
 {
     return
     {

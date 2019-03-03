@@ -6,6 +6,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "glyph2drendermodel/glyph2drendermodel.h"
 #include "renderfont/renderfont.h"
 #include "window/window.h"
 
