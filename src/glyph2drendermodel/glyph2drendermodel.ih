@@ -1,5 +1,6 @@
 #include "glyph2drendermodel.h"
 
 #include "../utility/utility.h"
+#include "../simulation/simulation.h"
 
 using namespace std;

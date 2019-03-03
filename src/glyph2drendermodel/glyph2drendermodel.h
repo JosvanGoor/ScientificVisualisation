@@ -11,6 +11,7 @@
 #include <string>
 #include <vector>
 
+//forward decl
 class Glyph2dRenderModel
 {
     float d_coord_start;
@@ -34,6 +35,9 @@ class Glyph2dRenderModel
         void render();
 
         void set_glyph_dim(size_t dim);
+        // void update_scalar(vector<double> const &scalar);
+        void update_vectors(double *vecx, double *vecy, size_t gridsize);
+        void update_vectors(std::vector<double> &vecx, std::vector<double> &vecy, size_t gridsize);
 
     private:
         std::vector<float> unit_glyph();
