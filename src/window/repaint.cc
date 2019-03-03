@@ -9,10 +9,7 @@ void Window::repaint()
         cerr << "No current rendermodel! skipping draw.\n";
         return;
     }
-    if (omp_get_thread_num() == 0)
-        d_rendermodel->set_colormapping(static_cast<int>(d_colormapping));
-
-    #pragma omp barrier
+    d_rendermodel->set_colormapping(static_cast<int>(d_colormapping));
 
     switch(d_drawmode)
     {
