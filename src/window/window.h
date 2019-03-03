@@ -16,11 +16,6 @@ typedef Simulation<600> t_Simulation;
 
 class Window
 {
-    vector<float> colors;
-    vector<float> colors_lines;
-    vector<double> store;
-    vector<float> lines;
-
     float v_min;
     float v_max;
     float d_min, d_max;
