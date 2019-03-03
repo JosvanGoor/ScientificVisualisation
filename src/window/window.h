@@ -12,7 +12,7 @@
 #include "../simulation/simulation.h"
 #include <GLFW/glfw3.h>
 
-typedef Simulation<600> t_Simulation;
+typedef Simulation<500> t_Simulation;
 
 class Window
 {

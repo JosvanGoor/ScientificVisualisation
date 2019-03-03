@@ -2,6 +2,14 @@
 
 EXECUTABLE = scivis	
 
+ARROW3DRENDERMODEL	=	arrow3drendermodel/arrow3drendermodel1.o \
+						arrow3drendermodel/initialize.o \
+						arrow3drendermodel/render.o \
+						arrow3drendermodel/setarrowdim.o \
+						arrow3drendermodel/unitarrow.o \
+						arrow3drendermodel/updatescalar.o \
+						arrow3drendermodel/updatevectors.o
+
 ENUMS				=	enums/colormappingstring.o \
 						enums/colormodestring.o \
 						enums/drawmodestring.o \
@@ -87,7 +95,8 @@ WINDOW				=	window/framebufferresized.o \
 						window/window0.o \
 						window/window1.o
 
-OBJECTS				=	$(ENUMS) \
+OBJECTS				=	$(ARROW3DRENDERMODEL) \
+						$(ENUMS) \
 						$(GLAD) \
 						$(GLYPH2DRENDERMODEL) \
 						$(LINERENDERMODEL) \

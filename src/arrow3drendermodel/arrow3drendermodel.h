@@ -1,21 +1,23 @@
-#ifndef __INCLUDED_GLYPH2DRENDERMODEL_H
-#define __INCLUDED_GLYPH2DRENDERMODEL_H
+#ifndef __INCLUDED_ARROWRENDERMODEL_H
+#define __INCLUDED_ARROWRENDERMODEL_H
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "../rendermodel/rendermodel.h"
+#include "../utility/utility.h"
 
 #include <glad/glad.h>
 #include <string>
 #include <vector>
 
-class Glyph2dRenderModel
+class Arrow3dRenderModel
 {
-    size_t d_glyph_dim; // # of glyphs per dimension
+    size_t d_drawcount;
+    size_t d_arrow_dim;
+    size_t d_arrow_detail;
 
-    glm::mat4 d_projection;
+    glm::mat4 d_projection; //includes lookat
     GLuint d_projection_location;
 
     GLuint d_program;
@@ -23,20 +25,20 @@ class Glyph2dRenderModel
     GLuint d_vertex_buffer;
     GLuint d_position_buffer;
     GLuint d_rotation_buffer;
-    GLuint d_color_buffer;
+    GLuint d_scalar_buffer;
 
     public:
-        Glyph2dRenderModel();
-        
+        Arrow3dRenderModel();
+
         void render();
 
-        void set_glyph_dim(size_t dim);
+        void set_arrow_dim(size_t dim);
         void update_scalar(std::vector<double> const &scalar, size_t gridsize);
         void update_vectors(double *vecx, double *vecy, size_t gridsize);
         void update_vectors(std::vector<double> &vecx, std::vector<double> &vecy, size_t gridsize);
 
     private:
-        std::vector<float> unit_glyph();
+        std::vector<float> unit_arrow(size_t detail);
 
         void initialize();
 };
