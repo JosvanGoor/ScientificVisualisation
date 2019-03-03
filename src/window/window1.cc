@@ -16,6 +16,10 @@ Window::Window(size_t width, size_t height)
     d_simulation(),
     d_rendermodel()
 {
+    colors.resize(2 * d_simulation.gridsize() * d_simulation.gridsize(), 0);
+    colors.resize(4 * d_simulation.gridsize() * d_simulation.gridsize(), 0);
+    lines.resize(4 * d_simulation.gridsize() * d_simulation.gridsize(), 0);
+
     d_window = glfwCreateWindow
     (
         d_width,

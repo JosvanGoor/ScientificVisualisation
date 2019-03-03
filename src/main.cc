@@ -59,8 +59,10 @@ try
             {
                 simulation_time += chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count();
                 chrono::time_point t1 = chrono::high_resolution_clock::now();
-                window.repaint();
-
+            }
+            window.repaint();
+            if (omp_get_thread_num() == 0)
+            {
                 font.set_size(window.width(), window.height());
                 font.update_string(status, window.print_settings());
                 font.render_string_outlined(status, glm::vec2{10.0f, 5.0f});
