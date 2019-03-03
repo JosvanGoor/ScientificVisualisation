@@ -10,6 +10,9 @@ ENUMS				=	enums/colormappingstring.o \
 GLAD				=	glad/glad.o \
 						lodepng/lodepng.o
 
+GLYPH2DRENDERMODEL	=	glyph2drendermodel/initialize.o \
+						glyph2drendermodel/unitglyph.o
+
 LINERENDERMODEL		=	linerendermodel/linerendermodel0.o \
 						linerendermodel/linerendermodel1.o \
 						linerendermodel/render.o
@@ -81,6 +84,7 @@ WINDOW				=	window/framebufferresized.o \
 
 OBJECTS				=	$(ENUMS) \
 						$(GLAD) \
+						$(GLYPH2DRENDERMODEL) \
 						$(LINERENDERMODEL) \
 						$(RENDERFONT) \
 						$(RENDERMODEL) \
@@ -94,7 +98,7 @@ COMPILER = g++
 FLAGS = -std=c++17 -Wall -O3 -ffast-math -fopenmp
 INCLUDEDIRS = -I./extern/include/
 LIBDIRS     = -L./extern/lib/
-LIBRARIES = $(LIBDIRS) -lfftw3 -lGL -lglfw -lfreetype
+LIBRARIES = $(LIBDIRS) -lfftw3 -lGL -lglfw -lfreetype -ldl
 
 #folders
 SOURCEDIR = src
