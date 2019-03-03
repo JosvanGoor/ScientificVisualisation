@@ -6,45 +6,11 @@
 #include <iostream>
 #include <sstream>
 
+#include "../enums/enums.h"
 #include "../linerendermodel/linerendermodel.h"
 #include "../smokerendermodel/smokerendermodel.h"
 #include "../simulation/simulation.h"
 #include <GLFW/glfw3.h>
-
-enum class DrawMode
-{
-    SMOKE,
-    VECTORS,
-    NONE
-};
-std::string drawmode_string(DrawMode mode);
-
-enum class ColorMapping
-{
-    BLACKWHITE,
-    RAINBOW,
-    BANDS,
-    SPACE,
-    DUTCH
-};
-std::string colormapping_string(ColorMapping mapping);
-
-enum class ColorMode
-{
-    DENSITY,
-    FORCE,
-    VELOCITY
-};
-std::string colormode_string(ColorMode mode);
-
-
-enum class ScalingMode
-{
-    STATIC,
-    DYNAMIC
-};
-std::string scalingmode_string(ScalingMode mode);
-typedef std::array<float, 3> Color;
 
 typedef Simulation<600> t_Simulation;
 

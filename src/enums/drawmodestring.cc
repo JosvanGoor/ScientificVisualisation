@@ -1,4 +1,4 @@
-#include "window.ih"
+#include "enums.ih"
 
 string drawmode_string(DrawMode mode)
 {
@@ -11,6 +11,6 @@ string drawmode_string(DrawMode mode)
             return "DrawMode::VECTORS";
 
         default:
-            return "UNKNOWN DrawMode";
+            return "Unknown or Modval DrawMode";
     }
 }

@@ -35,6 +35,8 @@ void Window::paint_smoke()
             std::transform(d_simulation.force_x().begin(),d_simulation.force_x().end(),
                             d_simulation.force_y().begin(), store.begin(), length);
             break;
+        case ColorMode::MODULO_VALUE:
+            throw "Invalid color mode."s;
     }
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

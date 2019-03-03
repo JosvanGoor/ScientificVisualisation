@@ -2,6 +2,16 @@
 
 #include <iostream>
 
+template <typename Enum>
+Enum rotate_enum(Enum val)
+{
+    return static_cast<Enum>
+    (
+        (static_cast<int>(val) + 1) % 
+        static_cast<int>(Enum::MODULO_VALUE)
+    );
+}
+
 void Window::key_event(int key, int scancode, int action, int mods)
 {
     if (action != GLFW_PRESS)
@@ -18,43 +28,19 @@ void Window::key_event(int key, int scancode, int action, int mods)
         break;
 
         case GLFW_KEY_C:
-            set_colormapping
-            ( 
-                static_cast<ColorMapping>
-                (
-                    (static_cast<int>(d_colormapping) + 1) % 5
-                )
-            );
+            set_colormapping(rotate_enum(d_colormapping));
         break;
 
         case GLFW_KEY_R:
-            set_drawmode
-            (
-                static_cast<DrawMode>
-                (
-                    (static_cast<int>(d_drawmode) + 1) % 2
-                )
-            );
+            set_drawmode(rotate_enum(d_drawmode));
         break;
 
         case GLFW_KEY_M:
-            set_colormode
-            (
-                static_cast<ColorMode>
-                (
-                    (static_cast<int>(d_colormode) + 1) % 3
-                )
-            );
+            set_colormode(rotate_enum(d_colormode));
         break;
 
         case GLFW_KEY_S:
-            set_scalingmode
-            (
-                static_cast<ScalingMode>
-                (
-                    (static_cast<int>(d_scalingmode) + 1) % 2
-                )
-            );
+            set_scalingmode(rotate_enum(d_scalingmode));
         break;
 
         case GLFW_KEY_MINUS:

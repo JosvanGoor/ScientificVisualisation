@@ -2,6 +2,11 @@
 
 EXECUTABLE = scivis	
 
+ENUMS				=	enums/colormappingstring.o \
+						enums/colormodestring.o \
+						enums/drawmodestring.o \
+						enums/scalingmodestring.o
+
 GLAD				=	glad/glad.o \
 						lodepng/lodepng.o
 
@@ -60,11 +65,7 @@ UTILITY				=	utility/buildprogram.o \
 						utility/loadtexture.o \
 						utility/readfile.o
 
-WINDOW				=	window/colormappingstring.o \
-						window/colormodestring.o \
-						window/scalingmodestring.o \
-						window/drawmodestring.o \
-						window/framebufferresized.o \
+WINDOW				=	window/framebufferresized.o \
 						window/initializesmokerender.o \
 						window/keyevent.o \
 						window/mousebuttonevent.o \
@@ -78,7 +79,8 @@ WINDOW				=	window/colormappingstring.o \
 						window/window0.o \
 						window/window1.o
 
-OBJECTS				=	$(GLAD) \
+OBJECTS				=	$(ENUMS) \
+						$(GLAD) \
 						$(LINERENDERMODEL) \
 						$(RENDERFONT) \
 						$(RENDERMODEL) \

@@ -1,4 +1,4 @@
-#include "window.ih"
+#include "enums.ih"
 
 string colormode_string(ColorMode mode)
 {
@@ -14,6 +14,6 @@ string colormode_string(ColorMode mode)
             return "ColorMode::VELOCITY";
 
         default:
-            return "UNKNWON ColorMode";
+            return "Unknown or Modval ColorMode";
     }
 }

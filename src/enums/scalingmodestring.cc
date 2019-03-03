@@ -1,4 +1,4 @@
-#include "window.ih"
+#include "enums.ih"
 
 string scalingmode_string(ScalingMode mode)
 {
@@ -11,6 +11,6 @@ string scalingmode_string(ScalingMode mode)
             return "ScalingMode::DYNAMIC";
 
         default:
-            return "UNKNWON ColorMode";
+            return "Unknown or Modval ColorMode";
     }
 }

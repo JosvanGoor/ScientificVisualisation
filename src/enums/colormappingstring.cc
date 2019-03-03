@@ -1,4 +1,4 @@
-#include "window.ih"
+#include "enums.ih"
 
 string colormapping_string(ColorMapping mapping)
 {
@@ -20,6 +20,6 @@ string colormapping_string(ColorMapping mapping)
             return "ColorMapping::DUTCH";
 
         default:
-            return "UNKNOWN ColorMapping";
+            return "Unknown or Modval ColorMapping";
     }
 }
