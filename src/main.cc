@@ -10,6 +10,7 @@ void error_callback(int error, const char* description)
 int main()
 try
 {
+    omp_set_nested(1);
     glfwSetErrorCallback(error_callback);
 
     glfwInit();

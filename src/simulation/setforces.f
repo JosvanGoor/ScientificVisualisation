@@ -22,9 +22,12 @@ void Simulation<Size>::set_forces()
                         d_force_y.begin(), [](float lhs){
                             return lhs * 0.85;
                         });}
-        #pragma omp section
-        {std::copy(d_force_x.begin(), d_force_x.end(), d_vfield0_x);}
-        #pragma omp section
-        {std::copy(d_force_y.begin(), d_force_y.end(), d_vfield0_y);}
+    }
+
+    #pragma omp for simd
+    for(size_t i = 0; i < Size*Size; ++i)
+    {
+        d_vfield0_x[i] = d_force_x[i];
+        d_vfield0_y[i] = d_force_y[i];
     }
 }
