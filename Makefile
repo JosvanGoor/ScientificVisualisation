@@ -7,6 +7,7 @@ ARROW3DRENDERMODEL	=	arrow3drendermodel/arrow3drendermodel1.o \
 						arrow3drendermodel/render.o \
 						arrow3drendermodel/setarrowdim.o \
 						arrow3drendermodel/unitarrow.o \
+						arrow3drendermodel/unitarrownormals.o \
 						arrow3drendermodel/updatescalar.o \
 						arrow3drendermodel/updatevectors.o
 

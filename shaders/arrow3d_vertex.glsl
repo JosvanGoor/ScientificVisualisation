@@ -1,22 +1,61 @@
 #version 330
 
 layout (location = 0) in vec3 vertex;
-layout (location = 1) in vec2 position;
-layout (location = 2) in float rotation;
-layout (location = 3) in float scalar;
+layout (location = 1) in vec3 normal;
+
+layout (location = 3) in vec2 position;
+layout (location = 4) in float rotation;
+layout (location = 5) in float scalar;
 
 uniform mat4 projection;
 const float PI = 3.1415926535897932384626433832795;
 
-void main()
+out vec3 g_normal;
+out vec3 g_position;
+
+mat4 position_transform()
+{
+    return mat4
+    (
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 1, 0,
+        position.x, position.y, 0, 1
+    );
+}
+
+mat4 scale_transform()
 {
     float scale = max(0.0, min(1.0, scalar));
+    scale = 2.0;
+    return mat4
+    (
+        scale, 0, 0, 0,
+        0, scale, 0, 0,
+        0, 0, scale, 0,
+        0, 0, 0, 1
+    );
+}
 
-    vec3 pos;
-    pos.x = vertex.x * cos(rotation) - vertex.y * sin(rotation);
-    pos.y = vertex.y * cos(rotation) + vertex.x * sin(rotation);
-    pos.z = vertex.z;
-    pos = (pos * scale) + vec3(position, 0.0);
+mat4 rotation_transform()
+{
+    return mat4
+    (
+        cos(rotation), sin(rotation), 0, 0,
+        sin(rotation), -cos(rotation), 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, 1
+    );
+}
 
-    gl_Position = projection * vec4(pos, 1.0);
+void main()
+{
+    mat4 M = position_transform() *
+             scale_transform() *
+             rotation_transform();
+
+    mat3 norm_transform = transpose(inverse(mat3(M)));
+    g_normal = norm_transform * normal;
+
+    gl_Position = projection * M * vec4(vertex, 1.0);
 }

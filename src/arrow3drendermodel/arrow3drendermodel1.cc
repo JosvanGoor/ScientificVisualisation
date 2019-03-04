@@ -1,12 +1,13 @@
 #include "arrow3drendermodel.ih"
 
 Arrow3dRenderModel::Arrow3dRenderModel()
-:   d_arrow_dim(100),
+:   d_arrow_dim(25),
     d_arrow_detail(30),
     d_projection(1),
     d_program(0),
     d_attribute_object(0),
     d_vertex_buffer(0),
+    d_normal_buffer(0),
     d_position_buffer(0),
     d_rotation_buffer(0),
     d_scalar_buffer(0)

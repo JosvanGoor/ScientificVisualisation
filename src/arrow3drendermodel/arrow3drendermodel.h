@@ -23,6 +23,7 @@ class Arrow3dRenderModel
     GLuint d_program;
     GLuint d_attribute_object;
     GLuint d_vertex_buffer;
+    GLuint d_normal_buffer;
     GLuint d_position_buffer;
     GLuint d_rotation_buffer;
     GLuint d_scalar_buffer;
@@ -39,7 +40,7 @@ class Arrow3dRenderModel
 
     private:
         std::vector<float> unit_arrow(size_t detail);
-
+        std::vector<float> unit_arrow_normals(std::vector<float> const &vertices);
         void initialize();
 };
 
