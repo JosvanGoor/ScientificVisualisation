@@ -2,7 +2,6 @@
 
 Arrow3dRenderModel::Arrow3dRenderModel()
 :   d_arrow_dim(25),
-    d_arrow_detail(30),
     d_projection(1),
     d_program(0),
     d_attribute_object(0),

@@ -15,7 +15,6 @@ class Arrow3dRenderModel
 {
     size_t d_drawcount;
     size_t d_arrow_dim;
-    size_t d_arrow_detail;
 
     glm::mat4 d_projection; //includes lookat
     GLuint d_projection_location;
@@ -39,8 +38,7 @@ class Arrow3dRenderModel
         void update_vectors(std::vector<double> &vecx, std::vector<double> &vecy, size_t gridsize);
 
     private:
-        std::vector<float> unit_arrow(size_t detail);
-        std::vector<float> unit_arrow_normals(std::vector<float> const &vertices);
+        void buffer_arrow();
         void initialize();
 };
 

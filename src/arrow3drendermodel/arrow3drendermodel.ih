@@ -1,3 +1,5 @@
 #include "arrow3drendermodel.h"
 
+#include "../objreader/objreader.h"
+
 using namespace std;

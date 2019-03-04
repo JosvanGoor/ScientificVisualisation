@@ -9,15 +9,17 @@ void Arrow3dRenderModel::initialize()
     );
     d_projection_location = glGetUniformLocation(d_program, "projection");
 
-    vector<float> arrow = unit_arrow(d_arrow_detail);
-    vector<float> normals = unit_arrow_normals(arrow);
+    ObjReader reader{"object_files/arrow.obj"};
+    vector<float> vertices = reader.raw_vertices();
+    vector<float> normals = reader.raw_normals();
+    d_drawcount = vertices.size() / 3;
 
     glGenVertexArrays(1, &d_attribute_object);
     glBindVertexArray(d_attribute_object);
 
     glGenBuffers(1, &d_vertex_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, d_vertex_buffer);
-    glBufferData(GL_ARRAY_BUFFER, bytesize(arrow), arrow.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, bytesize(vertices), vertices.data(), GL_STATIC_DRAW);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
     glEnableVertexAttribArray(0);
 

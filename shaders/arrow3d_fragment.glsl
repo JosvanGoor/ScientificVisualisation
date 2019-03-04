@@ -11,11 +11,7 @@ const vec3 light_col = vec3(1.0, 1.0, 1.0);
 
 void main()
 {
-    vec3 norm;
-    if (gl_FrontFacing)
-        norm = normalize(g_normal);
-    else    
-        norm = -normalize(g_normal);
+    vec3 norm = normalize(g_normal);
     vec3 light_dir = normalize(light_pos - g_position);
     float diff = max(dot(norm, light_dir), 0.0);
     vec3 diffuse = diff * light_col;

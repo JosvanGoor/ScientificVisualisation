@@ -6,8 +6,6 @@ ARROW3DRENDERMODEL	=	arrow3drendermodel/arrow3drendermodel1.o \
 						arrow3drendermodel/initialize.o \
 						arrow3drendermodel/render.o \
 						arrow3drendermodel/setarrowdim.o \
-						arrow3drendermodel/unitarrow.o \
-						arrow3drendermodel/unitarrownormals.o \
 						arrow3drendermodel/updatescalar.o \
 						arrow3drendermodel/updatevectors.o
 
@@ -30,6 +28,16 @@ GLYPH2DRENDERMODEL	=	glyph2drendermodel/glyph2drendermodel1.o \
 LINERENDERMODEL		=	linerendermodel/linerendermodel0.o \
 						linerendermodel/linerendermodel1.o \
 						linerendermodel/render.o
+
+OBJREADER			=	objreader/extracttriangles.o \
+						objreader/extractvertex.o \
+						objreader/objreader1.o \
+						objreader/parseface.o \
+						objreader/parseindex.o \
+						objreader/parsenormal.o \
+						objreader/parsevertex.o \
+						objreader/rawnormals.o \
+						objreader/rawvertices.o
 
 RENDERFONT			=	renderfont/buildmap.o \
 						renderfont/createstring.o \
@@ -101,6 +109,7 @@ OBJECTS				=	$(ARROW3DRENDERMODEL) \
 						$(GLAD) \
 						$(GLYPH2DRENDERMODEL) \
 						$(LINERENDERMODEL) \
+						$(OBJREADER) \
 						$(RENDERFONT) \
 						$(RENDERMODEL) \
 						$(SMOKERENDERMODEL) \
