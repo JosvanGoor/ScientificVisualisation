@@ -56,6 +56,7 @@ void main()
 
     mat3 norm_transform = transpose(inverse(mat3(M)));
     g_normal = norm_transform * normal;
+    g_position = (M * vec4(vertex, 1.0)).xyz;
 
     gl_Position = projection * M * vec4(vertex, 1.0);
 }
