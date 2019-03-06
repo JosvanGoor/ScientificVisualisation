@@ -36,10 +36,10 @@ class Arrow3dRenderModel
         void update_scalar(std::vector<double> const &scalar, size_t gridsize);
         void update_vectors(double *vecx, double *vecy, size_t gridsize);
         void update_vectors(std::vector<double> &vecx, std::vector<double> &vecy, size_t gridsize);
+        void initialize();
 
     private:
         void buffer_arrow();
-        void initialize();
 };
 
 #endif

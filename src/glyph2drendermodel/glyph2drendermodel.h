@@ -34,11 +34,11 @@ class Glyph2dRenderModel
         void update_scalar(std::vector<double> const &scalar, size_t gridsize);
         void update_vectors(double *vecx, double *vecy, size_t gridsize);
         void update_vectors(std::vector<double> &vecx, std::vector<double> &vecy, size_t gridsize);
+        void initialize();
 
     private:
         std::vector<float> unit_glyph();
 
-        void initialize();
 };
 
 #endif

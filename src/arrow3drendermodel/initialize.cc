@@ -1,12 +1,20 @@
 #include "arrow3drendermodel.ih"
+#include <iostream>
 
 void Arrow3dRenderModel::initialize()
 {
+
+    cout << "3dArrow\n";
+    cout.flush();
+
     d_program = build_program
     (
         "shaders/arrow3d_vertex.glsl",
         "shaders/arrow3d_fragment.glsl"
     );
+    cout << "3dArrow\n";
+    cout.flush();
+
     d_projection_location = glGetUniformLocation(d_program, "projection");
 
     ObjReader reader{"object_files/arrow.obj"};
@@ -56,4 +64,6 @@ void Arrow3dRenderModel::initialize()
     /* Cleanup */
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    set_arrow_dim(d_arrow_dim);
 }

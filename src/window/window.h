@@ -10,9 +10,11 @@
 #include "../linerendermodel/linerendermodel.h"
 #include "../smokerendermodel/smokerendermodel.h"
 #include "../simulation/simulation.h"
+#include "../arrow3drendermodel/arrow3drendermodel.h"
+#include "../glyph2drendermodel/glyph2drendermodel.h"
 #include <GLFW/glfw3.h>
 
-typedef Simulation<500> t_Simulation;
+typedef Simulation<600> t_Simulation;
 
 class Window
 {
@@ -32,9 +34,13 @@ class Window
     ColorMapping d_colormapping;
     ColorMode d_colormode;
     ScalingMode d_scalingmode;
+    GlyphMode d_glyphmode;
     
     t_Simulation d_simulation;
     std::unique_ptr<RenderModel> d_rendermodel;
+
+    Glyph2dRenderModel d_glyphs;
+    Arrow3dRenderModel d_arrows;
 
     public:
         Window(size_t width = 500, size_t height = 500);
@@ -53,6 +59,7 @@ class Window
         void set_colormapping(ColorMapping mapping);
         void set_colormode(ColorMode mode);
         void set_scalingmode(ScalingMode mode);
+        void set_glyphmode(GlyphMode mode);
         
         void print_shortcuts() const;
         std::string print_settings() const;
@@ -62,6 +69,8 @@ class Window
         void mouse_button_event(int button, int action, int mods);
         void mouse_moved(double xpos, double ypos);
         void framebuffer_resized(int width, int height);
+
+        void init_glyps();
 
     private:
         Window(Window const &copy) = delete;
@@ -74,6 +83,12 @@ class Window
         void paint_smoke();
         void paint_vectors();
 };
+
+inline void Window::init_glyps()
+{
+    d_glyphs.initialize();
+    d_arrows.initialize();
+}
 
 inline size_t Window::width() const
 {
@@ -118,6 +133,11 @@ inline void Window::set_colormode(ColorMode mode)
 inline void Window::set_scalingmode(ScalingMode mode)
 {
     d_scalingmode = mode;
+}
+
+inline void Window::set_glyphmode(GlyphMode mode)
+{
+    d_glyphmode = mode;
 }
 
 inline std::string Window::print_settings() const

@@ -1,4 +1,5 @@
 #include "arrow3drendermodel.ih"
+#include <iostream>
 
 Arrow3dRenderModel::Arrow3dRenderModel()
 :   d_arrow_dim(25),
@@ -11,6 +12,7 @@ Arrow3dRenderModel::Arrow3dRenderModel()
     d_rotation_buffer(0),
     d_scalar_buffer(0)
 {
+
     //* Gonna use some "magic" settings here
     //* They are sound, I calculated them on paper
     //* After these transforms the plane at 0,0,0 spans ~83x83 which
@@ -25,7 +27,4 @@ Arrow3dRenderModel::Arrow3dRenderModel()
         glm::vec3(0.0f, 1.0f, 0.0f) // it works
     );
     d_projection = projection * lookat;
-
-    initialize();
-    set_arrow_dim(d_arrow_dim);
 }

@@ -1,4 +1,5 @@
 #include "glyph2drendermodel.ih"
+#include<iostream>
 
 Glyph2dRenderModel::Glyph2dRenderModel()
 :   d_glyph_dim(50),
@@ -9,7 +10,5 @@ Glyph2dRenderModel::Glyph2dRenderModel()
     d_position_buffer(0),
     d_rotation_buffer(0),
     d_color_buffer(0)
-{
-    initialize();
-    set_glyph_dim(d_glyph_dim);
+{   
 }

@@ -10,6 +10,7 @@ void error_callback(int error, const char* description)
 int main()
 try
 {
+    
     omp_set_nested(1);
     glfwSetErrorCallback(error_callback);
 
@@ -19,10 +20,13 @@ try
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     Window window{1350, 850};
+    
     window.make_current();
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
         throw "Failed to initialize GLAD"s;
+
+    window.init_glyps();
 
     window.set_drawmode(DrawMode::SMOKE);
     
@@ -35,10 +39,6 @@ try
     chrono::time_point t1 = chrono::high_resolution_clock::now();
     double simulation_time = 0.0;
     double graphics_time = 0.0;
-
-    //TEST
-    Glyph2dRenderModel glyphs;
-    Arrow3dRenderModel arrows;
 
     #pragma omp parallel
     {
@@ -68,9 +68,6 @@ try
                 window.repaint();
                 
                 auto &sim = window.simulation();
-                arrows.update_vectors(sim.vfield_x(), sim.vfield_y(), sim.gridsize());
-                arrows.update_scalar(sim.rho(), sim.gridsize());
-                arrows.render();
 
                 font.set_size(window.width(), window.height());
                 font.update_string(status, window.print_settings());

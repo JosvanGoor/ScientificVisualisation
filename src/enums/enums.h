@@ -41,6 +41,15 @@ enum class ScalingMode
 };
 std::string scalingmode_string(ScalingMode mode);
 
+enum class GlyphMode
+{
+    NONE,
+    GLYPH,
+    ARROW,
+    MODULO_VALUE
+};
+std::string glyphmode_string(GlyphMode mode);
+
 /* Rotates all enum values between 0 and modulo_value */
 template <typename Enum>
 Enum rotate_enum(Enum val)

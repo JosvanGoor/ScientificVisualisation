@@ -13,8 +13,10 @@ Window::Window(size_t width, size_t height)
     d_colormapping(ColorMapping::DUTCH),
     d_colormode(ColorMode::DENSITY),
     d_scalingmode(ScalingMode::STATIC),
+    d_glyphmode(GlyphMode::NONE),
     d_simulation(),
-    d_rendermodel()
+    d_rendermodel(),
+    d_arrows()
 {
     d_window = glfwCreateWindow
     (

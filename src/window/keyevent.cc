@@ -33,6 +33,12 @@ void Window::key_event(int key, int scancode, int action, int mods)
             set_scalingmode(rotate_enum(d_scalingmode));
         break;
 
+        case GLFW_KEY_G:
+            cout <<"test\n";
+            set_glyphmode(rotate_enum(d_glyphmode));
+            cout << glyphmode_string(d_glyphmode) << '\n';
+        break;
+
         case GLFW_KEY_MINUS:
             d_min -= 0.01;
         break;

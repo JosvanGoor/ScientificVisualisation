@@ -46,5 +46,7 @@ void Glyph2dRenderModel::initialize()
 
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    set_glyph_dim(d_glyph_dim);
 }
 
