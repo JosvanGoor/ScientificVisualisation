@@ -22,19 +22,26 @@ void Window::paint_smoke()
     switch (d_colormode)
     {
         case ColorMode::DENSITY:
-            store.reserve(d_simulation.rho().size());
+            store.resize(d_simulation.rho().size(),0);
             std::copy(d_simulation.rho().begin(), d_simulation.rho().end(), store.begin());
             break;
         case ColorMode::VELOCITY:
-            store.reserve(d_simulation.gridsize() * 2 * (d_simulation.gridsize() / 2 + 1));
-            std::transform(d_simulation.vfield_x(),d_simulation.vfield_x() + d_simulation.gridsize() * 2 * (d_simulation.gridsize() / 2 + 1),
-                            d_simulation.vfield_y(), store.begin(), length);
+            store.resize(d_simulation.gridsize() * 2 * (d_simulation.gridsize() / 2 + 1),0);
+            if (false)
+                std::transform(d_simulation.vfield_x(),d_simulation.vfield_x() + d_simulation.gridsize() * 2 * (d_simulation.gridsize() / 2 + 1),
+                                d_simulation.vfield_y(), store.begin(), length);
+            else
+                divergence<double *>(d_simulation.vfield_x(), d_simulation.vfield_y(), store);
             break;
         case ColorMode::FORCE:
-            store.reserve(d_simulation.force_x().size());
-            std::transform(d_simulation.force_x().begin(),d_simulation.force_x().end(),
-                            d_simulation.force_y().begin(), store.begin(), length);
+            store.resize(d_simulation.force_x().size(),0);
+            if (false)
+                std::transform(d_simulation.force_x().begin(),d_simulation.force_x().end(),
+                                d_simulation.force_y().begin(), store.begin(), length);
+            else
+                divergence<vector<double>>(d_simulation.force_x(), d_simulation.force_y(), store);
             break;
+            
         default:
             throw "Illegal colormode"s;
     }

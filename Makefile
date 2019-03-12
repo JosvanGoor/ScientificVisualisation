@@ -103,7 +103,7 @@ WINDOW				=	window/framebufferresized.o \
 						window/setdrawmode.o \
 						window/setinputcallbacks.o \
 						window/window0.o \
-						window/window1.o
+						window/window1.o 
 
 OBJECTS				=	$(ARROW3DRENDERMODEL) \
 						$(ENUMS) \

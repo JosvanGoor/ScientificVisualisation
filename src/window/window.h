@@ -81,8 +81,13 @@ class Window
         void initialize_smoke_render();
 
         void paint_smoke();
+
+        template <typename T>
+        void divergence(T vecX, T vecY, vector<double> &store);
         void paint_vectors();
 };
+
+#include "divergence.f"
 
 inline void Window::init_glyps()
 {

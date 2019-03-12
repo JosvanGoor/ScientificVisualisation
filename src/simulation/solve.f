@@ -54,11 +54,11 @@ void Simulation<Size>::solve()
                 y0 = Size * (yval - d_timestep * d_vfield0_y[pos]) - 0.5f;
                 i0 = clamp(x0);
                 s = x0 - i0;
-                i0 = (i0 + Size) % Size; 
+                i0 = ((i0 % Size) + Size) % Size; 
                 i1 = (i0 + 1) % Size;
                 j0 = clamp(y0);
                 t = y0 - j0;
-                j0 = (j0 + Size) % Size; 
+                j0 = ((j0 % Size) + Size) % Size; 
                 j1 = (j0 + 1) % Size;
 
                 pos00 = i0 + Size * j0;
@@ -88,9 +88,15 @@ void Simulation<Size>::solve()
             size_t j2 = Size * jdx;
             size_t j1 = (Size + 2) * jdx;
 
-            //Saves approx 1ms
-            std::copy(d_vfield_x + j2, d_vfield_x + j2 + Size, d_vfield0_x + j1);
-            std::copy(d_vfield_y + j2, d_vfield_y + j2 + Size, d_vfield0_y + j1);
+            for (int idx = 0; idx != Size; ++idx)
+            {
+                d_vfield0_x[idx+j1] = d_vfield_x[idx+j2]; 
+                d_vfield0_y[idx+j1] = d_vfield_y[idx+j2];
+            }
+
+            // //Saves approx 1ms
+            // std::copy(d_vfield_x + j2, d_vfield_x + j2 + Size, d_vfield0_x + j1);
+            // std::copy(d_vfield_y + j2, d_vfield_y + j2 + Size, d_vfield0_y + j1);
         }
 
         // if (omp_get_thread_num() == 0)

@@ -18,13 +18,13 @@ void Simulation<Size>::diffuse_matter()
 
             int i0 = clamp(x0);
             double s = x0 - i0;
-            i0 = (i0 + Size) % Size; 
-            int i1 = (i0 + 1) % Size;
+            i0 = ((i0 % Size) + Size) % Size; 
+            int i1 = ((i0 % Size) + 1) % Size;
 
             int j0 = clamp(y0);
             double t = y0 - j0;
-            j0 = (j0 + Size) % Size; 
-            int j1 = (j0 + 1) % Size;
+            j0 = ((j0 % Size) + Size) % Size; 
+            int j1 = ((j0 % Size) + 1) % Size;
 
             size_t pos00 = i0 + Size * j0;
             size_t pos01 = i0 + Size * j1;
