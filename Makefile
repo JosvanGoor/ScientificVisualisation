@@ -88,6 +88,7 @@ UTILITY				=	utility/buildprogram.o \
 						utility/clamp.o \
 						utility/compileshader.o \
 						utility/linkprogram.o \
+						utility/linterp.o \
 						utility/loadtexture.o \
 						utility/readfile.o
 

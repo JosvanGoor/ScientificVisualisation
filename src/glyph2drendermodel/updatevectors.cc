@@ -20,7 +20,7 @@ void Glyph2dRenderModel::update_vectors(double *vecx, double *vecy, size_t grids
         
             size_t xpos = static_cast<size_t>(approx_x * gridsize);
             size_t index = (ypos * gridsize) + xpos;
-        
+
             float angle = atan2(vecy[index], vecx[index]);
             angles.push_back(angle);
         }
