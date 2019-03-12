@@ -19,8 +19,13 @@ void Glyph2dRenderModel::update_scalar(vector<double> const &scalar, size_t grid
         
             size_t xpos = static_cast<size_t>(approx_x * gridsize);
             size_t index = (ypos * gridsize) + xpos;
-        
-            colors.push_back(scalar[index]);
+
+
+
+            colors.push_back
+            (
+                linterp(const_cast<double *>(scalar.data()), d_glyph_dim/ numglyphs, gridsize, xpos, ypos)
+            );
         }
     }
 

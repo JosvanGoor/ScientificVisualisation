@@ -19,6 +19,8 @@ Num radians(Num deg);
 template <typename Num>
 Num degrees(Num rad);
 
+float linterp(double *data, size_t range, size_t gridsize, size_t pivx, size_t pivy);
+
 /*
     Opengl
 */

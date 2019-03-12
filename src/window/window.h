@@ -156,6 +156,9 @@ inline std::string Window::print_settings() const
     ss        << "}:"
               << " " << colormapping_string(d_colormapping) << " -> "
               << colormode_string(d_colormode);
+    
+    if (d_glyphmode != GlyphMode::NONE)
+        ss << " [" << glyphmode_string(d_glyphmode) << "]";
 
     return ss.str();
 }
