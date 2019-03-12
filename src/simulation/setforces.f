@@ -24,10 +24,10 @@ void Simulation<Size>::set_forces()
                         });}
     }
 
-    #pragma omp for simd
-    for(size_t i = 0; i < Size*Size; ++i)
-    {
-        d_vfield0_x[i] = d_force_x[i];
-        d_vfield0_y[i] = d_force_y[i];
-    }
+    // #pragma omp for simd
+    // for(size_t i = 0; i < Size*Size; ++i)
+    // {
+    //     d_vfield0_x[i] = d_force_x[i];
+    //     d_vfield0_y[i] = d_force_y[i];
+    // }
 }

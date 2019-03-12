@@ -21,10 +21,10 @@ void Simulation<Size>::solve()
         #pragma omp for simd
         for (int idx = 0; idx < gridsize_sq; ++idx)
         {
-            d_vfield_x[idx] += d_timestep * d_vfield0_x[idx];
+            d_vfield_x[idx] += d_timestep * d_force_x[idx];
             d_vfield0_x[idx] = d_vfield_x[idx];
 
-            d_vfield_y[idx] += d_timestep * d_vfield0_y[idx];
+            d_vfield_y[idx] += d_timestep * d_force_y[idx];
             d_vfield0_y[idx] = d_vfield_y[idx];
         }
 
@@ -37,21 +37,21 @@ void Simulation<Size>::solve()
         // solve.cc 12
         double yval, xval, x0, y0, s, t;
         int j1, i0, i1, j0;
-        size_t pos, pos00, pos01, pos10, pos11;
+        size_t pos, pos00, pos01, pos10, pos11, jOff;
         #pragma omp for
         for (int jdx = 0; jdx < Size; ++jdx)
         {
             // deze zat in de for, eruitgehaald.
             yval = (0.5 / Size) + jdx * (1.0 / Size);
 
-            j1 = Size * jdx;
+            jOff = Size * jdx;
             xval = (0.5 / Size);
             for (int idx = 0; idx != Size; ++idx)
             {
-                pos = idx + j1;
+                pos = idx + jOff;
 
-                x0 = Size * (xval - d_timestep * d_vfield0_x[pos]) - 0.5f;
-                y0 = Size * (yval - d_timestep * d_vfield0_y[pos]) - 0.5f;
+                x0 = Size * (xval - d_timestep * d_vfield0_x[pos]) - 0.5;
+                y0 = Size * (yval - d_timestep * d_vfield0_y[pos]) - 0.5;
                 i0 = clamp(x0);
                 s = x0 - i0;
                 i0 = ((i0 % Size) + Size) % Size; 
@@ -71,7 +71,7 @@ void Simulation<Size>::solve()
                 // solve.cc 24
                 d_vfield_y[pos] = (1 - s) * ((1 - t) * d_vfield0_y[pos00] + t * d_vfield0_y[pos01])
                     + s * ((1 - t) * d_vfield0_y[pos10] + t * d_vfield0_y[pos11]);
-                    xval += (1.0 / Size);
+                xval += (1.0 / Size);
             }
         }
 
@@ -85,8 +85,8 @@ void Simulation<Size>::solve()
         #pragma omp for
         for (int jdx = 0; jdx < Size; ++jdx)
         {
-            size_t j2 = Size * jdx;
             size_t j1 = (Size + 2) * jdx;
+            size_t j2 = Size * jdx;
 
             for (int idx = 0; idx != Size; ++idx)
             {
