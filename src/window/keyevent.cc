@@ -21,6 +21,10 @@ void Window::key_event(int key, int scancode, int action, int mods)
             set_colormapping(rotate_enum(d_colormapping));
         break;
 
+        case GLFW_KEY_D:
+            set_divmode(rotate_enum(d_divmode));
+        break;
+
         case GLFW_KEY_R:
             set_drawmode(rotate_enum(d_drawmode));
         break;

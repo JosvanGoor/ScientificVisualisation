@@ -35,6 +35,7 @@ class Window
     ColorMode d_colormode;
     ScalingMode d_scalingmode;
     GlyphMode d_glyphmode;
+    DivMode d_divmode;
     
     t_Simulation d_simulation;
     std::unique_ptr<RenderModel> d_rendermodel;
@@ -60,6 +61,7 @@ class Window
         void set_colormode(ColorMode mode);
         void set_scalingmode(ScalingMode mode);
         void set_glyphmode(GlyphMode mode);
+        void set_divmode(DivMode mode);
         
         void print_shortcuts() const;
         std::string print_settings() const;
@@ -143,6 +145,11 @@ inline void Window::set_scalingmode(ScalingMode mode)
 inline void Window::set_glyphmode(GlyphMode mode)
 {
     d_glyphmode = mode;
+}
+
+inline void Window::set_divmode(DivMode mode)
+{
+    d_divmode = mode;
 }
 
 inline std::string Window::print_settings() const

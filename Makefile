@@ -13,6 +13,7 @@ ENUMS				=	enums/colormappingstring.o \
 						enums/colormodestring.o \
 						enums/drawmodestring.o \
 						enums/scalingmodestring.o\
+						enums/divmodestring.o\
 						enums/glyphmodestring.o
 
 GLAD				=	glad/glad.o \

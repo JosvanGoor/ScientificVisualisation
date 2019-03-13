@@ -27,7 +27,7 @@ void Window::paint_smoke()
             break;
         case ColorMode::VELOCITY:
             store.resize(d_simulation.gridsize() * 2 * (d_simulation.gridsize() / 2 + 1),0);
-            if (false)
+            if (d_divmode == DivMode::OFF)
                 std::transform(d_simulation.vfield_x(),d_simulation.vfield_x() + d_simulation.gridsize() * 2 * (d_simulation.gridsize() / 2 + 1),
                                 d_simulation.vfield_y(), store.begin(), length);
             else
@@ -35,7 +35,7 @@ void Window::paint_smoke()
             break;
         case ColorMode::FORCE:
             store.resize(d_simulation.force_x().size(),0);
-            if (false)
+            if (d_divmode == DivMode::OFF)
                 std::transform(d_simulation.force_x().begin(),d_simulation.force_x().end(),
                                 d_simulation.force_y().begin(), store.begin(), length);
             else

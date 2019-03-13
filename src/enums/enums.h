@@ -50,6 +50,14 @@ enum class GlyphMode
 };
 std::string glyphmode_string(GlyphMode mode);
 
+enum class DivMode
+{
+    OFF,
+    ON,
+    MODULO_VALUE
+};
+std::string divmode_string(DivMode mode);
+
 /* Rotates all enum values between 0 and modulo_value */
 template <typename Enum>
 Enum rotate_enum(Enum val)
