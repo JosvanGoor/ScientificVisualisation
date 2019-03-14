@@ -43,7 +43,7 @@ class Window
 
     Glyph2dRenderModel d_glyphs;
     Arrow3dRenderModel d_arrows;
-    // Isoline2dRenderModel d_iso2d;
+    Isoline2dRenderModel d_iso2d;
 
     vector<double> store;
     vector<float> lines;
