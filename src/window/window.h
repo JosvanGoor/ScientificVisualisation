@@ -43,6 +43,8 @@ class Window
     Glyph2dRenderModel d_glyphs;
     Arrow3dRenderModel d_arrows;
 
+    vector<double> store;
+
     public:
         Window(size_t width = 500, size_t height = 500);
         ~Window();
@@ -78,6 +80,8 @@ class Window
         Window(Window const &copy) = delete;
         Window &operator=(Window const &copy) = delete;
 
+        void calcStore();
+
         void set_input_callbacks();
 
         void initialize_smoke_render();
@@ -85,7 +89,7 @@ class Window
         void paint_smoke();
 
         template <typename T>
-        void divergence(T vecX, T vecY, vector<double> &store);
+        void divergence(T vecX, T vecY);
         void paint_vectors();
 };
 

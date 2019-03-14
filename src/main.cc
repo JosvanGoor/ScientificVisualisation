@@ -64,9 +64,13 @@ try
 
                 simulation_time += chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count();
                 chrono::time_point t1 = chrono::high_resolution_clock::now();
-
-                window.repaint();
-                
+            }
+            
+            window.repaint();
+            
+            #pragma omp barrier
+            if (omp_get_thread_num() == 0)
+            {    
                 auto &sim = window.simulation();
 
                 font.set_size(window.width(), window.height());

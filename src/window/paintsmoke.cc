@@ -5,46 +5,12 @@
 #include <iostream>
 #include <cmath>
 
-double length(double a, double b)
-{   
-    return std::sqrt(a * a + b * b);
-}
-
 void Window::paint_smoke()
 {
     vector<float> colors;
     colors.resize(2 * d_simulation.gridsize() * d_simulation.gridsize(), 0);
     float v_min = std::numeric_limits<float>::max();
     float v_max = std::numeric_limits<float>::min();
-    vector<double> store;
-
-    // chrono::time_point t1 = chrono::high_resolution_clock::now();
-    switch (d_colormode)
-    {
-        case ColorMode::DENSITY:
-            store.resize(d_simulation.rho().size(),0);
-            std::copy(d_simulation.rho().begin(), d_simulation.rho().end(), store.begin());
-            break;
-        case ColorMode::VELOCITY:
-            store.resize(d_simulation.gridsize() * 2 * (d_simulation.gridsize() / 2 + 1),0);
-            if (d_divmode == DivMode::OFF)
-                std::transform(d_simulation.vfield_x(),d_simulation.vfield_x() + d_simulation.gridsize() * 2 * (d_simulation.gridsize() / 2 + 1),
-                                d_simulation.vfield_y(), store.begin(), length);
-            else
-                divergence<double *>(d_simulation.vfield_x(), d_simulation.vfield_y(), store);
-            break;
-        case ColorMode::FORCE:
-            store.resize(d_simulation.force_x().size(),0);
-            if (d_divmode == DivMode::OFF)
-                std::transform(d_simulation.force_x().begin(),d_simulation.force_x().end(),
-                                d_simulation.force_y().begin(), store.begin(), length);
-            else
-                divergence<vector<double>>(d_simulation.force_x(), d_simulation.force_y(), store);
-            break;
-            
-        default:
-            throw "Illegal colormode"s;
-    }
 
     // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // deze kan weg denk ik
 

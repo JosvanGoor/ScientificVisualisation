@@ -87,16 +87,9 @@ void Simulation<Size>::solve()
         {
             size_t j1 = (Size + 2) * jdx;
             size_t j2 = Size * jdx;
-
-            for (int idx = 0; idx != Size; ++idx)
-            {
-                d_vfield0_x[idx+j1] = d_vfield_x[idx+j2]; 
-                d_vfield0_y[idx+j1] = d_vfield_y[idx+j2];
-            }
-
-            // //Saves approx 1ms
-            // std::copy(d_vfield_x + j2, d_vfield_x + j2 + Size, d_vfield0_x + j1);
-            // std::copy(d_vfield_y + j2, d_vfield_y + j2 + Size, d_vfield0_y + j1);
+            
+            std::copy(d_vfield_x + j2, d_vfield_x + j2 + Size, d_vfield0_x + j1);
+            std::copy(d_vfield_y + j2, d_vfield_y + j2 + Size, d_vfield0_y + j1);
         }
 
         // if (omp_get_thread_num() == 0)

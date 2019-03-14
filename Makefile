@@ -104,6 +104,7 @@ WINDOW				=	window/framebufferresized.o \
 						window/repaint.o \
 						window/setdrawmode.o \
 						window/setinputcallbacks.o \
+						window/calcStore.o \
 						window/window0.o \
 						window/window1.o 
 
