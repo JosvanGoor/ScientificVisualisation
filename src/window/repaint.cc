@@ -19,7 +19,7 @@ void Window::repaint()
     
     #pragma omp barrier
 
-    calc_lines(0.5);
+    calc_lines(0.3);
 
     #pragma omp barrier
     if (omp_get_thread_num() == 0)
