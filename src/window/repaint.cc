@@ -1,5 +1,6 @@
 #include "window.ih"
 #include <iostream>
+#include <chrono>
 
 void Window::repaint()
 {
