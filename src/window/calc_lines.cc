@@ -9,7 +9,7 @@ void Window::calc_lines(double iso)
 {
     double size = 1.0 / d_simulation.gridsize();
     vector<double> &rho = d_simulation.rho();
-    double x1, y1, x2, y2;
+    double x1, y1, x2, y2, x3, y3, x4, y4;
 
     #pragma omp for
     for (size_t jdx = 0; jdx < d_simulation.gridsize() - 1; ++jdx)
@@ -89,6 +89,14 @@ void Window::calc_lines(double iso)
                     y2 = size * (jdx + interpolate(iso, rho[index + 1], rho[index + d_simulation.gridsize() + 1]));
                     break;
 
+                case 10: //Combination of 14 and 11  
+                    //left
+                    x3 = idx * size;
+                    y3 = size * (jdx + interpolate(iso, rho[index], rho[index + d_simulation.gridsize()]));
+                    //bottom
+                    y4 = (jdx + 1) * size;
+                    x4 = size * (idx + interpolate(iso, rho[index + d_simulation.gridsize()], rho[index + d_simulation.gridsize() + 1]));
+                
                 case 11: //top right below iso
                     //top
                     x1 = size * (idx + interpolate(iso, rho[index], rho[index + 1]));
@@ -97,13 +105,7 @@ void Window::calc_lines(double iso)
                     x2 = (idx + 1) * size;
                     y2 = size * (jdx + interpolate(iso, rho[index + 1], rho[index + d_simulation.gridsize() + 1]));
                     break;
-                
-                case 5:     
-                    break;
 
-                case 10:       
-                    break;
-                
                 case 6:  //right 2 are above iso
                     //top
                     x1 = size * (idx + interpolate(iso, rho[index], rho[index + 1]));
@@ -119,6 +121,16 @@ void Window::calc_lines(double iso)
                     x2 = size * (idx + interpolate(iso, rho[index + d_simulation.gridsize()], rho[index + d_simulation.gridsize() + 1]));
                     y2 = (jdx + 1) * size;
                     break;
+
+                //combination of 13 and 7
+                case 5:    
+                    //right
+                    x3 = (idx + 1) * size;
+                    y3 = size * (jdx + interpolate(iso, rho[index+1], rho[index + d_simulation.gridsize()+1]));
+                    //bottom
+                    y4 = (jdx + 1) * size;
+                    x4 = size * (idx + interpolate(iso, rho[index + d_simulation.gridsize()], rho[index + d_simulation.gridsize() + 1])); 
+                    
                 
                 case 7:  //top left below iso
                     //left
@@ -147,22 +159,25 @@ void Window::calc_lines(double iso)
             {
                 #pragma omp critical
                 {
-                    if(x1 < 0.001)
-                        cout << type << ", " << x1 << '\n';
-                    if(x2 < 0.001)
-                        cout << "x2: " << type << ", " << x2 << '\n';
-                    if(x1 > 0.999)
-                        cout << type << ", " << x1 << '\n';
-                    if(x2 > 0.999)
-                        cout << "x2: " << type << ", " << x2 << '\n';
-
-                    if(abs(x2 - x1) > 2 * size)
-                        cout << type<< ", " << idx << ", " << x1 << ' ' << x2 << '\n';
-                    // cout << x1 << ", " << y1 << ", " << x2 << ", " << y2 << '\n';
                     lines.push_back(x1);
                     lines.push_back(y1);
                     lines.push_back(x2);
                     lines.push_back(y2);
+                }
+            }    
+
+            if (type == 5 || type == 10)
+            {
+                #pragma omp critical
+                {
+                    lines.push_back(x1);
+                    lines.push_back(y1);
+                    lines.push_back(x2);
+                    lines.push_back(y2);
+                    lines.push_back(x3);
+                    lines.push_back(y3);
+                    lines.push_back(x4);
+                    lines.push_back(y4);
                 }
             }
         }
