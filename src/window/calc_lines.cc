@@ -88,31 +88,48 @@ void Window::calc_lines(double iso)
                 case 10:       
                     break;
                 
-                case 6:   
+                case 6:  //right 2 are above iso
                     x1 = size * (idx + interpolate(iso, rho[index], rho[index + 1]));
                     y1 = jdx * size;
                     x2 = size * (idx + interpolate(iso, rho[index+ d_simulation.gridsize()], rho[index + d_simulation.gridsize() + 1]));
                     y2 = (jdx + 1) * size;
                     break;
 
-                case 9:       
+                case 9:  //left 2 are above iso
                     x1 = size * (idx + 1 - interpolate(iso, rho[index], rho[index + 1]));
                     y1 = jdx * size;
                     x2 = size * (idx + 1 - interpolate(iso, rho[index+ d_simulation.gridsize()], rho[index + d_simulation.gridsize() + 1]));
                     y2 = (jdx + 1) * size;
                     break;
                 
-                case 7:     
+                case 7:  //top left below iso
                     x1 = size * idx;
- 
+                    y1 = size * (jdx + interpolate(iso, rho[index], rho[index + d_simulation.gridsize()]));
                     y2 = size * jdx;
+                    x2 = size * (jdx + 1 - interpolate(iso, rho[idx], rho[idx + 1]));
                     break;
 
                 case 8:       
+                    x1 = size * idx;
+                    y1 = size * (jdx + 1 - interpolate(iso, rho[index], rho[index + d_simulation.gridsize()]));
+                    y2 = size * jdx;
+                    x2 = size * (jdx + interpolate(iso, rho[idx], rho[idx + 1]));
                     break;
 
                 default:
                     break;
+            }
+
+            if (type != 0)
+            {
+                #pragma omp critical
+                {
+                    // cout << x1 << ", " << y1 << ", " << x2 << ", " << y2 << '\n';
+                    lines.push_back(x1);
+                    lines.push_back(y1);
+                    lines.push_back(x2);
+                    lines.push_back(y2);
+                }
             }
         }
     }

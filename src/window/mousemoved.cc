@@ -7,6 +7,14 @@ void Window::mouse_moved(double xpos, double ypos)
     if (!d_mouse_dragging)
         return;
 
+    double fix_x = d_width / static_cast<double>(d_simulation.gridsize() + 1) + 5;
+    double fix_y = d_height / static_cast<double>(d_simulation.gridsize() + 1) + 5;
+    
+    xpos = xpos > fix_x ? xpos : fix_x;
+    xpos = xpos < d_width - fix_x ? xpos : fix_x;
+    ypos = ypos > fix_y ? ypos : fix_y;
+    ypos = ypos < d_height - fix_y ? ypos : fix_y;
+
     int xi = clamp((d_simulation.gridsize() + 1) * (xpos / d_width));
     int yi = clamp((d_simulation.gridsize() + 1) * ((d_height - ypos) / d_height));
 

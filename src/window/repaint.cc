@@ -13,9 +13,13 @@ void Window::repaint()
     if (omp_get_thread_num() == 0)
     {
         d_rendermodel->set_colormapping(static_cast<int>(d_colormapping));
+        lines.resize(0);
     }
-
     calcStore();
+    
+    #pragma omp barrier
+
+    calc_lines(0.5);
 
     #pragma omp barrier
     if (omp_get_thread_num() == 0)
@@ -61,7 +65,11 @@ void Window::repaint()
         SmokeRenderModel *mdl = dynamic_cast<SmokeRenderModel*>(d_rendermodel.get());
         if (mdl)
             mdl->render_bar();
+    
+        d_iso2d.update_lines(lines);
     }
+
+
 
     //DO NOT ADD OMP BARRIER HERE!!!
 
