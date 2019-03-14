@@ -61,12 +61,26 @@ void Window::repaint()
             default:
                 throw "Wtf this is impossible..."s;
         }
+        
+        d_iso2d.update_lines(lines);
+        switch(d_isomode)
+        {
+            case IsolineMode::ISO2D:
+                d_iso2d.render();
+            break;
+
+            case IsolineMode::OFF:
+            break;
+
+            default:
+                throw "Wtf this is impossible..."s;
+        }
 
         SmokeRenderModel *mdl = dynamic_cast<SmokeRenderModel*>(d_rendermodel.get());
         if (mdl)
             mdl->render_bar();
     
-        d_iso2d.update_lines(lines);
+        
     }
 
 

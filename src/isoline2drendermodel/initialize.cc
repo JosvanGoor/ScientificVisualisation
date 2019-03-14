@@ -26,6 +26,6 @@ void Isoline2dRenderModel::initialize()
     glUseProgram(0);
 
     d_drawcount = 0;
-    set_size(100, 100); // dummy value
+    set_size(1, 1); // dummy value
     set_color(glm::vec3(0.0f, 0.0f, 0.0f));
 }

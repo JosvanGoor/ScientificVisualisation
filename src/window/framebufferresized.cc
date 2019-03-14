@@ -11,7 +11,7 @@ void Window::framebuffer_resized(int width, int height)
 
     glViewport(0, 0, width, height);
     
-    d_iso2d.set_size(width, height);
+    // d_iso2d.set_size(width, height);
 
     if (d_drawmode == DrawMode::SMOKE)
         initialize_smoke_render();
