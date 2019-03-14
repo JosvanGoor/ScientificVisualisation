@@ -15,7 +15,7 @@
 #include "../glyph2drendermodel/glyph2drendermodel.h"
 #include <GLFW/glfw3.h>
 
-typedef Simulation<600> t_Simulation;
+typedef Simulation<100> t_Simulation;
 
 class Window
 {

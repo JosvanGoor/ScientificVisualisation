@@ -26,32 +26,60 @@ void Window::calc_lines(double iso)
 
             switch (type)
             {
-                case 1:     
+                case 1:    //bottom left above iso
                     x1 = idx * size;
                     y1 = size * (jdx + interpolate(iso,rho[index], rho[index + d_simulation.gridsize()])) ;
                     y2 = (jdx + 1) * size;
-
+                    x2 = size * (idx + 1 - interpolate(iso,rho[index + d_simulation.gridsize() + 1] ,rho[index + d_simulation.gridsize()]));
                     break;
                 
-                case 14:       
+                case 14:   //bottom left below iso
+                    x1 = idx * size;
+                    y1 = size * (jdx + 1 - interpolate(iso,rho[index + d_simulation.gridsize()],rho[index])) ;
+                    y2 = (jdx + 1) * size;
+                    x2 = size * (idx + interpolate(iso, rho[index + d_simulation.gridsize()], rho[index + d_simulation.gridsize() + 1]));
                     break;
                 
-                case 2:     
+                case 2:     //bottom right above iso
+                    x1 = (idx + 1) * size;
+                    y1 = size * (jdx + interpolate(iso,rho[index + 1], rho[index + d_simulation.gridsize() + 1])) ;
+                    y2 = (jdx + 1) * size;
+                    x2 = size * (idx + interpolate(iso, rho[index + d_simulation.gridsize()], rho[index + d_simulation.gridsize() + 1]));
                     break;
 
-                case 13:       
+                case 13:   //bottom right below iso
+                    x1 = (idx + 1) * size;
+                    y1 = size * (jdx + 1 - interpolate(iso,rho[index + 1], rho[index + d_simulation.gridsize() + 1])) ;
+                    y2 = (jdx + 1) * size;
+                    x2 = size * (idx + 1 - interpolate(iso, rho[index + d_simulation.gridsize()], rho[index + d_simulation.gridsize() + 1]));
                     break;
                 
-                case 3:     
+                case 3:    //bottom 2 above iso
+                    x1 = idx * size;
+                    y1 = size * (jdx + interpolate(iso, rho[index], rho[index + d_simulation.gridsize()]));
+                    x2 = (idx + 1) * size;
+                    y2 = size * (jdx + interpolate(iso, rho[index + 1], rho[index + d_simulation.gridsize() + 1]));
                     break;
 
-                case 12:       
+                case 12:  //bottom 2 below iso
+                    x1 = idx * size;
+                    y1 = size * (jdx + 1 - interpolate(iso, rho[index], rho[index + d_simulation.gridsize()]));
+                    x2 = (idx + 1) * size;
+                    y2 = size * (jdx + 1 - interpolate(iso, rho[index + 1], rho[index + d_simulation.gridsize() + 1]));
                     break;
                 
-                case 4:     
+                case 4:  //top right above iso
+                    x1 = size * (idx + interpolate(iso, rho[index], rho[index + 1]));
+                    y1 = jdx * size;
+                    x2 = (idx + 1) * size;
+                    y2 = size * (jdx + 1 - interpolate(iso, rho[index + d_simulation.gridsize() + 1], rho[index + 1]));
                     break;
 
-                case 11:       
+                case 11: //top right below iso
+                    x1 = size * (idx + 1 - interpolate(iso, rho[index], rho[index + 1]));
+                    y1 = jdx * size;
+                    x2 = (idx + 1) * size;
+                    y2 = size * (jdx +interpolate(iso, rho[index + d_simulation.gridsize() + 1], rho[index + 1]));
                     break;
                 
                 case 5:     
@@ -60,13 +88,24 @@ void Window::calc_lines(double iso)
                 case 10:       
                     break;
                 
-                case 6:     
+                case 6:   
+                    x1 = size * (idx + interpolate(iso, rho[index], rho[index + 1]));
+                    y1 = jdx * size;
+                    x2 = size * (idx + interpolate(iso, rho[index+ d_simulation.gridsize()], rho[index + d_simulation.gridsize() + 1]));
+                    y2 = (jdx + 1) * size;
                     break;
 
                 case 9:       
+                    x1 = size * (idx + 1 - interpolate(iso, rho[index], rho[index + 1]));
+                    y1 = jdx * size;
+                    x2 = size * (idx + 1 - interpolate(iso, rho[index+ d_simulation.gridsize()], rho[index + d_simulation.gridsize() + 1]));
+                    y2 = (jdx + 1) * size;
                     break;
                 
                 case 7:     
+                    x1 = size * idx;
+ 
+                    y2 = size * jdx;
                     break;
 
                 case 8:       
