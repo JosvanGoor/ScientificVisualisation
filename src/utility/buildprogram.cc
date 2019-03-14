@@ -1,5 +1,7 @@
 #include "utility.ih"
 
+#include <iostream>
+
 GLuint build_program(string const &vfile, string const &ffile)
 {
     string vtext = read_file(vfile);

@@ -26,7 +26,7 @@ try
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
         throw "Failed to initialize GLAD"s;
 
-    window.init_glyps();
+    window.initialize();
 
     window.set_drawmode(DrawMode::SMOKE);
     

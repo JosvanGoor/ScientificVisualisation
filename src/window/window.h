@@ -41,9 +41,9 @@ class Window
     t_Simulation d_simulation;
     std::unique_ptr<RenderModel> d_rendermodel;
 
+    Isoline2dRenderModel d_iso2d;
     Glyph2dRenderModel d_glyphs;
     Arrow3dRenderModel d_arrows;
-    Isoline2dRenderModel d_iso2d;
 
     vector<double> store;
     vector<float> lines;
@@ -77,7 +77,7 @@ class Window
         void mouse_moved(double xpos, double ypos);
         void framebuffer_resized(int width, int height);
 
-        void init_glyps();
+        void initialize();
 
     private:
         Window(Window const &copy) = delete;
@@ -99,10 +99,11 @@ class Window
 
 #include "divergence.f"
 
-inline void Window::init_glyps()
+inline void Window::initialize()
 {
     d_glyphs.initialize();
     d_arrows.initialize();
+    d_iso2d.initialize();
 }
 
 inline size_t Window::width() const
