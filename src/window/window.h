@@ -37,6 +37,7 @@ class Window
     ScalingMode d_scalingmode;
     GlyphMode d_glyphmode;
     DivMode d_divmode;
+    IsolineMode d_isomode;
     
     t_Simulation d_simulation;
     std::unique_ptr<RenderModel> d_rendermodel;
@@ -66,7 +67,8 @@ class Window
         void set_scalingmode(ScalingMode mode);
         void set_glyphmode(GlyphMode mode);
         void set_divmode(DivMode mode);
-        
+        void set_isomode(IsolineMode mode);
+
         void print_shortcuts() const;
         std::string print_settings() const;
 
@@ -159,6 +161,11 @@ inline void Window::set_divmode(DivMode mode)
     d_divmode = mode;
 }
 
+inline void Window::set_isomode(IsolineMode mode)
+{
+    d_isomode = mode;
+}
+
 inline std::string Window::print_settings() const
 {
     std::stringstream ss;
@@ -171,8 +178,12 @@ inline std::string Window::print_settings() const
               << " " << colormapping_string(d_colormapping) << " -> "
               << colormode_string(d_colormode);
     
+    ss << "\nOverlays: [ ";
     if (d_glyphmode != GlyphMode::NONE)
-        ss << " [" << glyphmode_string(d_glyphmode) << "]";
+        ss << glyphmode_string(d_glyphmode) << " ";
+    if (d_isomode != IsolineMode::OFF)
+        ss << isoline_string(d_isomode) << " ";
+    ss << "]";
 
     return ss.str();
 }
