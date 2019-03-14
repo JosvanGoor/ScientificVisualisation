@@ -17,6 +17,7 @@ void Window::paint_smoke()
     size_t pushloc = 0;
     for (int jdx = 0; jdx < (d_simulation.gridsize() - 1); ++jdx)
     {
+
         int index = jdx * d_simulation.gridsize();
         colors[pushloc++] = (store[index]);
         
