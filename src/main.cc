@@ -76,8 +76,6 @@ try
                 font.set_size(window.width(), window.height());
                 font.update_string(status, window.print_settings());
                 font.render_string_outlined(status, glm::vec2{10.0f, 5.0f});
-
-                graphics_time += chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count();
                 
                 if (iterations == 100)
                 {
@@ -90,6 +88,7 @@ try
                     iterations = 0;
                 }
                 window.swap_buffers();
+                graphics_time += chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count();
                 glfwPollEvents();
             }
             

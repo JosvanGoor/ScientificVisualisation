@@ -57,6 +57,10 @@ void Window::repaint()
             default:
                 throw "Wtf this is impossible..."s;
         }
+
+        SmokeRenderModel *mdl = dynamic_cast<SmokeRenderModel*>(d_rendermodel.get());
+        if (mdl)
+            mdl->render_bar();
     }
 
     //DO NOT ADD OMP BARRIER HERE!!!

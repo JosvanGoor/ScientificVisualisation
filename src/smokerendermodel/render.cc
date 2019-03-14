@@ -15,6 +15,4 @@ void SmokeRenderModel::render()
     {
         glDrawArrays(GL_TRIANGLE_STRIP, idx * d_drawcount * 2, d_drawcount * 2);
     }
-
-    render_bar();
 }
