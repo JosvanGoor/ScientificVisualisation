@@ -27,6 +27,10 @@ GLYPH2DRENDERMODEL	=	glyph2drendermodel/glyph2drendermodel1.o \
 						glyph2drendermodel/updatescalar.o \
 						glyph2drendermodel/updatevectors.o
 
+ISOLINE2DRENDERMODEL=	isoline2drendermodel/isoline2drendermodel1.o \
+						isoline2drendermodel/render.o \
+						isoline2drendermodel/updatelines.o
+
 LINERENDERMODEL		=	linerendermodel/linerendermodel0.o \
 						linerendermodel/linerendermodel1.o \
 						linerendermodel/render.o
@@ -112,6 +116,7 @@ OBJECTS				=	$(ARROW3DRENDERMODEL) \
 						$(ENUMS) \
 						$(GLAD) \
 						$(GLYPH2DRENDERMODEL) \
+						$(ISOLINE2DRENDERMODEL) \
 						$(LINERENDERMODEL) \
 						$(OBJREADER) \
 						$(RENDERFONT) \

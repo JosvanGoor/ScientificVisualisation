@@ -7,6 +7,7 @@
 #include <sstream>
 
 #include "../enums/enums.h"
+#include "../isoline2drendermodel/isoline2drendermodel.h"
 #include "../linerendermodel/linerendermodel.h"
 #include "../smokerendermodel/smokerendermodel.h"
 #include "../simulation/simulation.h"
@@ -42,6 +43,7 @@ class Window
 
     Glyph2dRenderModel d_glyphs;
     Arrow3dRenderModel d_arrows;
+    // Isoline2dRenderModel d_iso2d;
 
     vector<double> store;
 
