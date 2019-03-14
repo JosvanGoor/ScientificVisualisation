@@ -63,7 +63,7 @@ try
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
                 simulation_time += chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count();
-                chrono::time_point t1 = chrono::high_resolution_clock::now();
+                t1 = chrono::high_resolution_clock::now();
             }
             
             window.repaint();

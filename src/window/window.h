@@ -44,6 +44,7 @@ class Window
     Arrow3dRenderModel d_arrows;
 
     vector<double> store;
+    vector<float> lines;
 
     public:
         Window(size_t width = 500, size_t height = 500);
@@ -81,6 +82,7 @@ class Window
         Window &operator=(Window const &copy) = delete;
 
         void calcStore();
+        void calc_lines(double iso);
 
         void set_input_callbacks();
 
