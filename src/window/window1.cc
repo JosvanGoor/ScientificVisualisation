@@ -15,6 +15,7 @@ Window::Window(size_t width, size_t height)
     d_scalingmode(ScalingMode::STATIC),
     d_glyphmode(GlyphMode::NONE),
     d_divmode(DivMode::OFF),
+    d_isomode(IsolineMode::OFF),
     d_simulation(),
     d_rendermodel(),
     d_arrows()

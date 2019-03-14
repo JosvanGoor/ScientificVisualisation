@@ -73,14 +73,14 @@ void Window::repaint()
             break;
 
             default:
-                throw "Wtf this is impossible..."s;
+                throw "Wtf this is impossible...";
         }
 
         SmokeRenderModel *mdl = dynamic_cast<SmokeRenderModel*>(d_rendermodel.get());
         if (mdl)
             mdl->render_bar();
     
-        
+
     }
 
 
