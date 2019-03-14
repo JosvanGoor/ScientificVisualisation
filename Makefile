@@ -27,7 +27,8 @@ GLYPH2DRENDERMODEL	=	glyph2drendermodel/glyph2drendermodel1.o \
 						glyph2drendermodel/updatescalar.o \
 						glyph2drendermodel/updatevectors.o
 
-ISOLINE2DRENDERMODEL=	isoline2drendermodel/isoline2drendermodel1.o \
+ISOLINE2DRENDERMODEL=	isoline2drendermodel/initialize.o \
+						isoline2drendermodel/isoline2drendermodel1.o \
 						isoline2drendermodel/render.o \
 						isoline2drendermodel/updatelines.o
 
@@ -128,7 +129,7 @@ OBJECTS				=	$(ARROW3DRENDERMODEL) \
 #build macros
 COMPILER = g++
 # FLAGS = -std=c++17 -Wall -ggdb -pedantic -fopenmp
-FLAGS = -std=c++17 -Wall -O3 -fopenmp
+FLAGS = -std=c++17 -Wall -g -fopenmp
 INCLUDEDIRS = -I./extern/include/
 LIBDIRS     = -L./extern/lib/
 LIBRARIES = $(LIBDIRS) -lfftw3 -lGL -lglfw -lfreetype -ldl

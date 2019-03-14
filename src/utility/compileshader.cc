@@ -1,9 +1,10 @@
 #include "utility.ih"
 
+#include <iostream>
+
 GLuint compile_shader(string const &source, GLuint type)
 {
     GLuint shader = glCreateShader(type);
-
     char const *src = source.c_str();
     glShaderSource(shader, 1, &src, nullptr);
     glCompileShader(shader);

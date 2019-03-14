@@ -32,6 +32,8 @@ class Isoline2dRenderModel
         void set_color(glm::vec3 const &color);
         void set_size(size_t width, size_t height);
         void update_lines(std::vector<float> const &lines);
+
+        void initialize();
 };
 
 inline void Isoline2dRenderModel::set_color(glm::vec3 const &color)
