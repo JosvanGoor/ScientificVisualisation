@@ -8,6 +8,7 @@ void RenderFont::String::buffer_string(string const &str, vector<Character> cons
     buffer.reserve(str.size() * 6 * 4);
 
     size_t xpos = 0;
+    size_t ypos = 0;
     d_drawcount = 0;
     for (char ch : str)
     {
@@ -17,8 +18,17 @@ void RenderFont::String::buffer_string(string const &str, vector<Character> cons
             continue;
         }
 
+        if (ch == '\n')
+        {
+            xpos = 0;
+            ypos += characters['I'].size.y * 1.25 + 4;
+            continue;
+        }
+
+
+
         float xp = xpos + characters[ch].bearing.x;
-        float yp = -characters[ch].bearing.y + d_height;
+        float yp = ypos + -characters[ch].bearing.y + d_height;
         float w = characters[ch].size.x;
         float h = characters[ch].size.y;
 

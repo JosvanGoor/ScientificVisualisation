@@ -58,6 +58,14 @@ enum class DivMode
 };
 std::string divmode_string(DivMode mode);
 
+enum class IsolineMode
+{
+    OFF,
+    ISO2D,
+    MODULO_VALUE
+};
+std::string isoline_string(IsolineMode mode);
+
 /* Rotates all enum values between 0 and modulo_value */
 template <typename Enum>
 Enum rotate_enum(Enum val)

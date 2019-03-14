@@ -12,9 +12,10 @@ ARROW3DRENDERMODEL	=	arrow3drendermodel/arrow3drendermodel1.o \
 ENUMS				=	enums/colormappingstring.o \
 						enums/colormodestring.o \
 						enums/drawmodestring.o \
-						enums/scalingmodestring.o\
-						enums/divmodestring.o\
-						enums/glyphmodestring.o
+						enums/scalingmodestring.o \
+						enums/divmodestring.o \
+						enums/glyphmodestring.o \
+						enums/isolinemode.o
 
 GLAD				=	glad/glad.o \
 						lodepng/lodepng.o

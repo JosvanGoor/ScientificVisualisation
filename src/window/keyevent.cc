@@ -17,6 +17,10 @@ void Window::key_event(int key, int scancode, int action, int mods)
             print_shortcuts();
         break;
 
+        case GLFW_KEY_I:
+            set_isomode(rotate_enum(d_isomode));
+        break;
+
         case GLFW_KEY_C:
             set_colormapping(rotate_enum(d_colormapping));
         break;
