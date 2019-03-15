@@ -18,8 +18,9 @@ void Window::repaint()
     calcStore();
     
     #pragma omp barrier
-
-    calc_lines(0.3);
+    
+    if (d_isomode == IsolineMode::ISO2D)
+        calc_lines(0.3);
 
     #pragma omp barrier
     if (omp_get_thread_num() == 0)
@@ -62,10 +63,10 @@ void Window::repaint()
                 throw "Wtf this is impossible..."s;
         }
         
-        d_iso2d.update_lines(lines);
         switch(d_isomode)
         {
             case IsolineMode::ISO2D:
+                d_iso2d.update_lines(lines);
                 d_iso2d.render();
             break;
 

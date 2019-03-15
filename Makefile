@@ -131,7 +131,7 @@ OBJECTS				=	$(ARROW3DRENDERMODEL) \
 #build macros
 COMPILER = g++
 # FLAGS = -std=c++17 -Wall -ggdb -pedantic -fopenmp
-FLAGS = -std=c++17 -Wall -g -fopenmp
+FLAGS = -std=c++17 -Wall -O3 -ffast-math -fopenmp
 INCLUDEDIRS = -I./extern/include/
 LIBDIRS     = -L./extern/lib/
 LIBRARIES = $(LIBDIRS) -lfftw3 -lGL -lglfw -lfreetype -ldl

@@ -7,12 +7,10 @@ void Simulation<Size>::diffuse_matter()
     for (int jdx = 0; jdx < Size; ++jdx)
     {
         double yval = (0.5 / Size) + (1.0 / Size) * jdx;
-        size_t offset = Size * jdx;
-        for (int idx = 0; idx < Size; ++idx)
+        size_t pos = Size * jdx;
+        double xval = 0.5 / Size;
+        for (int idx = 0; idx != Size; ++idx)
         {
-            double xval = (0.5 / Size) + (1.0 / Size) * idx;
-            size_t pos = idx + offset;
-
             double x0 = Size * (xval - d_timestep * d_vfield_x[pos]) - 0.5;
             double y0 = Size * (yval - d_timestep * d_vfield_y[pos]) - 0.5;
 
@@ -32,6 +30,9 @@ void Simulation<Size>::diffuse_matter()
             size_t pos11 = i1 + Size * j1;
             d_rho[pos] = (1 - s) * ((1 - t) * d_rho0[pos00] + t * d_rho[pos01])
                 + s * ((1 - t) * d_rho0[pos10] + t * d_rho0[pos11]);
+            
+            xval += (1.0 / Size);
+            ++pos;
         }
     }
 }

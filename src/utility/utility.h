@@ -7,7 +7,12 @@
 
 constexpr double pi() { return 3.14159265359; }
 
-int clamp(double val);
+inline int clamp(double val)
+{
+    return val >= 0.0
+        ? static_cast<int>(val)
+        : -static_cast<int>(1 - val);
+}
 std::string read_file(std::string const &file);
 
 template <typename Data>

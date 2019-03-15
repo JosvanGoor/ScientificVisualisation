@@ -59,6 +59,7 @@
         "utility": "cpp",
         "__config": "cpp",
         "__nullptr": "cpp",
-        "hash_map": "cpp"
+        "hash_map": "cpp",
+        "cinttypes": "cpp"
     }
 }
