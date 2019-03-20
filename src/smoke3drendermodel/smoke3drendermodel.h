@@ -63,7 +63,7 @@ class Smoke3dRenderModel
         Smoke3dRenderModel &operator=(Smoke3dRenderModel&) = delete;
 
         // ran on resize
-        std::vector<float> update_smoke_mapping(size_t gridsize);
+        std::vector<float> update_smoke_mapping(size_t gridsize, std::vector<float> const &height);
 };
 
 inline void Smoke3dRenderModel::set_colormapping(size_t mapping)

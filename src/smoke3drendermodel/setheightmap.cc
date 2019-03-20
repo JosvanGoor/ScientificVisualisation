@@ -4,19 +4,11 @@
 
 void Smoke3dRenderModel::set_heightmap(vector<float> const &height, float min, float max)
 {
-    // no range check....
-    for (size_t idx = 0; idx < height.size(); ++idx)
-    {
-        d_triangles[idx * 3 + 2] = height[idx]; // range checks
-    }
-
-    cout << __PRETTY_FUNCTION__ << "\n";
-    cout << "sizeof height: " << height.size() << "\n";
-    cout << "sizeof  tri's: " << d_triangles.size() << "\n";
-
+    d_triangles = update_smoke_mapping(d_gridsize, height);
+    
     vector<float> normals;
     size_t pt_idx = 0;
-    for (int jdx = 0; jdx < d_gridsize; ++jdx)
+    for (int jdx = 0; jdx < (d_gridsize - 1); ++jdx)
     {
         for (int idx = 0; idx < ((d_gridsize - 1) * 2); ++idx)
         {
