@@ -31,3 +31,6 @@ vgcore.*
 *.exe
 scivis
 wisdom
+
+
+**/ipch/
