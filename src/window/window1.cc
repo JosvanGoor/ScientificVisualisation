@@ -1,7 +1,10 @@
 #include "window.ih"
 
 Window::Window(size_t width, size_t height)
-:   d_min(0),
+:   d_iso_min(0),
+    d_iso_max(1),
+    d_n_iso(4),
+    d_min(0),
     d_max(1),
     d_width(width),
     d_height(height),

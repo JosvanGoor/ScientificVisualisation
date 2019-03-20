@@ -15,13 +15,15 @@
 #include "../glyph2drendermodel/glyph2drendermodel.h"
 #include <GLFW/glfw3.h>
 
-typedef Simulation<600> t_Simulation;
+typedef Simulation<300> t_Simulation;
 
 class Window
 {
-    float v_min;
-    float v_max;
-    float d_min, d_max;
+    double d_iso_min, d_iso_max;
+    size_t d_n_iso;
+    double v_min;
+    double v_max;
+    double d_min, d_max;
     size_t d_width;
     size_t d_height;
     GLFWwindow *d_window;
