@@ -5,6 +5,7 @@ void Arrow3dRenderModel::render()
     size_t numarrows = d_arrow_dim * d_arrow_dim;
 
     glEnable(GL_DEPTH_TEST);
+    glClear(GL_DEPTH_BUFFER_BIT); //??
 
     glUseProgram(d_program);
     glBindVertexArray(d_attribute_object);

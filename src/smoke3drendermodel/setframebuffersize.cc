@@ -4,14 +4,15 @@ void Smoke3dRenderModel::set_framebuffer_size(size_t width, size_t height, size_
 {
     d_width = width;
     d_height = height;
+    d_gridsize = gridsize;
 
     d_projection = ortho
     (
         0.0f, static_cast<float>(width),
         0.0f, static_cast<float>(height),
-        -1.0f, 1.0f
+        -10.0f, 10.0f
     );
     d_bar_projection = d_projection;
 
-    update_smoke_mapping(gridsize);
+    d_triangles = update_smoke_mapping(gridsize);
 }

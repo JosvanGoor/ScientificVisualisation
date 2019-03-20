@@ -11,7 +11,7 @@ class Smoke3dRenderModel
     // background buffers
     GLuint d_smoke_attributes;
     GLuint d_smoke_vertices;
-    GLuint d_smoke_height;
+    GLuint d_smoke_normals;
     GLuint d_smoke_colors;
 
     // bar buffers
@@ -26,9 +26,13 @@ class Smoke3dRenderModel
     float d_hmax;
     size_t d_width;
     size_t d_height;
+    size_t d_gridsize;
     size_t d_drawcount;
     size_t d_colormapping;
     glm::mat4 d_projection;
+
+    // tri buffer
+    std::vector<float> d_triangles;
 
     // uniform locations
     GLuint d_projection_loc;
@@ -59,7 +63,7 @@ class Smoke3dRenderModel
         Smoke3dRenderModel &operator=(Smoke3dRenderModel&) = delete;
 
         // ran on resize
-        void update_smoke_mapping(size_t gridsize);
+        std::vector<float> update_smoke_mapping(size_t gridsize);
 };
 
 inline void Smoke3dRenderModel::set_colormapping(size_t mapping)

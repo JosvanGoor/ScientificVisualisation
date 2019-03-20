@@ -7,6 +7,7 @@
 #define DUTCH 4
 
 in float col;
+in vec3 normal;
 out vec4 FragColor;
 uniform int u_colormapping;
 uniform vec2 u_limits;
@@ -119,5 +120,5 @@ vec4 colormap(float col)
 
 void main()
 {
-    FragColor = colormap(col);
+    FragColor = vec4(normal, 1.0);
 } 
