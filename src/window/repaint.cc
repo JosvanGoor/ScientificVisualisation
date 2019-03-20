@@ -21,7 +21,12 @@ void Window::repaint()
     #pragma omp barrier
     
     if (d_isomode == IsolineMode::ISO2D)
-        calc_lines(0.3);
+    {   
+        for (size_t idx = 0; idx != d_n_iso; ++idx)
+        {
+            calc_lines(d_iso_min + (idx + 1) * (d_iso_max - d_iso_min) / (d_n_iso + 1));
+        }
+    }
 
     #pragma omp barrier
     if (omp_get_thread_num() == 0)
@@ -66,18 +71,21 @@ void Window::repaint()
                 throw "Wtf this is impossible..."s;
         }
         
-        switch(d_isomode)
-        {
-            case IsolineMode::ISO2D:
-                d_iso2d.update_lines(lines);
-                d_iso2d.render();
-            break;
+        if (d_colormode == ColorMode::DENSITY)
+        {    
+            switch(d_isomode)
+            {
+                case IsolineMode::ISO2D:
+                    d_iso2d.update_lines(lines);
+                    d_iso2d.render();
+                break;
 
-            case IsolineMode::OFF:
-            break;
+                case IsolineMode::OFF:
+                break;
 
-            default:
-                throw "Wtf this is impossible...";
+                default:
+                    throw "Wtf this is impossible...";
+            }
         }
 
         SmokeRenderModel *mdl = dynamic_cast<SmokeRenderModel*>(d_rendermodel.get());
