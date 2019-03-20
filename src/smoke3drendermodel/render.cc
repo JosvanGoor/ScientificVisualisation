@@ -11,8 +11,7 @@ void Smoke3dRenderModel::render()
     glUniform1i(d_colormapping_loc, d_colormapping);
     glUniform2f(d_limit_loc, d_cmin, d_cmax);
 
-    for (size_t idx = 0; idx < (d_drawcount - 1); ++idx)
-        glDrawArrays(GL_TRIANGLE_STRIP, idx * d_drawcount * 2, d_drawcount * 2);
+    glDrawArrays(GL_TRIANGLES, 0, d_drawcount);
 
     glDisable(GL_DEPTH_TEST);
 }

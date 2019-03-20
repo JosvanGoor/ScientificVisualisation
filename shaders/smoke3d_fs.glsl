@@ -120,5 +120,5 @@ vec4 colormap(float col)
 
 void main()
 {
-    FragColor = vec4(normal, 1.0);
+    FragColor = colormap(col);
 } 
