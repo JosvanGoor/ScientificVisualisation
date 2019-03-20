@@ -85,6 +85,15 @@ SIMULATION			=	simulation/diffusematter.o \
 						simulation/simulationstep.o \
 						simulation/solve.o
 
+SMOKE3DRENDERMODEL	=	smoke3drendermodel/initialize.o \
+						smoke3drendermodel/render.o \
+						smoke3drendermodel/setcolormap.o \
+						smoke3drendermodel/setframebuffersize.o \
+						smoke3drendermodel/setheightmap.o \
+						smoke3drendermodel/smoke3drendermodel0.o \
+						smoke3drendermodel/smoke3drendermodel1.o \
+						smoke3drendermodel/updatesmokemapping.o
+
 SMOKERENDERMODEL	=	smokerendermodel/buildbar.o \
 						smokerendermodel/render.o \
 						smokerendermodel/renderbar.o \
@@ -124,6 +133,7 @@ OBJECTS				=	$(ARROW3DRENDERMODEL) \
 						$(OBJREADER) \
 						$(RENDERFONT) \
 						$(RENDERMODEL) \
+						$(SMOKE3DRENDERMODEL) \
 						$(SMOKERENDERMODEL) \
 						$(UTILITY) \
 						$(WINDOW) \

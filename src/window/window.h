@@ -9,6 +9,7 @@
 #include "../enums/enums.h"
 #include "../isoline2drendermodel/isoline2drendermodel.h"
 #include "../linerendermodel/linerendermodel.h"
+#include "../smoke3drendermodel/smoke3drendermodel.h"
 #include "../smokerendermodel/smokerendermodel.h"
 #include "../simulation/simulation.h"
 #include "../arrow3drendermodel/arrow3drendermodel.h"
@@ -42,6 +43,7 @@ class Window
     t_Simulation d_simulation;
     std::unique_ptr<RenderModel> d_rendermodel;
 
+    Smoke3dRenderModel d_smoke3d;
     Isoline2dRenderModel d_iso2d;
     Glyph2dRenderModel d_glyphs;
     Arrow3dRenderModel d_arrows;
@@ -103,9 +105,12 @@ class Window
 
 inline void Window::initialize()
 {
+    d_smoke3d.initialize();
     d_glyphs.initialize();
     d_arrows.initialize();
     d_iso2d.initialize();
+
+    d_smoke3d.set_framebuffer_size(d_width, d_height, d_simulation.gridsize());
 }
 
 inline size_t Window::width() const

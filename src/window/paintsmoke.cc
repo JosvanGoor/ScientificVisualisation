@@ -61,7 +61,8 @@ void Window::paint_smoke()
         v_min = v_max - 0.0000000000001;
     }
 
-    d_rendermodel->set_color_data(colors, v_min, v_max);
-    d_rendermodel->render();
+    d_smoke3d.set_colormap(colors, v_min, v_max);
+    d_smoke3d.set_heightmap(colors, v_min, v_max);
+    d_smoke3d.render();
     // cout << "spent " << chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count() << " s rendering\n";
 }

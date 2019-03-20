@@ -19,6 +19,7 @@ class RenderFont::String
     std::string d_text;
 
     public:
+        String();
         ~String();
         String(String &&move);
         String &operator=(String &&move);
@@ -39,6 +40,11 @@ class RenderFont::String
         void generate_buffers();
         void buffer_string(std::string const &str, std::vector<Character> const &characters);
 };
+
+inline RenderFont::String::String()
+{
+    d_vao = 0;
+}
 
 inline void RenderFont::String::set_text_color(glm::vec3 color)
 {

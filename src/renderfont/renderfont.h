@@ -32,12 +32,14 @@ class RenderFont
     public:
         class String;
 
+        RenderFont();
         RenderFont(std::string const &font, size_t size);
         RenderFont(RenderFont &&other);
         ~RenderFont();
         RenderFont &operator=(RenderFont &&other);
         void swap(RenderFont &other);
 
+        bool valid() const;
         void set_size(size_t width, size_t height);
 
         String create_string(std::string const &text, GLuint storage_mode = GL_DYNAMIC_DRAW);
@@ -53,6 +55,16 @@ class RenderFont
         glm::vec2 tex_position(size_t width, size_t height, size_t xpos, size_t ypos);
         void store_glyph(FT_Face face, std::vector<unsigned char> &map, size_t mapwidth, size_t xpos, size_t ypos);
 };
+
+inline RenderFont::RenderFont()
+{
+    d_program = 0;
+}
+
+inline bool RenderFont::valid() const
+{
+    return d_program;
+}
 
 inline RenderFont &RenderFont::operator=(RenderFont &&other)
 {

@@ -4,15 +4,16 @@
 
 void Window::repaint()
 {
-    if (!d_rendermodel)
-    {
-        cerr << "No current rendermodel! skipping draw.\n";
-        return;
-    }
+    // if (!d_rendermodel)
+    // {
+    //     cerr << "No current rendermodel! skipping draw.\n";
+    //     return;
+    // }
 
     if (omp_get_thread_num() == 0)
     {
-        d_rendermodel->set_colormapping(static_cast<int>(d_colormapping));
+        d_smoke3d.set_colormapping(static_cast<size_t>(d_colormapping));
+        // d_rendermodel->set_colormapping(static_cast<int>(d_colormapping));
         lines.resize(0);
     }
     calcStore();
@@ -28,11 +29,13 @@ void Window::repaint()
         switch(d_drawmode)
         {
             case DrawMode::SMOKE:
+                if (d_rendermodel)
+                    d_rendermodel.release();
                 paint_smoke();
             break;
 
             case DrawMode::VECTORS:
-                    paint_vectors();
+                paint_vectors();
             break;
 
             case DrawMode::NONE:
