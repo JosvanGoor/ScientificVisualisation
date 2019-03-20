@@ -19,13 +19,15 @@ void Smoke3dRenderModel::set_colormap(vector<float> const &color, float min, flo
 
             remap.insert(remap.end(),
             {
+                // tri 1
                 color[row * d_gridsize + col],
                 color[(row + 1) * d_gridsize + col],
                 color[row * d_gridsize + (col + 1)],
 
+                // tri 2
                 color[row * d_gridsize + (col + 1)],
                 color[(row + 1) * d_gridsize + col],
-                color[(row + 1) * d_gridsize + (col + 1)]
+                color[(row + 1) * d_gridsize + (col + 1)],
             });
         }
     }

@@ -50,7 +50,7 @@ class Window
     Glyph2dRenderModel d_glyphs;
     Arrow3dRenderModel d_arrows;
 
-    vector<double> store;
+    vector<float> store;
     vector<float> lines;
 
     public:

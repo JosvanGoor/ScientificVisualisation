@@ -8,7 +8,7 @@
 void Window::paint_smoke()
 {
     vector<float> colors;
-    colors.resize(2 * d_simulation.gridsize() * d_simulation.gridsize(), 0);
+    colors.resize(2 * d_simulation.gridsize() * (d_simulation.gridsize() - 1), 0);
     double v_min = std::numeric_limits<float>::max();
     double v_max = std::numeric_limits<float>::lowest();
 
@@ -61,7 +61,7 @@ void Window::paint_smoke()
         v_min = v_max - 0.0000000000001;
     }
 
-    d_smoke3d.set_colormap(colors, v_min, v_max);
+    d_smoke3d.set_colormap(store, v_min, v_max);
     d_smoke3d.set_heightmap(colors, v_min, v_max);
     d_smoke3d.render();
     // d_rendermodel->set_color_data(colors, v_min, v_max);
