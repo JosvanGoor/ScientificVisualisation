@@ -48,19 +48,35 @@ void Window::key_event(int key, int scancode, int action, int mods)
         break;
 
         case GLFW_KEY_MINUS:
-            d_min -= 0.01;
+            if (mods & GLFW_MOD_SHIFT)
+                d_min -= 0.01;
+            else
+                d_max = d_max - 0.01 < d_min ? d_min : d_max - 0.01;
         break;
 
         case GLFW_KEY_EQUAL:
-            d_min = d_min + 0.01 > d_max ? d_max : d_min + 0.01;
+            if (mods & GLFW_MOD_SHIFT)
+                d_min = d_min + 0.01 > d_max ? d_max : d_min + 0.01;
+            else 
+                d_max += 0.01;
         break;
 
-        case GLFW_KEY_LEFT_BRACKET:
-            d_max = d_max - 0.01 < d_min ? d_min : d_max - 0.01;
+        case GLFW_KEY_COMMA:
+            if (mods & GLFW_MOD_SHIFT)
+                d_iso_max -= 0.1;
+            else if(mods & GLFW_MOD_CONTROL)
+                d_n_iso = 1 > d_n_iso - 1 ? 1 : d_n_iso - 1;
+            else
+                d_iso_min -= 0.1;
         break;
 
-        case GLFW_KEY_RIGHT_BRACKET:
-            d_max += 0.01;
+        case GLFW_KEY_PERIOD:
+            if (mods & GLFW_MOD_SHIFT)
+                d_iso_max += 0.1;
+            else if(mods & GLFW_MOD_CONTROL)
+                ++d_n_iso;
+            else
+                d_iso_min += 0.1;
         break;
     }
 }

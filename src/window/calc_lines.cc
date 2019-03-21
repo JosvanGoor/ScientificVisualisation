@@ -10,13 +10,14 @@ void Window::calc_lines(double iso)
     double size = 1.0 / d_simulation.gridsize();
     vector<double> &rho = d_simulation.rho();
     double x1, y1, x2, y2, x3, y3, x4, y4;
+    x1 = y1 = x2 = y2 = x3 = y3 = x4 = y4 = 0;
 
     #pragma omp for
-    for (size_t jdx = 0; jdx < d_simulation.gridsize() - 1; ++jdx)
+    for (int jdx = 0; jdx < d_simulation.gridsize() - 1; ++jdx)
     {
         size_t offset = jdx * d_simulation.gridsize();
         
-        for (size_t idx = 0; idx != d_simulation.gridsize() - 1; ++idx)
+        for (int idx = 0; idx != d_simulation.gridsize() - 1; ++idx)
         {
             size_t index = idx + offset;
             size_t type = 8 *   (rho[index] > iso) 
@@ -155,7 +156,7 @@ void Window::calc_lines(double iso)
             }
 
                 
-            if (type != 0 && type != 15 && type != 5 && type != 10)
+            if (type != 0 && type != 15)
             {
                 #pragma omp critical
                 {
@@ -163,24 +164,16 @@ void Window::calc_lines(double iso)
                     lines.push_back(y1);
                     lines.push_back(x2);
                     lines.push_back(y2);
+
+                    if (type == 5 || type == 10)
+                    {
+                        lines.push_back(x3);
+                        lines.push_back(y3);
+                        lines.push_back(x4);
+                        lines.push_back(y4);
+                    }
                 }
             }    
-
-            if (type == 5 || type == 10)
-            {
-                #pragma omp critical
-                {
-                    lines.push_back(x1);
-                    lines.push_back(y1);
-                    lines.push_back(x2);
-                    lines.push_back(y2);
-                    lines.push_back(x3);
-                    lines.push_back(y3);
-                    lines.push_back(x4);
-                    lines.push_back(y4);
-                }
-            }
         }
     }
-    
 }

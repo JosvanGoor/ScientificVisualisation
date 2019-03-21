@@ -12,7 +12,7 @@ void Simulation<Size>::solve()
     // solve.cc: 9
     {
 
-        chrono::time_point t1 = chrono::high_resolution_clock::now();
+        // chrono::time_point t1 = chrono::high_resolution_clock::now();
         // if (omp_get_thread_num() == 0)
         //     t1 = chrono::high_resolution_clock::now();
     

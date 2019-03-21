@@ -17,7 +17,7 @@ void Window::calcStore()
             #pragma omp barrier
 
             #pragma omp for
-            for (size_t jdx = 0; jdx < d_simulation.gridsize(); ++jdx)
+            for (int jdx = 0; jdx < d_simulation.gridsize(); ++jdx)
             {
                 size_t jOff = d_simulation.gridsize() * jdx;
                 
@@ -33,7 +33,7 @@ void Window::calcStore()
             if (d_divmode == DivMode::OFF)
             {
                 #pragma omp for
-                for (size_t jdx = 0; jdx < d_simulation.gridsize(); ++jdx)
+                for (int jdx = 0; jdx < d_simulation.gridsize(); ++jdx)
                 {
                     size_t jOff = 2 * (d_simulation.gridsize() / 2 + 1) * jdx;
                     
@@ -53,7 +53,7 @@ void Window::calcStore()
             if (d_divmode == DivMode::OFF)
             {     
                 #pragma omp for
-                for (size_t jdx = 0; jdx < d_simulation.gridsize(); ++jdx)
+                for (int jdx = 0; jdx < d_simulation.gridsize(); ++jdx)
                 {
                     size_t jOff = d_simulation.gridsize() * jdx;
                     

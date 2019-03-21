@@ -71,8 +71,6 @@ try
             #pragma omp barrier
             if (omp_get_thread_num() == 0)
             {    
-                auto &sim = window.simulation();
-
                 font.set_size(window.width(), window.height());
                 font.update_string(status, window.print_settings());
                 font.render_string_outlined(status, glm::vec2{10.0f, 5.0f});
