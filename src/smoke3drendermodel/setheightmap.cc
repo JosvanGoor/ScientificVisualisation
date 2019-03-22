@@ -4,7 +4,7 @@
 
 void Smoke3dRenderModel::set_heightmap(vector<float> const &height, float min, float max)
 {
-    d_triangles = update_smoke_mapping(d_gridsize, height);
+    update_smoke_mapping(d_gridsize);
     
     vector<float> normals;
     for (size_t idx = 0; idx < d_triangles.size() / 3; ++idx)

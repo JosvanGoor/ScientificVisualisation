@@ -6,7 +6,9 @@ Smoke3dRenderModel::~Smoke3dRenderModel()
     glDeleteVertexArrays(1, &d_smoke_attributes);
     glDeleteBuffers(1, &d_smoke_vertices);
     glDeleteBuffers(1, &d_smoke_normals);
-    glDeleteBuffers(1, &d_smoke_colors);
-    glDeleteVertexArrays(1, &d_bar_attributes);
-    glDeleteBuffers(1, &d_bar_vertex);
+    
+    glDeleteFramebuffers(1, &d_framebuffer);
+    glDeleteTextures(1, &d_color_tex);
+    glDeleteRenderbuffers(1, &d_depth_rbuf);
+
 }

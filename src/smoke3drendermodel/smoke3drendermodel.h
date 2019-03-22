@@ -12,47 +12,39 @@ class Smoke3dRenderModel
     GLuint d_smoke_attributes;
     GLuint d_smoke_vertices;
     GLuint d_smoke_normals;
-    GLuint d_smoke_colors;
+    GLuint d_smoke_texcoords;
 
-    // bar buffers
-    GLuint d_bar_attributes;
-    GLuint d_bar_vertex;
-    glm::mat4 d_bar_projection;
+    // framebuffer parts
+    GLuint d_framebuffer;
+    GLuint d_color_tex;
+    GLuint d_depth_rbuf;
 
     // extra
-    float d_cmin; // color
-    float d_cmax;
     float d_hmin; // height
     float d_hmax;
     size_t d_width;
     size_t d_height;
     size_t d_gridsize;
     size_t d_drawcount;
-    size_t d_colormapping;
+    glm::mat4 d_lookat;
     glm::mat4 d_projection;
-
+    
     // tri buffer
     std::vector<float> d_triangles;
 
     // uniform locations
+    GLuint d_sampler_loc;
     GLuint d_projection_loc;
-    GLuint d_colormapping_loc;
-    GLuint d_limit_loc;
-
-    // text stuff
-    RenderFont d_renderfont;
-    RenderFont::String d_maxtext;
-    RenderFont::String d_mintext;
-
+    
     public:
         Smoke3dRenderModel();
         ~Smoke3dRenderModel();
 
         void render();
-        void render_bar();
+        
+        void bind_framebuffer();
+        void release_framebuffer();
 
-        void set_colormapping(size_t mapping);
-        void set_colormap(std::vector<float> const &color, float min = 0, float max = 0);
         void set_heightmap(std::vector<float> const &color, float min = 0, float max = 0);
 
         void initialize();
@@ -63,12 +55,18 @@ class Smoke3dRenderModel
         Smoke3dRenderModel &operator=(Smoke3dRenderModel&) = delete;
 
         // ran on resize
-        std::vector<float> update_smoke_mapping(size_t gridsize, std::vector<float> const &height);
+        void generate_framebuffer();
+        void update_smoke_mapping(size_t gridsize);
 };
 
-inline void Smoke3dRenderModel::set_colormapping(size_t mapping)
+inline void Smoke3dRenderModel::bind_framebuffer()
 {
-    d_colormapping = mapping;
+    glBindFramebuffer(GL_FRAMEBUFFER, d_framebuffer);
+}
+
+inline void Smoke3dRenderModel::release_framebuffer()
+{
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 #endif
