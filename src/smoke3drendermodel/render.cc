@@ -7,11 +7,6 @@ void Smoke3dRenderModel::render()
 
     glm::mat4 mvp = d_projection * d_lookat;
 
-    // mvp = ortho
-    // (
-    //     0.0f, static_cast<float>(d_width), 0.0f, static_cast<float>(d_height), -1.0f, 1.0f
-    // );
-
     glUseProgram(d_program);
     glBindVertexArray(d_smoke_attributes);
     glUniformMatrix4fv(d_projection_loc, 1, GL_FALSE, value_ptr(mvp));

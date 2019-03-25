@@ -19,4 +19,13 @@ Smoke3dRenderModel::Smoke3dRenderModel()
     d_projection(1.0f),
     d_sampler_loc(0),
     d_projection_loc(0)
-{ }
+{
+
+    d_lookat = glm::lookAt
+    (
+        vec3(0.0f, -20.0f, 15.0f), // cam pos
+        vec3(0.0f, 0.0f, 0.0f), // center / looking at
+        vec3(0.0f, 0.0f, 1.0f) // up
+    );
+
+}
