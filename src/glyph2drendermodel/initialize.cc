@@ -24,7 +24,7 @@ void Glyph2dRenderModel::initialize()
     glGenBuffers(1, &d_position_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, d_position_buffer);
     glBufferData(GL_ARRAY_BUFFER, 0, nullptr, GL_STREAM_DRAW);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), nullptr);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
     glEnableVertexAttribArray(1);
     glVertexAttribDivisor(1, 1);
 

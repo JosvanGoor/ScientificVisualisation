@@ -13,10 +13,13 @@
 
 class Arrow3dRenderModel
 {
+    size_t d_width;
+    size_t d_height;
     size_t d_drawcount;
     size_t d_arrow_dim;
 
-    glm::mat4 d_projection; //includes lookat
+    glm::mat4 d_lookat;
+    glm::mat4 d_projection;
     GLuint d_projection_location;
 
     GLuint d_program;
@@ -31,6 +34,8 @@ class Arrow3dRenderModel
         Arrow3dRenderModel();
 
         void render();
+
+        void set_framebuffer_size(size_t width, size_t height);
 
         void set_arrow_dim(size_t dim);
         void update_scalar(std::vector<double> const &scalar, size_t gridsize);

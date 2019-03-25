@@ -4,8 +4,8 @@ void Arrow3dRenderModel::set_arrow_dim(size_t dim)
 {
     d_arrow_dim = dim;
 
-    float d_coord_advance = 82.0f / static_cast<float>(dim);
-    float d_coord_start = -41.0f + (d_coord_advance / 2.0f);
+    float d_coord_advance = 20.0f / static_cast<float>(dim);
+    float d_coord_start = -10.0f + (d_coord_advance / 2.0f);
 
     size_t numarrows = dim * dim;
     vector<float> positions;
@@ -19,6 +19,8 @@ void Arrow3dRenderModel::set_arrow_dim(size_t dim)
             positions.push_back(d_coord_start + (col * d_coord_advance));
             // ypos
             positions.push_back(d_coord_start + (row * d_coord_advance));
+            // zpos
+            positions.push_back(0.25f);
         }
     }
 

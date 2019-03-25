@@ -15,6 +15,7 @@ class Glyph2dRenderModel
 {
     size_t d_glyph_dim; // # of glyphs per dimension
 
+    glm::mat4 d_lookat;
     glm::mat4 d_projection;
     GLuint d_projection_location;
 
@@ -29,6 +30,8 @@ class Glyph2dRenderModel
         Glyph2dRenderModel();
         
         void render();
+
+        void set_framebuffer_size(size_t width, size_t height);
 
         void set_glyph_dim(size_t dim);
         void update_scalar(std::vector<double> const &scalar, size_t gridsize);

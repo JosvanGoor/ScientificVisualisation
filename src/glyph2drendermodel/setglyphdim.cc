@@ -5,8 +5,8 @@ void Glyph2dRenderModel::set_glyph_dim(size_t dim)
     d_glyph_dim = dim;
 
     float d_coord_advance = 
-        250.0f / static_cast<float>(d_glyph_dim);
-    float d_coord_start = d_coord_advance / 2.0f;
+        20.0f / static_cast<float>(d_glyph_dim);
+    float d_coord_start = -10.0f + d_coord_advance / 2.0f;
 
     /* Upload glyph positions once */
     size_t numglyphs = d_glyph_dim * d_glyph_dim;
@@ -21,6 +21,8 @@ void Glyph2dRenderModel::set_glyph_dim(size_t dim)
             positions.push_back(d_coord_start + (col * d_coord_advance));
             // ypos
             positions.push_back(d_coord_start + (row * d_coord_advance));
+            // zpos
+            positions.push_back(0.1f);
         }
     }
 

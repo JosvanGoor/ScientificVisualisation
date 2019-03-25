@@ -41,7 +41,7 @@ void Arrow3dRenderModel::initialize()
     glGenBuffers(1, &d_position_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, d_position_buffer);
     glBufferData(GL_ARRAY_BUFFER, 0, nullptr, GL_STREAM_DRAW);
-    glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), nullptr);
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
     glEnableVertexAttribArray(3);
     glVertexAttribDivisor(3, 1);
 

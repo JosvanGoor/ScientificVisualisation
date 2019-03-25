@@ -112,7 +112,7 @@ inline void Window::initialize()
     d_arrows.initialize();
     d_iso2d.initialize();
 
-    d_smoke3d.set_framebuffer_size(d_width, d_height, d_simulation.gridsize());
+    framebuffer_resized(d_width, d_height);
 }
 
 inline size_t Window::width() const

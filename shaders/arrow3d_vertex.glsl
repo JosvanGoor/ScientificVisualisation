@@ -3,7 +3,7 @@
 layout (location = 0) in vec3 vertex;
 layout (location = 1) in vec3 normal;
 
-layout (location = 3) in vec2 position;
+layout (location = 3) in vec3 position;
 layout (location = 4) in float rotation;
 layout (location = 5) in float scalar;
 
@@ -20,13 +20,14 @@ mat4 position_transform()
         1, 0, 0, 0,
         0, 1, 0, 0,
         0, 0, 1, 0,
-        position.x, position.y, 0, 1
+        position.x, position.y, position.z, 1
     );
 }
 
 mat4 scale_transform()
 {
-    float scale = 0.75 * max(0.0, min(1.0, scalar));
+    // float scale = 0.75 * max(0.0, min(1.0, scalar));
+    float scale = 0.1;
     return mat4
     (
         scale, 0, 0, 0,
@@ -57,5 +58,5 @@ void main()
     g_normal = norm_transform * normal;
     g_position = (M * vec4(vertex, 1.0)).xyz;
 
-    gl_Position = projection * M * vec4(vertex, 1.0);
+    gl_Position = (projection * M) * vec4(vertex, 1.0);
 }

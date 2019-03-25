@@ -50,27 +50,6 @@ void Window::repaint()
                 throw "Wtf this is impossible..."s;
         }
 
-        switch(d_glyphmode)
-        {
-            case GlyphMode::NONE:
-                break;
-
-            case GlyphMode::GLYPH:
-                d_glyphs.update_vectors(d_simulation.vfield_x(), d_simulation.vfield_y(), d_simulation.gridsize());
-                d_glyphs.update_scalar(d_simulation.rho(), d_simulation.gridsize());
-                d_glyphs.render();
-            break;
-
-            case GlyphMode::ARROW:
-                d_arrows.update_vectors(d_simulation.vfield_x(), d_simulation.vfield_y(), d_simulation.gridsize());
-                d_arrows.update_scalar(d_simulation.rho(), d_simulation.gridsize());
-                d_arrows.render();
-            break;
-
-            default:
-                throw "Wtf this is impossible..."s;
-        }
-        
         if (d_colormode == ColorMode::DENSITY)
         {    
             switch(d_isomode)
@@ -93,6 +72,27 @@ void Window::repaint()
 
         d_smoke3d.set_heightmap(store, v_min, v_max);
         d_smoke3d.render();
+
+        switch(d_glyphmode)
+        {
+            case GlyphMode::NONE:
+                break;
+
+            case GlyphMode::GLYPH:
+                d_glyphs.update_vectors(d_simulation.vfield_x(), d_simulation.vfield_y(), d_simulation.gridsize());
+                d_glyphs.update_scalar(d_simulation.rho(), d_simulation.gridsize());
+                d_glyphs.render();
+            break;
+
+            case GlyphMode::ARROW:
+                d_arrows.update_vectors(d_simulation.vfield_x(), d_simulation.vfield_y(), d_simulation.gridsize());
+                d_arrows.update_scalar(d_simulation.rho(), d_simulation.gridsize());
+                d_arrows.render();
+            break;
+
+            default:
+                throw "Wtf this is impossible..."s;
+        }
 
         SmokeRenderModel *mdl = dynamic_cast<SmokeRenderModel*>(d_rendermodel.get());
         if (mdl)
