@@ -2,8 +2,8 @@
 
 void Smoke3dRenderModel::update_smoke_mapping(size_t gridsize)
 {
-    float wn = 20.0f / static_cast<float>(gridsize + 1);
-    float hn = 20.0f / static_cast<float>(gridsize + 1);
+    float wn = 20.0f / static_cast<float>(gridsize);
+    float hn = 20.0f / static_cast<float>(gridsize);
     // float hn = 1.0f;
     // float wn = 1.0f;
     float ti = 1.0f / static_cast<float>(gridsize);
