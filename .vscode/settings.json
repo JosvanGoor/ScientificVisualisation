@@ -60,6 +60,7 @@
         "__config": "cpp",
         "__nullptr": "cpp",
         "hash_map": "cpp",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "valarray": "cpp"
     }
 }

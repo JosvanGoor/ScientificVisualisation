@@ -4,8 +4,26 @@
 
 void Smoke3dRenderModel::set_heightmap(vector<float> const &height, float min, float max)
 {
-    update_smoke_mapping(d_gridsize);
-    
+
+    for (size_t row = 0; row < (d_gridsize - 1); ++row)
+    {
+        for (size_t col = 0; col < (d_gridsize - 1); ++col)
+        {
+            size_t offset = (row * (d_gridsize - 1) + col) * 18;
+            
+            d_triangles[offset + 2] = height[row * d_gridsize + col];
+            d_triangles[offset + 5] = height[(row + 1) * d_gridsize + col];
+            d_triangles[offset + 8] = height[row * d_gridsize + col + 1];
+            d_triangles[offset + 11] = height[row * d_gridsize + col + 1];
+            d_triangles[offset + 14] = height[(row + 1) * d_gridsize + col];
+            d_triangles[offset + 17] = height[(row + 1) * d_gridsize + col + 1];
+        }
+    }
+
+    glBindBuffer(GL_ARRAY_BUFFER, d_smoke_vertices);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * d_triangles.size(), d_triangles.data(), GL_STREAM_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
     vector<float> normals;
     for (size_t idx = 0; idx < d_triangles.size() / 3; ++idx)
     {

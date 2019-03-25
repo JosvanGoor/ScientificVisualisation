@@ -2,19 +2,21 @@
 
 void Smoke3dRenderModel::update_smoke_mapping(size_t gridsize)
 {
-    float wn = d_width / static_cast<double>(gridsize + 1);
-    float hn = d_height / static_cast<double>(gridsize + 1);
+    float wn = 20.0f / static_cast<float>(gridsize + 1);
+    float hn = 20.0f / static_cast<float>(gridsize + 1);
+    // float hn = 1.0f;
+    // float wn = 1.0f;
     float ti = 1.0f / static_cast<float>(gridsize);
 
     d_triangles.clear();
     vector<float> texcoords;
     for (size_t row = 0; row < (gridsize - 1); ++row)
     {
-        float ypos = hn + (row * hn);
+        float ypos = -10.0f + hn + (row * hn);
         float typos = row * ti;
         for (size_t col = 0; col < (gridsize - 1); ++col)
         {
-            float xpos = wn + (col * wn);
+            float xpos = -10.0f + wn + (col * wn);
             float txpos = col * ti;
             // Define quad as 2 triangles, quad vertices are
             // 2 *--* 3

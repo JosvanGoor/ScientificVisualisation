@@ -13,9 +13,10 @@ Smoke3dRenderModel::Smoke3dRenderModel()
     d_hmax(0.0f),
     d_width(100),
     d_height(100),
+    d_gridsize(100),
     d_drawcount(0),
     d_lookat(1.0f),
     d_projection(1.0f),
-    d_projection_loc(0),
-    d_sampler_loc(0)
+    d_sampler_loc(0),
+    d_projection_loc(0)
 { }
