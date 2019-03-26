@@ -24,6 +24,8 @@ class Window
     size_t d_n_iso;
     double v_min;
     double v_max;
+    double dyn_min;
+    double dyn_max;
     double d_min, d_max;
     size_t d_width;
     size_t d_height;
@@ -37,6 +39,7 @@ class Window
     DrawMode d_drawmode;
     ColorMapping d_colormapping;
     ColorMode d_colormode;
+    ColorMode d_heightmode;
     ColorMode d_scalar_mode;
     ScalingMode d_scalingmode;
     GlyphMode d_glyphmode;
@@ -71,6 +74,7 @@ class Window
         void set_colormapping(ColorMapping mapping);
         void set_colormode(ColorMode mode);
         void set_scalarmode(ColorMode mode);
+        void set_heightmode(ColorMode mode);
         void set_scalingmode(ScalingMode mode);
         void set_glyphmode(GlyphMode mode);
         void set_divmode(DivMode mode);
@@ -162,6 +166,11 @@ inline void Window::set_scalarmode(ColorMode mode)
     d_scalar_mode = mode;
 }
 
+inline void Window::set_heightmode(ColorMode mode)
+{
+    d_heightmode = mode;
+}
+
 inline void Window::set_scalingmode(ScalingMode mode)
 {
     d_scalingmode = mode;
@@ -185,16 +194,21 @@ inline void Window::set_isomode(IsolineMode mode)
 inline std::string Window::print_settings() const
 {
     std::stringstream ss;
-    ss        << "Settings: "
-              << "{" << drawmode_string(d_drawmode) << "}:"
-              << "{" << scalingmode_string(d_scalingmode);
-    if (d_scalingmode == ScalingMode::STATIC) 
-        ss    << ": between: [" << d_min << ", " << d_max << ']';
-    ss        << "}:"
-              << " " << colormapping_string(d_colormapping) << " -> "
-              << colormode_string(d_colormode);
+    ss << "DrawMode: {" << drawmode_string(d_drawmode) << "}:";
+    ss << "{" << scalingmode_string(d_scalingmode);
     
-    ss << "\nOverlays: [ ";
+    if (d_scalingmode == ScalingMode::STATIC)
+        ss << ": between [" << d_min << ", " << "d_max" << "]";
+    ss << "} ";
+    
+    ss << colormapping_string(d_colormapping) << " -> ";
+    ss << colormode_string(d_colormode) << "\n";
+
+    ss << "Heightmap:";
+    ss << " ColorMode scalar -> height: ";
+    ss << colormode_string(d_heightmode) << "\n";
+
+    ss << "Overlays: [ ";
     if (d_glyphmode != GlyphMode::NONE)
         ss << glyphmode_string(d_glyphmode) << " ";
     if (d_isomode != IsolineMode::OFF)

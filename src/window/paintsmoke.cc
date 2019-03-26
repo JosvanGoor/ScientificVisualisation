@@ -49,7 +49,6 @@ void Window::paint_smoke()
     // cout << "spent " << chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count() << " s preparing\n";
     // t1 = chrono::high_resolution_clock::now();
 
-
     if (d_scalingmode == ScalingMode::STATIC)
     {
         v_min = d_min;

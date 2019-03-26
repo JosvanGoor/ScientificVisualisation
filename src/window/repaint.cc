@@ -70,20 +70,29 @@ void Window::repaint()
                     throw "Wtf this is impossible...";
             }
         }
+        // update scalar for smoke if applicable
+        d_scalar_mode = d_heightmode;
+    }
+
+    #pragma omp barrier
+    if (d_drawmode == DrawMode::SMOKE
+            && d_heightmode != d_colormode)
+    {
+        // recalculate store for heightmapping
+        cout << "recalculating store\n";
+        calcStore();
+    }
+
+    // #pragma omp barrier
+    if (omp_get_thread_num() == 0)
+    {
 
         if (d_drawmode == DrawMode::SMOKE)
         {
             d_smoke3d.release_framebuffer();
-
-            if (d_scalingmode == ScalingMode::DYNAMIC)
-                d_smoke3d.set_heightmap(store, v_min, v_max);
-            else
-                d_smoke3d.set_heightmap(store, d_min, d_max);
-
+            d_smoke3d.set_heightmap(store, v_min, v_max);
             d_smoke3d.render();
         }
-        
-        
 
         switch(d_glyphmode)
         {

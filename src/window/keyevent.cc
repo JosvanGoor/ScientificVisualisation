@@ -34,7 +34,10 @@ void Window::key_event(int key, int scancode, int action, int mods)
         break;
 
         case GLFW_KEY_M:
-            set_colormode(rotate_enum(d_colormode));
+            if (mods & GLFW_MOD_SHIFT)
+                set_heightmode(rotate_enum(d_heightmode));
+            else
+                set_colormode(rotate_enum(d_colormode));
         break;
 
         case GLFW_KEY_S:

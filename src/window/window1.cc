@@ -15,6 +15,8 @@ Window::Window(size_t width, size_t height)
     d_drawmode(DrawMode::NONE),
     d_colormapping(ColorMapping::DUTCH),
     d_colormode(ColorMode::DENSITY),
+    d_heightmode(ColorMode::DENSITY),
+    d_scalar_mode(ColorMode::DENSITY),
     d_scalingmode(ScalingMode::STATIC),
     d_glyphmode(GlyphMode::NONE),
     d_divmode(DivMode::OFF),
