@@ -37,6 +37,7 @@ class Window
     DrawMode d_drawmode;
     ColorMapping d_colormapping;
     ColorMode d_colormode;
+    ColorMode d_scalar_mode;
     ScalingMode d_scalingmode;
     GlyphMode d_glyphmode;
     DivMode d_divmode;
@@ -69,6 +70,7 @@ class Window
         void set_drawmode(DrawMode mode);
         void set_colormapping(ColorMapping mapping);
         void set_colormode(ColorMode mode);
+        void set_scalarmode(ColorMode mode);
         void set_scalingmode(ScalingMode mode);
         void set_glyphmode(GlyphMode mode);
         void set_divmode(DivMode mode);
@@ -153,6 +155,11 @@ inline void Window::set_colormapping(ColorMapping mapping)
 inline void Window::set_colormode(ColorMode mode)
 {
     d_colormode = mode;
+}
+
+inline void Window::set_scalarmode(ColorMode mode)
+{
+    d_scalar_mode = mode;
 }
 
 inline void Window::set_scalingmode(ScalingMode mode)

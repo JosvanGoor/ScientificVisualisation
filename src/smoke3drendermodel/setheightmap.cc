@@ -1,9 +1,21 @@
 #include "smoke3drendermodel.ih"
 
+#include <functional>
 #include <iostream> 
 
 void Smoke3dRenderModel::set_heightmap(vector<float> const &height, float min, float max)
 {
+
+    auto map = std::bind(
+        [](float val, float low, float high) -> float
+        {
+            float rval = std::max(std::min(val, high), low);
+            return (rval - low) / (high - low);
+        },
+        std::placeholders::_1,
+        min,
+        max
+    );
 
     for (size_t row = 0; row < (d_gridsize - 1); ++row)
     {
@@ -11,12 +23,12 @@ void Smoke3dRenderModel::set_heightmap(vector<float> const &height, float min, f
         {
             size_t offset = (row * (d_gridsize - 1) + col) * 18;
             
-            d_triangles[offset + 2] = height[row * d_gridsize + col];
-            d_triangles[offset + 5] = height[(row + 1) * d_gridsize + col];
-            d_triangles[offset + 8] = height[row * d_gridsize + col + 1];
-            d_triangles[offset + 11] = height[row * d_gridsize + col + 1];
-            d_triangles[offset + 14] = height[(row + 1) * d_gridsize + col];
-            d_triangles[offset + 17] = height[(row + 1) * d_gridsize + col + 1];
+            d_triangles[offset + 2] = map(height[row * d_gridsize + col]);
+            d_triangles[offset + 5] = map(height[(row + 1) * d_gridsize + col]);
+            d_triangles[offset + 8] = map(height[row * d_gridsize + col + 1]);
+            d_triangles[offset + 11] = map(height[row * d_gridsize + col + 1]);
+            d_triangles[offset + 14] = map(height[(row + 1) * d_gridsize + col]);
+            d_triangles[offset + 17] = map(height[(row + 1) * d_gridsize + col + 1]);
         }
     }
 

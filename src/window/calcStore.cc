@@ -8,7 +8,7 @@ double length(double a, double b)
 
 void Window::calcStore()
 {
-    switch (d_colormode)
+    switch (d_scalar_mode)
     {
         case ColorMode::DENSITY:
             if(omp_get_thread_num() == 0)

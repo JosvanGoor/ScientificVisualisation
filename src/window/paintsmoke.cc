@@ -9,8 +9,8 @@ void Window::paint_smoke()
 {
     vector<float> colors;
     colors.resize(2 * d_simulation.gridsize() * (d_simulation.gridsize() - 1), 0);
-    double v_min = std::numeric_limits<float>::max();
-    double v_max = std::numeric_limits<float>::lowest();
+    v_min = std::numeric_limits<float>::max();
+    v_max = std::numeric_limits<float>::lowest();
 
     // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // deze kan weg denk ik
 

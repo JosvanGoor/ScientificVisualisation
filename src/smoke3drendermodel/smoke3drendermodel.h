@@ -45,7 +45,7 @@ class Smoke3dRenderModel
         void bind_framebuffer();
         void release_framebuffer();
 
-        void set_heightmap(std::vector<float> const &color, float min = 0, float max = 0);
+        void set_heightmap(std::vector<float> const &color, float min, float max);
 
         void initialize();
         void set_framebuffer_size(size_t width, size_t height, size_t gridsize);

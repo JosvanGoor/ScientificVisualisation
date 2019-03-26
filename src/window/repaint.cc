@@ -17,7 +17,11 @@ void Window::repaint()
 
         if (d_drawmode == DrawMode::SMOKE)
             d_smoke3d.bind_framebuffer();
+        
+        d_scalar_mode = d_colormode;
     }
+
+    #pragma omp barrier
     calcStore();
     
     #pragma omp barrier
@@ -68,10 +72,18 @@ void Window::repaint()
         }
 
         if (d_drawmode == DrawMode::SMOKE)
+        {
             d_smoke3d.release_framebuffer();
 
-        d_smoke3d.set_heightmap(store, v_min, v_max);
-        d_smoke3d.render();
+            if (d_scalingmode == ScalingMode::DYNAMIC)
+                d_smoke3d.set_heightmap(store, v_min, v_max);
+            else
+                d_smoke3d.set_heightmap(store, d_min, d_max);
+
+            d_smoke3d.render();
+        }
+        
+        
 
         switch(d_glyphmode)
         {
