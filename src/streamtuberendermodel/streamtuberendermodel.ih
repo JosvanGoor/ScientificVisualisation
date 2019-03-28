@@ -1,0 +1,3 @@
+#include "streamtuberendermodel.h"
+
+using namespace std;
