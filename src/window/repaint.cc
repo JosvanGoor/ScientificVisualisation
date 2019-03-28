@@ -15,7 +15,7 @@ void Window::repaint()
         d_rendermodel->set_colormapping(static_cast<int>(d_colormapping));
         lines.resize(0);
 
-        if (d_drawmode == DrawMode::SMOKE)
+        if (d_drawmode == DrawMode::SMOKE3D)
             d_smoke3d.bind_framebuffer();
         
         d_scalar_mode = d_colormode;
@@ -47,6 +47,7 @@ void Window::repaint()
         switch(d_drawmode)
         {
             case DrawMode::SMOKE:
+            case DrawMode::SMOKE3D:
                 paint_smoke();
             break;
 
@@ -82,7 +83,7 @@ void Window::repaint()
     }
 
     #pragma omp barrier
-    if (d_drawmode == DrawMode::SMOKE
+    if (d_drawmode == DrawMode::SMOKE3D
             && d_heightmode != d_colormode)
     {
         // recalculate store for heightmapping
@@ -94,7 +95,7 @@ void Window::repaint()
     if (omp_get_thread_num() == 0)
     {
 
-        if (d_drawmode == DrawMode::SMOKE)
+        if (d_drawmode == DrawMode::SMOKE3D)
         {
             d_smoke3d.release_framebuffer();
             d_smoke3d.set_heightmap(store, v_min, v_max);
@@ -109,13 +110,19 @@ void Window::repaint()
             case GlyphMode::GLYPH:
                 d_glyphs.update_vectors(d_simulation.vfield_x(), d_simulation.vfield_y(), d_simulation.gridsize());
                 d_glyphs.update_scalar(d_simulation.rho(), d_simulation.gridsize());
-                d_glyphs.render();
+                if (d_drawmode == DrawMode::SMOKE3D)
+                    d_glyphs.render();
+                else
+                    d_glyphs.render_2d();
             break;
 
             case GlyphMode::ARROW:
                 d_arrows.update_vectors(d_simulation.vfield_x(), d_simulation.vfield_y(), d_simulation.gridsize());
                 d_arrows.update_scalar(d_simulation.rho(), d_simulation.gridsize());
-                d_arrows.render();
+                if (d_drawmode == DrawMode::SMOKE3D)
+                    d_arrows.render();
+                else
+                    d_arrows.render_2d();
             break;
 
             default:

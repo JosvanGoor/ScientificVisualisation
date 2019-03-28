@@ -34,6 +34,7 @@ class Arrow3dRenderModel
         Arrow3dRenderModel();
 
         void render();
+        void render_2d();
 
         void set_framebuffer_size(size_t width, size_t height);
 

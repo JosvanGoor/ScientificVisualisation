@@ -9,8 +9,16 @@ void Smoke3dRenderModel::set_heightmap(vector<float> const &height, float min, f
     auto map = std::bind(
         [](float val, float low, float high) -> float
         {
-            float rval = std::max(std::min(val, high), low);
-            return (rval - low) / (high - low);
+            float rval = std::max(val, low);
+            // if rval >> high then we dont cut it off but quickly scale down
+            // the peak by taking the cubic root. This prevents plateau forming
+            rval = (rval - low) / (high - low);
+
+            if (rval > 1.0)
+                return 1.0 + std::cbrt(rval - high);
+            return rval;
+
+
         },
         std::placeholders::_1,
         min,

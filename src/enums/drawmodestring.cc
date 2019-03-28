@@ -7,6 +7,9 @@ string drawmode_string(DrawMode mode)
         case DrawMode::SMOKE:
             return "DrawMode::SMOKE";
         
+        case DrawMode::SMOKE3D:
+            return "DrawMode::SMOKE3D";
+
         case DrawMode::VECTORS:
             return "DrawMode::VECTORS";
 
