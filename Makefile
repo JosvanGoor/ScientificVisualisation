@@ -125,6 +125,7 @@ WINDOW				=	window/framebufferresized.o \
 						window/setinputcallbacks.o \
 						window/calcStore.o \
 						window/calc_lines.o \
+						window/calc_streamline.o \
 						window/window0.o \
 						window/window1.o 
 
