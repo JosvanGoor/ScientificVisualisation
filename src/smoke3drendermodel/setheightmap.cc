@@ -15,7 +15,7 @@ void Smoke3dRenderModel::set_heightmap(vector<float> const &height, float min, f
             rval = (rval - low) / (high - low);
 
             if (rval > 1.0)
-                return 1.0 + std::cbrt(rval - high);
+                return std::cbrt(rval);
             return rval;
 
 

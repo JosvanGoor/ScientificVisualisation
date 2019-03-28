@@ -36,7 +36,7 @@ void Window::repaint()
 
     if (omp_get_thread_num() == 0)
     {
-        stream_lines.resize(0);
+        stream_lines.clear();
         calc_streamline(d_simulation.gridsize() / 2, d_simulation.gridsize() / 2, 0);
     }
 
@@ -100,6 +100,8 @@ void Window::repaint()
             d_smoke3d.release_framebuffer();
             d_smoke3d.set_heightmap(store, v_min, v_max);
             d_smoke3d.render();
+
+            d_streamtubes.draw_lines(stream_lines, d_simulation.gridsize());
         }
 
         switch(d_glyphmode)

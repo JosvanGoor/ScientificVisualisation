@@ -11,9 +11,7 @@ void Window::framebuffer_resized(int width, int height)
 
     glViewport(0, 0, width, height);
     
-    // d_iso2d.set_size(width, height);
-
-    if (d_drawmode == DrawMode::SMOKE)
+    if (d_drawmode == DrawMode::SMOKE || d_drawmode == DrawMode::SMOKE3D)
         initialize_smoke_render();
     
     if (d_rendermodel)
@@ -22,5 +20,6 @@ void Window::framebuffer_resized(int width, int height)
     d_arrows.set_framebuffer_size(width, height);
     d_glyphs.set_framebuffer_size(width, height);
     d_smoke3d.set_framebuffer_size(width, height, d_simulation.gridsize());
+    d_streamtubes.set_framebuffer_size(width, height);
 
 }

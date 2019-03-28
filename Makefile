@@ -104,6 +104,10 @@ SMOKERENDERMODEL	=	smokerendermodel/buildbar.o \
 						smokerendermodel/smokerendermodel0.o \
 						smokerendermodel/smokerendermodel1.o
 
+STREAMTRENDERMODEL	=	streamtuberendermodel/drawlines.o \
+						streamtuberendermodel/initialize.o \
+						streamtuberendermodel/setframebuffersize.o
+
 UTILITY				=	utility/buildprogram.o \
 						utility/clamp.o \
 						utility/compileshader.o \
@@ -140,6 +144,7 @@ OBJECTS				=	$(ARROW3DRENDERMODEL) \
 						$(RENDERMODEL) \
 						$(SMOKE3DRENDERMODEL) \
 						$(SMOKERENDERMODEL) \
+						$(STREAMTRENDERMODEL) \
 						$(UTILITY) \
 						$(WINDOW) \
 						main.o

@@ -7,6 +7,7 @@
 #include <sstream>
 
 #include "../enums/enums.h"
+#include "../streamtuberendermodel/streamtuberendermodel.h"
 #include "../isoline2drendermodel/isoline2drendermodel.h"
 #include "../linerendermodel/linerendermodel.h"
 #include "../smoke3drendermodel/smoke3drendermodel.h"
@@ -53,6 +54,7 @@ class Window
     Isoline2dRenderModel d_iso2d;
     Glyph2dRenderModel d_glyphs;
     Arrow3dRenderModel d_arrows;
+    StreamtubeRenderModel d_streamtubes;
 
     vector<float> store;
     vector<float> lines;
@@ -119,6 +121,7 @@ inline void Window::initialize()
     d_glyphs.initialize();
     d_arrows.initialize();
     d_iso2d.initialize();
+    d_streamtubes.initialize();
 
     framebuffer_resized(d_width, d_height);
 }
