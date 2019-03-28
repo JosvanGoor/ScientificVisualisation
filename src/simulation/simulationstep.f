@@ -28,4 +28,6 @@ void Simulation<Size>::simulation_step()
     diffuse_matter();
     // if (omp_get_thread_num() == 0)
     //     cout << "diffuse_matter: " << chrono::duration_cast<chrono::duration<double>>(chrono::high_resolution_clock::now() - t1).count() <<'\n';
+
+    update_history();
 }

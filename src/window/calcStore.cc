@@ -37,8 +37,8 @@ void Window::calcStore()
                 {
                     size_t jOff = 2 * (d_simulation.gridsize() / 2 + 1) * jdx;
                     
-                    std::transform(d_simulation.vfield_x() + jOff,d_simulation.vfield_x() + jOff + d_simulation.gridsize() + 2,
-                                        d_simulation.vfield_y() + jOff, store.begin() + jOff, length);
+                    std::transform(d_simulation.history_x()[19] + jOff,d_simulation.history_x()[19] + jOff + d_simulation.gridsize() + 2,
+                                        d_simulation.history_y()[19] + jOff, store.begin() + jOff, length);
                 }
             }
             else

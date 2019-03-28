@@ -56,6 +56,7 @@ class Window
 
     vector<float> store;
     vector<float> lines;
+    vector<float> stream_lines;
 
     public:
         Window(size_t width = 500, size_t height = 500);
@@ -97,6 +98,7 @@ class Window
 
         void calcStore();
         void calc_lines(double iso);
+        void calc_streamline(size_t x, size_t y, size_t z);
 
         void set_input_callbacks();
 

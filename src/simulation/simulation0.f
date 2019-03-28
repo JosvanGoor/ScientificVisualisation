@@ -11,4 +11,10 @@ Simulation<Size>::~Simulation()
     fftw_free(d_vfield_x);
     fftw_free(d_vfield0_y);
     fftw_free(d_vfield_y);
+
+    for (size_t idx = 0; idx != d_history_x.size(); ++idx)
+    {
+        fftw_free(d_history_x[idx]);
+        fftw_free(d_history_y[idx]);
+    }
 }

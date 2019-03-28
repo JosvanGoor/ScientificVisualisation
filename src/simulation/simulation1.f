@@ -6,9 +6,17 @@ Simulation<Size>::Simulation(double timestep, double viscosity)
     d_timestep(timestep),
     d_viscosity(viscosity),
     d_running(true),
-    d_vfield_size(Size * 2 * (Size / 2 + 1))
+    d_vfield_size(Size * 2 * (Size / 2 + 1)),
+    d_history_x(Size),
+    d_history_y(Size)
 {
     
+    for (size_t idx = 0; idx != d_history_x.size(); ++idx)
+    {
+        d_history_x[idx] = fftw_alloc_real(d_vfield_size); 
+        d_history_y[idx] = fftw_alloc_real(d_vfield_size); 
+    }
+
     d_vfield_x = fftw_alloc_real(d_vfield_size);
     d_vfield_y = fftw_alloc_real(d_vfield_size);
     d_vfield0_x = fftw_alloc_real(d_vfield_size);
@@ -25,7 +33,7 @@ Simulation<Size>::Simulation(double timestep, double viscosity)
              d_vfield0_y,
             FFTW_PATIENT);
     d_plan_rtoc_x = fftw_plan_dft_r2c_2d(Size, Size,
-            d_vfield0_x, 
+            d_vfield0_x,
              reinterpret_cast<fftw_complex *>(d_vfield0_x),
             FFTW_PATIENT);
     d_plan_rtoc_y = fftw_plan_dft_r2c_2d(Size, Size,

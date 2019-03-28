@@ -34,6 +34,13 @@ void Window::repaint()
         }
     }
 
+    if (omp_get_thread_num() == 0)
+    {
+        stream_lines.resize(0);
+        calc_streamline(d_simulation.gridsize / 2, d_simulation.gridsize / 2, 0);
+    }
+
+
     #pragma omp barrier
     if (omp_get_thread_num() == 0)
     {
