@@ -9,7 +9,7 @@ void Arrow3dRenderModel::render_2d()
 
     glm::mat4 lookat = glm::lookAt
     (
-        glm::vec3(0.01f, 0.0f, 10.35f), // yes
+        glm::vec3(0.01f, 0.0f, 10.25f), // yes
         glm::vec3(0.0f, 0.0f, 0.0f), // trust me
         glm::vec3(0.0f, 1.0f, 0.0f) // it works
     );
