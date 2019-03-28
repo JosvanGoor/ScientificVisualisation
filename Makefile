@@ -5,6 +5,7 @@ EXECUTABLE = scivis
 ARROW3DRENDERMODEL	=	arrow3drendermodel/arrow3drendermodel1.o \
 						arrow3drendermodel/initialize.o \
 						arrow3drendermodel/render.o \
+						arrow3drendermodel/render2d.o \
 						arrow3drendermodel/setarrowdim.o \
 						arrow3drendermodel/setframebuffersize.o \
 						arrow3drendermodel/updatescalar.o \
@@ -24,6 +25,7 @@ GLAD				=	glad/glad.o \
 GLYPH2DRENDERMODEL	=	glyph2drendermodel/glyph2drendermodel1.o \
 						glyph2drendermodel/initialize.o \
 						glyph2drendermodel/render.o \
+						glyph2drendermodel/render2d.o \
 						glyph2drendermodel/setframebuffersize.o \
 						glyph2drendermodel/setglyphdim.o \
 						glyph2drendermodel/unitglyph.o \
