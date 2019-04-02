@@ -7,8 +7,8 @@ Simulation<Size>::Simulation(double timestep, double viscosity)
     d_viscosity(viscosity),
     d_running(true),
     d_vfield_size(Size * 2 * (Size / 2 + 1)),
-    d_history_x(Size),
-    d_history_y(Size)
+    d_history_x(max(Size, 200)),
+    d_history_y(max(Size, 200))
 {
     
     for (size_t idx = 0; idx != d_history_x.size(); ++idx)

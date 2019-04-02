@@ -22,8 +22,6 @@ class Simulation
 
     std::deque<double*> d_history_x;
     std::deque<double*> d_history_y;
-
-
     
     std::vector<double> d_force_x;
     std::vector<double> d_force_y;
