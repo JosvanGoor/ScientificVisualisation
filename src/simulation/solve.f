@@ -37,16 +37,16 @@ void Simulation<Size>::solve()
         for (int jdx = 0; jdx < Size; ++jdx)
         {
             // deze zat in de for, eruitgehaald.
-            double yval = (0.5 / Size) + jdx * (1.0 / Size);
+            double yval = jdx * (1.0 / Size);
 
             size_t jOff = Size * jdx;
-            double xval = (0.5 / Size);
+            double xval = 0;
             for (int idx = 0; idx != Size; ++idx)
             {
                 size_t pos = idx + jOff;
 
-                double x0 = Size * (xval - d_timestep * d_vfield0_x[pos]) - 0.5;
-                double y0 = Size * (yval - d_timestep * d_vfield0_y[pos]) - 0.5;
+                double x0 = Size * (xval - d_timestep * d_vfield0_x[pos]);
+                double y0 = Size * (yval - d_timestep * d_vfield0_y[pos]);
                 int i0 = clamp(x0);
                 double s = x0 - i0;
                 i0 = (i0 + Size) % Size; 
