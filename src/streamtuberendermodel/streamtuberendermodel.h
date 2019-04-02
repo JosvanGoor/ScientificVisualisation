@@ -12,7 +12,7 @@ class StreamtubeRenderModel
     GLuint d_program;
     GLuint d_attribute_buffer;
     GLuint d_vertices;
-    // GLuint d_normals;
+    GLuint d_normals;
     // GLuint d_colors;
 
     size_t d_drawcount;
