@@ -134,7 +134,13 @@ void Window::repaint()
         SmokeRenderModel *mdl = dynamic_cast<SmokeRenderModel*>(d_rendermodel.get());
         if (mdl)
             mdl->render_bar();
-    
+
+        if (d_help)
+        {
+            float xpos = d_width / 2 - d_helpstring.width() / 2;
+            float ypos = d_height / 2 - d_helpstring.height() / 2;
+            d_helpfont.render_string_outlined(d_helpstring, glm::vec2(xpos, ypos));
+        }
 
     }
 

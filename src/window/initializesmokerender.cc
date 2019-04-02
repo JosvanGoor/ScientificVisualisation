@@ -4,8 +4,8 @@ void Window::initialize_smoke_render()
 {
     d_rendermodel = make_unique<SmokeRenderModel>();
 
-    double wn = d_width / static_cast<double>(d_simulation.gridsize());
-    double hn = d_height / static_cast<double>(d_simulation.gridsize());
+    double wn = d_width / static_cast<double>(d_simulation.gridsize() - 1);
+    double hn = d_height / static_cast<double>(d_simulation.gridsize() - 1);
 
     vector<float> triangles;
 

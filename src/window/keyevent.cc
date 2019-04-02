@@ -14,7 +14,7 @@ void Window::key_event(int key, int scancode, int action, int mods)
         break;
 
         case GLFW_KEY_H:
-            print_shortcuts();
+            d_help = !d_help;
         break;
 
         case GLFW_KEY_I:

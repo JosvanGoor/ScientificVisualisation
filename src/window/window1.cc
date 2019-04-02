@@ -23,6 +23,7 @@ Window::Window(size_t width, size_t height)
     d_isomode(IsolineMode::OFF),
     d_simulation(),
     d_rendermodel(),
+    d_help(false),
     d_arrows()
 {
     d_window = glfwCreateWindow

@@ -17,7 +17,7 @@
 #include "../glyph2drendermodel/glyph2drendermodel.h"
 #include <GLFW/glfw3.h>
 
-typedef Simulation<50> t_Simulation;
+typedef Simulation<200> t_Simulation;
 
 class Window
 {
@@ -49,6 +49,10 @@ class Window
     
     t_Simulation d_simulation;
     std::unique_ptr<RenderModel> d_rendermodel;
+
+    bool d_help;
+    RenderFont d_helpfont;
+    RenderFont::String d_helpstring;
 
     Smoke3dRenderModel d_smoke3d;
     Isoline2dRenderModel d_iso2d;
@@ -83,7 +87,7 @@ class Window
         void set_divmode(DivMode mode);
         void set_isomode(IsolineMode mode);
 
-        void print_shortcuts() const;
+        std::string print_shortcuts() const;
         std::string print_settings() const;
 
         // callbacks
@@ -122,6 +126,9 @@ inline void Window::initialize()
     d_arrows.initialize();
     d_iso2d.initialize();
     d_streamtubes.initialize();
+
+    d_helpfont = RenderFont("fonts/comic.ttf", 24);
+    d_helpstring = d_helpfont.create_string(print_shortcuts(), GL_STATIC_DRAW);
 
     framebuffer_resized(d_width, d_height);
 }

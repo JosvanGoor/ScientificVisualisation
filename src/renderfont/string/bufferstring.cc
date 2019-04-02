@@ -7,6 +7,7 @@ void RenderFont::String::buffer_string(string const &str, vector<Character> cons
     vector<float> buffer;
     buffer.reserve(str.size() * 6 * 4);
 
+    size_t width = 0;
     size_t xpos = 0;
     size_t ypos = 0;
     d_drawcount = 0;
@@ -49,9 +50,11 @@ void RenderFont::String::buffer_string(string const &str, vector<Character> cons
 
         d_drawcount += 6;
         xpos += characters[ch].advance;
+
+        d_width = max(d_width, xpos);
     }
 
-    d_width = xpos;
+    d_height = ypos;
     glBindBuffer(GL_ARRAY_BUFFER, d_buffer);
     glBufferData(GL_ARRAY_BUFFER, bytesize(buffer), buffer.data(), d_storage_mode);
     glBindBuffer(GL_ARRAY_BUFFER, 0);

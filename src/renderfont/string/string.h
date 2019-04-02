@@ -46,6 +46,16 @@ inline RenderFont::String::String()
     d_vao = 0;
 }
 
+inline size_t RenderFont::String::width() const
+{
+    return d_width;
+}
+
+inline size_t RenderFont::String::height() const
+{
+    return d_height;
+}
+
 inline void RenderFont::String::set_text_color(glm::vec3 color)
 {
     d_color = color;

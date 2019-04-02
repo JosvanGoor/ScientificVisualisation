@@ -21,5 +21,6 @@ void Window::framebuffer_resized(int width, int height)
     d_glyphs.set_framebuffer_size(width, height);
     d_smoke3d.set_framebuffer_size(width, height, d_simulation.gridsize());
     d_streamtubes.set_framebuffer_size(width, height);
+    d_helpfont.set_size(width, height);
 
 }
