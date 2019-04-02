@@ -69,72 +69,93 @@ void Smoke3dRenderModel::set_heightmap(vector<float> const &height, float min, f
         });
     }
 
+    size_t maxoffset = 0;
+    auto offset = [&](int col, int row)
+    {
+        col = (col + d_gridsize) % (d_gridsize - 1);
+        row = (row + d_gridsize) % (d_gridsize - 1);
+
+        maxoffset = (18 * d_gridsize * row) + (18 * col) > maxoffset
+            ? (18 * d_gridsize * row) + (18 * col)
+            : maxoffset;
+
+        return static_cast<size_t>
+        (
+            (18 * (d_gridsize - 1) * row) + (18 * col)
+        );
+    };
+
+    vector<float> smooths;
+    smooths.resize(normals.size());
+    for (int row = 0; row < (d_gridsize - 1); ++row)
+    {
+        for (int col = 0; col < (d_gridsize - 1); ++col)
+        {
+            // sum the 6 connecting normals
+            glm::vec3 smooth{0.0f};
+            smooth += glm::vec3
+            (
+                normals[offset(col - 1, row) + 15],
+                normals[offset(col - 1, row) + 16],
+                normals[offset(col - 1, row) + 17]
+            );
+
+            smooth += glm::vec3
+            (
+                normals[offset(col, row) + 3],
+                normals[offset(col, row) + 4],
+                normals[offset(col, row) + 5]
+            ) * 2.0f; // TIMES 2
+
+            smooth += glm::vec3
+            (
+                normals[offset(col, row + 1) + 0],
+                normals[offset(col, row + 1) + 1],
+                normals[offset(col, row + 1) + 2]
+            );
+
+            smooth += glm::vec3
+            (
+                normals[offset(col - 1, row + 1) + 6],
+                normals[offset(col - 1, row + 1) + 7],
+                normals[offset(col - 1, row + 1) + 8]
+            ) * 2.0f; // TIMES 2
+
+            smooth = normalize(smooth);
+            
+            smooths[offset(col - 1, row) + 15] = smooth.x;
+            smooths[offset(col - 1, row) + 16] = smooth.y;
+            smooths[offset(col - 1, row) + 17] = smooth.z;
+            
+            smooths[offset(col, row) + 3] = smooth.x;
+            smooths[offset(col, row) + 4] = smooth.y;
+            smooths[offset(col, row) + 5] = smooth.z;
+
+            smooths[offset(col, row) + 12] = smooth.x;
+            smooths[offset(col, row) + 13] = smooth.y;
+            smooths[offset(col, row) + 14] = smooth.z;
+
+            smooths[offset(col, row + 1) + 0] = smooth.x;
+            smooths[offset(col, row + 1) + 1] = smooth.y;
+            smooths[offset(col, row + 1) + 2] = smooth.z;
+
+            smooths[offset(col - 1, row + 1) + 6] = smooth.x;
+            smooths[offset(col - 1, row + 1) + 7] = smooth.y;
+            smooths[offset(col - 1, row + 1) + 8] = smooth.z;
+
+            smooths[offset(col - 1, row + 1) + 9] = smooth.x;
+            smooths[offset(col - 1, row + 1) + 10] = smooth.y;
+            smooths[offset(col - 1, row + 1) + 11] = smooth.z;
+
+            maxoffset = 0;
+        }
+    }
+
     glBindBuffer(GL_ARRAY_BUFFER, d_smoke_vertices);
     glBufferData(GL_ARRAY_BUFFER, sizeof(float) * d_triangles.size(), d_triangles.data(), GL_STREAM_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, d_smoke_normals);
-    glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(float), normals.data(), GL_STREAM_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(float), smooths.data(), GL_STREAM_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    // size_t pt_idx = 0;
-    // for (int jdx = 0; jdx < (d_gridsize - 1); ++jdx)
-    // {
-    //     for (int idx = 0; idx < ((d_gridsize - 1) * 2); ++idx)
-    //     {
-    //         vec3 u;
-    //         vec3 v;
-            
-    //         size_t offset = pt_idx * 3;
-
-    //         if (pt_idx % 2 == 0)
-    //         {
-    //             u = 
-    //             {
-    //                 d_triangles[offset + 0] - d_triangles[offset + 3],
-    //                 d_triangles[offset + 1] - d_triangles[offset + 4],
-    //                 d_triangles[offset + 2] - d_triangles[offset + 5]
-    //             };
-
-    //             v = 
-    //             {
-    //                 d_triangles[offset + 6] - d_triangles[offset + 3],
-    //                 d_triangles[offset + 7] - d_triangles[offset + 4],
-    //                 d_triangles[offset + 8] - d_triangles[offset + 5]
-    //             };
-    //         }
-    //         else
-    //         {
-    //             u = 
-    //             {
-    //                 d_triangles[offset + 3] - d_triangles[offset + 0],
-    //                 d_triangles[offset + 4] - d_triangles[offset + 1],
-    //                 d_triangles[offset + 5] - d_triangles[offset + 2]
-    //             };
-
-    //             v = 
-    //             {
-    //                 d_triangles[offset + 6] - d_triangles[offset + 0],
-    //                 d_triangles[offset + 7] - d_triangles[offset + 1],
-    //                 d_triangles[offset + 8] - d_triangles[offset + 2]
-    //             };
-    //         }
-
-    //         vec3 n = normalize(cross(u, v));
-            
-    //         normals.insert(normals.end(),
-    //         {
-    //             n.x, n.y, n.z,
-    //             n.x, n.y, n.z,
-    //             n.x, n.y, n.z
-    //         });
-
-    //         ++pt_idx;
-    //     }
-
-    //     pt_idx += 2;
-    // }
-
-    // glBindBuffer(GL_ARRAY_BUFFER, d_smoke_vertices);
-    // glBufferData(GL_ARRAY_BUFFER, d_triangles.size() * sizeof(float), d_triangles.data(), GL_STREAM_DRAW);
 
     d_hmin = min;
     d_hmax = max;
