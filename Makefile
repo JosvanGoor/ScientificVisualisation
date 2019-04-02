@@ -105,6 +105,7 @@ SMOKERENDERMODEL	=	smokerendermodel/buildbar.o \
 						smokerendermodel/smokerendermodel1.o
 
 STREAMTRENDERMODEL	=	streamtuberendermodel/drawlines.o \
+						streamtuberendermodel/generatetubes.o \
 						streamtuberendermodel/initialize.o \
 						streamtuberendermodel/setframebuffersize.o
 

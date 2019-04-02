@@ -15,6 +15,7 @@ class StreamtubeRenderModel
     // GLuint d_normals;
     // GLuint d_colors;
 
+    size_t d_drawcount;
     glm::mat4 d_projection;
     glm::mat4 d_lookat;
     GLuint d_projection_location;
@@ -28,6 +29,7 @@ class StreamtubeRenderModel
         void draw_lines(std::vector<float> const &lines, size_t nlayers);
 
     private:
+        void generate_tubes(std::vector<float> const &lines, size_t nlayers);
 };
 
 #endif
