@@ -71,7 +71,7 @@ void Smoke3dRenderModel::set_heightmap(vector<float> const &height, float min, f
 
     size_t maxoffset = 0;
     auto offset = [&](int col, int row)
-    {
+    { // Generate a offset with proper wrapping, allowing for negative indices
         col = (col + d_gridsize) % (d_gridsize - 1);
         row = (row + d_gridsize) % (d_gridsize - 1);
 
@@ -79,6 +79,7 @@ void Smoke3dRenderModel::set_heightmap(vector<float> const &height, float min, f
             ? (18 * d_gridsize * row) + (18 * col)
             : maxoffset;
 
+        // cast because we want it to be a proper index
         return static_cast<size_t>
         (
             (18 * (d_gridsize - 1) * row) + (18 * col)
@@ -91,7 +92,20 @@ void Smoke3dRenderModel::set_heightmap(vector<float> const &height, float min, f
     {
         for (int col = 0; col < (d_gridsize - 1); ++col)
         {
-            // sum the 6 connecting normals
+            // We take the sum of the normals of the 6 vertices connecting
+            // to the top left corner of a square. Because we do this for all quad
+            // and account for wrap-around quads this will update every point, as long as
+            // we update all normals connected to this point
+
+            // To get the indices of a certain corner we add some "magic" numbers.
+            // The x-index for each corner (barring quad offset) is as follows
+            // (see also triangle layout in updatesmokemapping.cc)
+            //
+            // 3 / 12 *--* 15
+            //        |\ |
+            //        | \|
+            //      0 *--* 6 / 9
+
             glm::vec3 smooth{0.0f};
             smooth += glm::vec3
             (
@@ -105,7 +119,7 @@ void Smoke3dRenderModel::set_heightmap(vector<float> const &height, float min, f
                 normals[offset(col, row) + 3],
                 normals[offset(col, row) + 4],
                 normals[offset(col, row) + 5]
-            ) * 2.0f; // TIMES 2
+            ) * 2.0f; // TIMES (3 & 12)
 
             smooth += glm::vec3
             (
@@ -119,10 +133,12 @@ void Smoke3dRenderModel::set_heightmap(vector<float> const &height, float min, f
                 normals[offset(col - 1, row + 1) + 6],
                 normals[offset(col - 1, row + 1) + 7],
                 normals[offset(col - 1, row + 1) + 8]
-            ) * 2.0f; // TIMES 2
+            ) * 2.0f; // TIMES 2 (6 & 9)
 
             smooth = normalize(smooth);
             
+            // set the normals for every connected vertex to the calculated
+            // smooth normal
             smooths[offset(col - 1, row) + 15] = smooth.x;
             smooths[offset(col - 1, row) + 16] = smooth.y;
             smooths[offset(col - 1, row) + 17] = smooth.z;
@@ -154,7 +170,7 @@ void Smoke3dRenderModel::set_heightmap(vector<float> const &height, float min, f
     glBindBuffer(GL_ARRAY_BUFFER, d_smoke_vertices);
     glBufferData(GL_ARRAY_BUFFER, sizeof(float) * d_triangles.size(), d_triangles.data(), GL_STREAM_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, d_smoke_normals);
-    glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(float), smooths.data(), GL_STREAM_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, smooths.size() * sizeof(float), smooths.data(), GL_STREAM_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     d_hmin = min;
