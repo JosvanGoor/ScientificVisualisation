@@ -12,7 +12,7 @@ void Window::mouse_moved(double xpos, double ypos)
 
     // If we render in 3d we need to unproject the mouse and 
     // translate the coordinates to screen space.
-    if (d_drawmode == DrawMode::SMOKE3D)
+    if (d_drawmode == DrawMode::SMOKE3D || d_drawmode == DrawMode::STREAMTUBES)
     {
         glm::vec3 world_pos = unproject_mouse();
 
