@@ -64,6 +64,6 @@ void SmokeRenderModel::render_bar()
     left -= 25;
     d_renderfont.update_string(d_maxtext, max.str());
     d_renderfont.update_string(d_mintext, min.str());
-    d_renderfont.render_string_outlined(d_maxtext, glm::vec2{left, bot - 26});
-    d_renderfont.render_string_outlined(d_mintext, glm::vec2{left, top + 10});
+    d_renderfont.render_string_outlined(d_maxtext, glm::vec2{left, bot - 16});
+    d_renderfont.render_string_outlined(d_mintext, glm::vec2{left, top + 26});
 }

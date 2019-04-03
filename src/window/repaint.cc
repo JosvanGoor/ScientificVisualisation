@@ -4,12 +4,6 @@
 
 void Window::repaint()
 {
-    // if (!d_rendermodel)
-    // {
-    //     cerr << "No current rendermodel! skipping draw.\n";
-    //     return;
-    // }
-
     if (omp_get_thread_num() == 0)
     {
         d_rendermodel->set_colormapping(static_cast<int>(d_colormapping));
@@ -87,7 +81,6 @@ void Window::repaint()
             && d_heightmode != d_colormode)
     {
         // recalculate store for heightmapping
-        cout << "recalculating store\n";
         calcStore();
     }
 
@@ -100,14 +93,6 @@ void Window::repaint()
             d_smoke3d.release_framebuffer();
             d_smoke3d.set_heightmap(store, v_min, v_max);
             d_smoke3d.render();
-
-            glReadPixels(int(d_mouse_zx), int(d_mouse_zy), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &d_mouse_z);
-            glm::vec3 scenepos = unproject_mouse();
-            // cout << "scenepos: " << scenepos.x << ", " << scenepos.y;
-            // cout << ", " << scenepos.z << "\n";
-
-
-            // cout << "mouse xyz: " << d_mouse_zx << ", " << d_mouse_zy << ", " << d_mouse_z << "\n";
 
             d_streamtubes.draw_lines(stream_lines, d_simulation.gridsize());
         }
@@ -151,9 +136,5 @@ void Window::repaint()
         }
 
     }
-
-
-
     //DO NOT ADD OMP BARRIER HERE!!!
-
 }
