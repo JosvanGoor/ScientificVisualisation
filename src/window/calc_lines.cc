@@ -162,15 +162,19 @@ void Window::calc_lines(double iso)
                 {
                     lines.push_back(x1);
                     lines.push_back(y1);
+                    lines.push_back(iso);
                     lines.push_back(x2);
                     lines.push_back(y2);
+                    lines.push_back(iso);
 
                     if (type == 5 || type == 10)
                     {
                         lines.push_back(x3);
                         lines.push_back(y3);
+                        lines.push_back(iso);
                         lines.push_back(x4);
                         lines.push_back(y4);
+                        lines.push_back(iso);
                     }
                 }
             }    

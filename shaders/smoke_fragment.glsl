@@ -5,11 +5,12 @@
 #define BANDS 2
 #define SPACE 3
 #define DUTCH 4
+#define BLACK 5
 
 in float col;
 out vec4 FragColor;
-uniform int u_colormapping;
-uniform vec2 u_limits;
+uniform int u_colormapping = BLACKWHITE;
+uniform vec2 u_limits = vec2(0.0, 1.0);
 
 
 float colormap_f1(float x) {
@@ -93,6 +94,9 @@ vec4 colormap(float col)
             max(0.0f, min(1.0f, 2.0 - 2 * col)),
             1.0f
         );
+
+    if (u_colormapping == BLACK)
+        return vec4(0.0, 0.0, 0.0, 1.0);
 
     if (u_colormapping == BANDS)
     {

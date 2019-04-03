@@ -22,7 +22,17 @@ void Window::key_event(int key, int scancode, int action, int mods)
         break;
 
         case GLFW_KEY_I:
-            set_isomode(rotate_enum(d_isomode));
+            if (mods & GLFW_MOD_SHIFT)
+            {
+                if (d_isoline_mapping == ColorMapping::DUTCH)
+                    set_isoline_colormapping(ColorMapping::BLACK);
+                else if (d_isoline_mapping == ColorMapping::BLACK)
+                    set_isoline_colormapping(static_cast<ColorMapping>(0));
+                else
+                    set_isoline_colormapping(rotate_enum(d_isoline_mapping));
+            }
+            else
+                set_isomode(rotate_enum(d_isomode));
         break;
 
         case GLFW_KEY_C:

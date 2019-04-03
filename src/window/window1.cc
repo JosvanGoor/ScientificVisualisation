@@ -14,6 +14,7 @@ Window::Window(size_t width, size_t height)
     d_vec_scale(1000),
     d_drawmode(DrawMode::NONE),
     d_colormapping(ColorMapping::DUTCH),
+    d_isoline_mapping(ColorMapping::BLACK),
     d_colormode(ColorMode::DENSITY),
     d_heightmode(ColorMode::DENSITY),
     d_scalar_mode(ColorMode::DENSITY),

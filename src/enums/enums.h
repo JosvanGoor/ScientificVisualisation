@@ -21,7 +21,8 @@ enum class ColorMapping
     BANDS,
     SPACE,
     DUTCH,
-    MODULO_VALUE
+    MODULO_VALUE,
+    BLACK = 5
 };
 std::string colormapping_string(ColorMapping mapping);
 

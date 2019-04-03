@@ -5,12 +5,11 @@ void StreamtubeRenderModel::generate_tubes(vector<float> const &lines, size_t nl
     vector<float> vertices;
 
     const size_t nslices = 16;
+    const float radius = 0.15f;
+    const float length = 7.0;
 
     for (size_t idx = 0; idx < ((lines.size() / 3) - 1); ++idx)
     {
-        const float radius = 0.5f;
-        const float length = 7.0;
-
         glm::vec3 start = 
         {
             (lines[idx * 3 + 0] - 0.5) * 20,
@@ -25,11 +24,13 @@ void StreamtubeRenderModel::generate_tubes(vector<float> const &lines, size_t nl
             lines[idx * 3 + 5] * length
         };
 
-        // of they are larger we probably cut from one end to another.
+        // if the x/y difference is larger than 0.9 we probably cut from one end to another.
         // which looks terrible so we skip it.
         if (abs(start.x - end.x) > 0.9 || abs(start.y - end.y) > 0.9)
             continue;
 
+        // if height differs too much they're probably different tubes
+        // so we dont want to connect those, skip it!
         if (abs(start.z - end.z) > 0.1)
             continue;
 

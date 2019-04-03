@@ -42,6 +42,7 @@ class Window
     float d_vec_scale;
     DrawMode d_drawmode;
     ColorMapping d_colormapping;
+    ColorMapping d_isoline_mapping;
     ColorMode d_colormode;
     ColorMode d_heightmode;
     ColorMode d_scalar_mode;
@@ -83,6 +84,7 @@ class Window
         void repaint();
         void set_drawmode(DrawMode mode);
         void set_colormapping(ColorMapping mapping);
+        void set_isoline_colormapping(ColorMapping mapping);
         void set_colormode(ColorMode mode);
         void set_scalarmode(ColorMode mode);
         void set_heightmode(ColorMode mode);
@@ -172,6 +174,12 @@ inline void Window::set_colormapping(ColorMapping mapping)
     d_colormapping = mapping;
 }
 
+inline void Window::set_isoline_colormapping(ColorMapping mapping)
+{
+    d_isoline_mapping = mapping;
+    d_iso2d.set_colormapping(mapping);
+}
+
 inline void Window::set_colormode(ColorMode mode)
 {
     d_colormode = mode;
@@ -228,7 +236,10 @@ inline std::string Window::print_settings() const
     if (d_glyphmode != GlyphMode::NONE)
         ss << glyphmode_string(d_glyphmode) << " ";
     if (d_isomode != IsolineMode::OFF)
-        ss << isoline_string(d_isomode) << " ";
+    {
+        ss << isoline_string(d_isomode) << " (";
+        ss << colormapping_string(d_isoline_mapping) << ") ";
+    }
     ss << "]";
 
     return ss.str();

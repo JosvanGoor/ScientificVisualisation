@@ -4,8 +4,8 @@ void Isoline2dRenderModel::initialize()
 {
     d_program = build_program
     (
-        "shaders/iso2d_vs.glsl",
-        "shaders/iso2d_fs.glsl"
+        "shaders/smoke_vertex.glsl",
+        "shaders/smoke_fragment.glsl"
     );
 
     glGenVertexArrays(1, &d_attribute_object);
@@ -14,12 +14,14 @@ void Isoline2dRenderModel::initialize()
     glGenBuffers(1, &d_vertex_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, d_vertex_buffer);
     glBufferData(GL_ARRAY_BUFFER, 0, nullptr, GL_STREAM_DRAW);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), nullptr);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+    glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, 3 * sizeof(float), reinterpret_cast<void*>(2 * sizeof(float)));
     glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
 
     glUseProgram(d_program);
-    d_color_location = glGetUniformLocation(d_program, "color");
-    d_projection_location = glGetUniformLocation(d_program, "projection");
+    d_color_location = glGetUniformLocation(d_program, "u_colormapping");
+    d_projection_location = glGetUniformLocation(d_program, "u_transform");
     
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);

@@ -19,6 +19,9 @@ string colormapping_string(ColorMapping mapping)
         case ColorMapping::DUTCH:
             return "ColorMapping::DUTCH";
 
+        case ColorMapping::BLACK:
+            return "ColorMapping::BLACK";
+
         default:
             return "Unknown or Modval ColorMapping";
     }

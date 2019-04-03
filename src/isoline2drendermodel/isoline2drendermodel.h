@@ -5,6 +5,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "../enums/enums.h"
 #include "../utility/utility.h"
 
 #include <glad/glad.h>
@@ -21,6 +22,7 @@ class Isoline2dRenderModel
     GLuint d_attribute_object;
     GLuint d_vertex_buffer;
 
+    ColorMapping d_colormapping;
     GLuint d_color_location;
     GLuint d_projection_location;
 
@@ -31,6 +33,7 @@ class Isoline2dRenderModel
 
         void set_color(glm::vec3 const &color);
         void set_size(size_t width, size_t height);
+        void set_colormapping(ColorMapping mapping);
         void update_lines(std::vector<float> const &lines);
 
         void initialize();
@@ -44,6 +47,11 @@ inline void Isoline2dRenderModel::set_color(glm::vec3 const &color)
 inline void Isoline2dRenderModel::set_size(size_t width, size_t height)
 {
     d_projection = glm::ortho(0.0f, static_cast<float>(width), 0.0f, static_cast<float>(height));
+}
+
+inline void Isoline2dRenderModel::set_colormapping(ColorMapping mapping)
+{
+    d_colormapping = mapping;
 }
 
 #endif
