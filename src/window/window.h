@@ -66,6 +66,7 @@ class Window
     vector<float> store;
     vector<float> lines;
     vector<float> stream_lines;
+    vector<glm::vec3> d_streamline_anchors;
 
     public:
         Window(size_t width = 500, size_t height = 500);

@@ -31,7 +31,15 @@ void Window::repaint()
     if (omp_get_thread_num() == 0)
     {
         stream_lines.clear();
-        calc_streamline(d_simulation.gridsize() / 2, d_simulation.gridsize() / 2, 0);
+        for (glm::vec3 const &anchor : d_streamline_anchors)
+        {
+            calc_streamline
+            (
+                d_simulation.gridsize() * anchor.x,
+                d_simulation.gridsize() * anchor.y,
+                anchor.z * 200
+            );
+        }
     }
 
 
@@ -94,7 +102,8 @@ void Window::repaint()
             d_smoke3d.set_heightmap(store, v_min, v_max);
             d_smoke3d.render();
 
-            d_streamtubes.draw_lines(stream_lines, d_simulation.gridsize());
+            if (!d_streamline_anchors.empty())
+                d_streamtubes.draw_lines(stream_lines, d_simulation.gridsize());
         }
 
         switch(d_glyphmode)

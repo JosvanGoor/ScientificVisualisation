@@ -5,7 +5,7 @@
 double interpolate(double x, double y, double p00, double p01, double p10, double p11)
 {
     if (x > 1 || x < 0 || y > 1 || y < 0)
-        throw "x and y should be in range [0,1]";
+        throw "x and y should be in range [0,1]"s;
 
     return p00 * (1 - x) * (1 - y) + p10 * x * (1 - y) + p01 * (1 - x) * y + p11 * x * y;
 }

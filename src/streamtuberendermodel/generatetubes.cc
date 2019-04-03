@@ -25,6 +25,14 @@ void StreamtubeRenderModel::generate_tubes(vector<float> const &lines, size_t nl
             lines[idx * 3 + 5] * length
         };
 
+        // of they are larger we probably cut from one end to another.
+        // which looks terrible so we skip it.
+        if (abs(start.x - end.x) > 0.9 || abs(start.y - end.y) > 0.9)
+            continue;
+
+        if (abs(start.z - end.z) > 0.1)
+            continue;
+
         for (size_t slice = 0; slice < nslices; ++slice)
         {
             float x0 = radius * cos((2 * pi() / nslices) * slice);

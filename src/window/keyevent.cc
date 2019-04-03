@@ -9,6 +9,10 @@ void Window::key_event(int key, int scancode, int action, int mods)
 
     switch(key)
     {
+        case GLFW_KEY_A:
+            d_streamline_anchors.clear();
+        break;
+
         case GLFW_KEY_Q:
             glfwSetWindowShouldClose(d_window, true);
         break;
