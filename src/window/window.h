@@ -34,6 +34,9 @@ class Window
 
     double d_mouse_lastx;
     double d_mouse_lasty;
+    float d_mouse_z;
+    double d_mouse_zx;
+    double d_mouse_zy;
     bool d_mouse_dragging;
 
     float d_vec_scale;
@@ -102,14 +105,14 @@ class Window
         Window(Window const &copy) = delete;
         Window &operator=(Window const &copy) = delete;
 
+        glm::vec3 unproject_mouse() const;
+
         void calcStore();
         void calc_lines(double iso);
         void calc_streamline(size_t x, size_t y, size_t z);
 
         void set_input_callbacks();
-
         void initialize_smoke_render();
-
         void paint_smoke();
 
         template <typename T>

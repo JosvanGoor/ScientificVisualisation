@@ -101,6 +101,14 @@ void Window::repaint()
             d_smoke3d.set_heightmap(store, v_min, v_max);
             d_smoke3d.render();
 
+            glReadPixels(int(d_mouse_zx), int(d_mouse_zy), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &d_mouse_z);
+            glm::vec3 scenepos = unproject_mouse();
+            // cout << "scenepos: " << scenepos.x << ", " << scenepos.y;
+            // cout << ", " << scenepos.z << "\n";
+
+
+            // cout << "mouse xyz: " << d_mouse_zx << ", " << d_mouse_zy << ", " << d_mouse_z << "\n";
+
             d_streamtubes.draw_lines(stream_lines, d_simulation.gridsize());
         }
 

@@ -4,8 +4,25 @@
 
 void Window::mouse_moved(double xpos, double ypos)
 {
+    d_mouse_zx = xpos;
+    d_mouse_zy = ypos;
+
     if (!d_mouse_dragging)
         return;
+
+    // If we render in 3d we need to unproject the mouse and 
+    // translate the coordinates to screen space.
+    if (d_drawmode == DrawMode::SMOKE3D)
+    {
+        glm::vec3 world_pos = unproject_mouse();
+
+        // if the coordinates fall outside of the grid we ignore them
+        if (abs(world_pos.x) >= 10.0 || abs(world_pos.y) >= 10.0)
+            return;
+
+        xpos = ((world_pos.x + 10.0) / 20.0) * d_width;
+        ypos = (1.0 - ((world_pos.y + 10.0) / 20.0)) * d_height;
+    }
 
     double fix_x = d_width / static_cast<double>(d_simulation.gridsize() + 1) + 5;
     double fix_y = d_height / static_cast<double>(d_simulation.gridsize() + 1) + 5;

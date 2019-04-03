@@ -47,6 +47,9 @@ class Smoke3dRenderModel
 
         void set_heightmap(std::vector<float> const &color, float min, float max);
 
+        glm::mat4 const &lookat() const;
+        glm::mat4 const &projection() const;
+
         void initialize();
         void set_framebuffer_size(size_t width, size_t height, size_t gridsize);
 
@@ -67,6 +70,16 @@ inline void Smoke3dRenderModel::bind_framebuffer()
 inline void Smoke3dRenderModel::release_framebuffer()
 {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+inline glm::mat4 const &Smoke3dRenderModel::lookat() const
+{
+    return d_lookat;
+}
+
+inline glm::mat4 const &Smoke3dRenderModel::projection() const
+{
+    return d_projection;
 }
 
 #endif

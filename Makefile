@@ -128,6 +128,7 @@ WINDOW				=	window/framebufferresized.o \
 						window/repaint.o \
 						window/setdrawmode.o \
 						window/setinputcallbacks.o \
+						window/unprojectmouse.o \
 						window/calcStore.o \
 						window/calc_lines.o \
 						window/calc_streamline.o \
