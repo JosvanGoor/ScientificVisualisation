@@ -123,7 +123,7 @@ void Window::repaint()
             case GlyphMode::GLYPH:
                 d_glyphs.update_vectors(d_simulation.vfield_x(), d_simulation.vfield_y(), d_simulation.gridsize());
                 d_glyphs.update_scalar(d_simulation.rho(), d_simulation.gridsize());
-                if (d_drawmode == DrawMode::SMOKE3D)
+                if (d_drawmode == DrawMode::SMOKE3D || d_drawmode == DrawMode::STREAMTUBES)
                     d_glyphs.render();
                 else
                     d_glyphs.render_2d();
@@ -132,7 +132,7 @@ void Window::repaint()
             case GlyphMode::ARROW:
                 d_arrows.update_vectors(d_simulation.vfield_x(), d_simulation.vfield_y(), d_simulation.gridsize());
                 d_arrows.update_scalar(d_simulation.rho(), d_simulation.gridsize());
-                if (d_drawmode == DrawMode::SMOKE3D)
+                if (d_drawmode == DrawMode::SMOKE3D || d_drawmode == DrawMode::STREAMTUBES)
                     d_arrows.render();
                 else
                     d_arrows.render_2d();

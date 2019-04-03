@@ -11,10 +11,11 @@ std::string Window::print_shortcuts() const
     ss << "  d:  Toggle divergence rendering\n";
     ss << "  g:  Toggle glyph mode [NONE, GLYPH, ARROW3D]\n";
     ss << "  h:  Toggle this menu\n";
+    ss << "  i:  Toggle isolines\n";
+    ss << "  i:  +shift: toggle isoline colormode\n";
     ss << "  m:  Toggle color mode    [DENSITY, FORCE, VELOCITY]\n";
-    ss << "  m:  (+shift) toggle heightmap mode\n";
+    ss << "  m:  +shift: toggle heightmap mode\n";
     ss << "  q:  Quit the program.\n";
     ss << "  r:  Toggle render mode   [SMOKE, SMOKE3D, VECTORS]\n";
-    ss << "\n";
     return ss.str();
 }

@@ -18,6 +18,7 @@ void Window::key_event(int key, int scancode, int action, int mods)
         break;
 
         case GLFW_KEY_H:
+            cout << "help toggled\n";
             d_help = !d_help;
         break;
 
