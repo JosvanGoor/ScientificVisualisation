@@ -4,8 +4,9 @@ void Window::set_drawmode(DrawMode mode)
 {
     switch(mode)
     {
-        case DrawMode::SMOKE3D:
         case DrawMode::SMOKE:
+        case DrawMode::SMOKE3D:
+        case DrawMode::STREAMTUBES:
             initialize_smoke_render();
         break;
 

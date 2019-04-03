@@ -7,6 +7,7 @@ enum class DrawMode
 {
     SMOKE,
     SMOKE3D,
+    STREAMTUBES,
     VECTORS,
     MODULO_VALUE,
     NONE,

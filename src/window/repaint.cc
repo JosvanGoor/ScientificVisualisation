@@ -9,7 +9,7 @@ void Window::repaint()
         d_rendermodel->set_colormapping(static_cast<int>(d_colormapping));
         lines.resize(0);
 
-        if (d_drawmode == DrawMode::SMOKE3D)
+        if (d_drawmode == DrawMode::SMOKE3D || d_drawmode == DrawMode::STREAMTUBES)
             d_smoke3d.bind_framebuffer();
         
         d_scalar_mode = d_colormode;
@@ -28,26 +28,24 @@ void Window::repaint()
         }
     }
 
-    if (omp_get_thread_num() == 0)
-    {
-        stream_lines.clear();
-        for (glm::vec3 const &anchor : d_streamline_anchors)
-        {
-            calc_streamline
-            (
-                d_simulation.gridsize() * anchor.x,
-                d_simulation.gridsize() * anchor.y,
-                anchor.z * 200
-            );
-        }
-    }
-
-
     #pragma omp barrier
     if (omp_get_thread_num() == 0)
     {
         switch(d_drawmode)
         {
+            case DrawMode::STREAMTUBES:
+                stream_lines.clear();
+                for (glm::vec3 const &anchor : d_streamline_anchors)
+                {
+                    calc_streamline
+                    (
+                        d_simulation.gridsize() * anchor.x,
+                        d_simulation.gridsize() * anchor.y,
+                        anchor.z * 200
+                    );
+                }
+            
+            // fallthrough
             case DrawMode::SMOKE:
             case DrawMode::SMOKE3D:
                 paint_smoke();
@@ -95,11 +93,22 @@ void Window::repaint()
     // #pragma omp barrier
     if (omp_get_thread_num() == 0)
     {
-
         if (d_drawmode == DrawMode::SMOKE3D)
         {
             d_smoke3d.release_framebuffer();
             d_smoke3d.set_heightmap(store, v_min, v_max);
+            d_smoke3d.render();
+        }
+
+        if (d_drawmode == DrawMode::STREAMTUBES)
+        {
+            d_smoke3d.release_framebuffer();
+            
+            // this is awefull and slow
+            vector<float> zeros;
+            zeros.resize(store.size(), 0.0f);
+
+            d_smoke3d.set_heightmap(zeros, v_min, v_max);
             d_smoke3d.render();
 
             if (!d_streamline_anchors.empty())

@@ -15,7 +15,7 @@ void Window::mouse_button_event(int button, int action, int mods)
 
         case GLFW_MOUSE_BUTTON_RIGHT:
         {
-            if (d_drawmode != DrawMode::SMOKE3D)
+            if (d_drawmode != DrawMode::STREAMTUBES)
                 return;
 
             // prevent we place 2 in 1 click.
