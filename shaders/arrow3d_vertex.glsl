@@ -26,7 +26,8 @@ mat4 position_transform()
 
 mat4 scale_transform()
 {
-    float scale = 0.1 * max(0.0, min(1.0, scalar));
+    // float scale = 0.1 * max(0.0, min(1.0, scalar));
+    float scale = 0.1;
     return mat4
     (
         scale, 0, 0, 0,
