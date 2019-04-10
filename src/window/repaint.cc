@@ -147,11 +147,7 @@ void Window::repaint()
             mdl->render_bar();
 
         if (d_help)
-        {
-            float xpos = d_width / 2 - d_helpstring.width() / 2;
-            float ypos = d_height / 2 - d_helpstring.height() / 2;
             d_helpfont.render_string_outlined(d_helpstring, glm::vec2(200, 200));
-        }
 
     }
     //DO NOT ADD OMP BARRIER HERE!!!
